@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:management_factory_system/View/Containers/background.dart';
 import 'package:management_factory_system/View/Main%20Pages/Dashboard/dashboard.dart';
+import 'package:management_factory_system/View/Main%20Pages/Delete/delete_page.dart';
 import 'package:management_factory_system/View/Main%20Pages/Edit/edit_page.dart';
 import 'package:management_factory_system/View/Main%20Pages/New/new_page.dart';
 import 'package:management_factory_system/main.dart';
@@ -14,64 +15,29 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  Widget currentWidget = const Dashboard();
-
-  List<Widget> wed = [
+  static List<Widget> wed = [
     const Dashboard(),
     const NewPage(),
     const EditPage(),
+    const DeletePage()
   ];
 
-  SidebarX drawer() {
-    return SidebarX(
-      controller: SidebarXController(selectedIndex: 0),
-      extendedTheme: const SidebarXTheme(
-        width: 400,
-        decoration: BoxDecoration(color: Color.fromARGB(255, 73, 106, 107)),
-        selectedIconTheme: IconThemeData(
-          color: Color.fromARGB(255, 11, 160, 88),
+  Widget currentWidget = wed[0];
+
+  Drawer drawer() {
+    return Drawer(
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+      elevation: 50,
+      child: Column(children: [
+        Container(
+          height: 200,
+          color: const Color.fromARGB(255, 7, 32, 34),
         ),
-        selectedTextStyle: TextStyle(
-          color: Color.fromARGB(255, 11, 160, 88),
-        ),
-        itemTextPadding: EdgeInsets.symmetric(horizontal: 20),
-        selectedItemTextPadding: EdgeInsets.symmetric(horizontal: 20),
-      ),
-      headerDivider: Container(
-        color: const Color.fromARGB(255, 7, 32, 34),
-        height: 150,
-        width: 400,
-      ),
-      footerDivider: Container(
-        color: const Color.fromARGB(255, 3, 232, 248),
-      ),
-      items: [
-        SidebarXItem(
-            icon: Icons.dashboard_rounded,
-            label: 'Dashboard',
-            onTap: () {
-              selectedPage(0);
-            }),
-        SidebarXItem(
-            icon: Icons.add_box_rounded,
-            label: 'New',
-            onTap: () {
-              selectedPage(1);
-            }),
-        SidebarXItem(
-          icon: Icons.edit_note_rounded,
-          label: 'Edit',
-          onTap: () {
-            selectedPage(2);
-          },
-        ),
-        SidebarXItem(
-            icon: Icons.delete_rounded,
-            label: 'Delete',
-            onTap: () {
-              selectedPage(3);
-            }),
-      ],
+        Container(
+          color: Colors.blue,
+          child: Column(children: const []),
+        )
+      ]),
     );
   }
 
