@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:management_factory_system/View/Containers/background.dart';
-import 'package:management_factory_system/View/Main%20Pages/New/new_project.dart';
+import 'package:management_factory_system/View/Main%20Pages/Edit/edit_page.dart';
+import 'package:management_factory_system/View/Main%20Pages/New/new_page.dart';
 import 'package:management_factory_system/main.dart';
 import 'package:sidebarx/sidebarx.dart';
 
@@ -12,6 +13,12 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  Widget currentWidget = const NewPage();
+
+  List<Widget> wed = [
+    const NewPage(),
+    const EditPage(),
+  ];
 
   SidebarX drawer() {
     return SidebarX(
@@ -36,17 +43,30 @@ class _HomeState extends State<Home> {
       footerDivider: Container(
         color: const Color.fromARGB(255, 3, 232, 248),
       ),
-      items:  [
+      items: [
         const SidebarXItem(icon: Icons.dashboard_rounded, label: 'Dashboard'),
-        SidebarXItem(icon: Icons.add_box_rounded, label: 'New', onTap: (){
-          Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => const NewProject()),
-              );
-        }),
-        const SidebarXItem(icon: Icons.edit_note_rounded, label: 'Edit'),
+        SidebarXItem(
+            icon: Icons.add_box_rounded,
+            label: 'New',
+            onTap: () {
+              selectedPage(0);
+            }),
+        SidebarXItem(
+          icon: Icons.edit_note_rounded,
+          label: 'Edit',
+          onTap: () {
+            selectedPage(1);
+          },
+        ),
         const SidebarXItem(icon: Icons.delete_rounded, label: 'Delete'),
       ],
     );
+  }
+
+  selectedPage(int index) {
+    setState(() {
+      currentWidget = wed[index];
+    });
   }
 
   AppBar upBar() {
@@ -72,8 +92,8 @@ class _HomeState extends State<Home> {
     return Scaffold(
         drawer: drawer(),
         appBar: upBar(),
-        body: const Background(
-          widget: Text('gd'),
+        body: Background(
+          widget: currentWidget,
         ));
   }
 }
