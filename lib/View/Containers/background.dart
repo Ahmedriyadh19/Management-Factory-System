@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Background extends StatelessWidget {
   final Widget widget;
-   const Background({
+  const Background({
     Key? key,
     required this.widget,
   }) : super(key: key);
@@ -20,8 +20,7 @@ class Background extends StatelessWidget {
         Color.fromARGB(255, 60, 106, 107),
         Color.fromARGB(255, 20, 32, 34)
       ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
-
-      child: widget,
+      child: Center(child: widget),
     );
   }
 }
