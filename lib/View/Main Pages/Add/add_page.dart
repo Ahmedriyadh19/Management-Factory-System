@@ -10,7 +10,7 @@ class AddPage extends StatefulWidget {
 
 class _AddPageState extends State<AddPage> {
   Widget bodyPage() {
-    return const Text('New');
+    return const Text('Add');
   }
 
   @override
