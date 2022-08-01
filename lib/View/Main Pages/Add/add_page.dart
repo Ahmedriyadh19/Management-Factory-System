@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:management_factory_system/View/Containers/background.dart';
 
-class NewPage extends StatefulWidget {
-  const NewPage({Key? key}) : super(key: key);
+class AddPage extends StatefulWidget {
+  const AddPage({Key? key}) : super(key: key);
 
   @override
-  State<NewPage> createState() => _NewPageState();
+  State<AddPage> createState() => _AddPageState();
 }
 
-class _NewPageState extends State<NewPage> {
+class _AddPageState extends State<AddPage> {
   Widget bodyPage() {
-    return const Text('new');
+    return const Text('New');
   }
 
   @override
