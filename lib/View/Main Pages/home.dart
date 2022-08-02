@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:management_factory_system/View/Containers/background.dart';
@@ -20,25 +21,46 @@ class _HomeState extends State<Home> {
   static List<PopupMenuItem> addListOption = [];
   static List<PopupMenuItem> editListOption = [];
   static List<PopupMenuItem> deleteListOption = [];
+
   initializeOptionsMenuList() {
     setState(() {
-      addListOption.add(createOption(Icons.person_add, 'Add Customer'));
-      addListOption
-          .add(createOption(Icons.document_scanner_rounded, 'Add Order'));
-      addListOption.add(createOption(Icons.person_pin_rounded, 'Add Staff'));
-      addListOption.add(createOption(Icons.payment_rounded, 'Add Income'));
-      addListOption.add(createOption(Icons.money_off_rounded, 'Add outcome'));
-      addListOption
-          .add(createOption(Icons.insert_drive_file_rounded, 'Add Product'));
+      addListOption.clear();
+      editListOption.clear();
+      deleteListOption.clear();
 
-      editListOption.add(createOption(Icons.edit, 'Edit Customer'));
+      addListOption.add(createOption(Icons.person_add, 'Add Customer', 4));
+      addListOption
+          .add(createOption(Icons.document_scanner_rounded, 'Add Order', 5));
+      addListOption.add(createOption(Icons.person_pin_rounded, 'Add Staff', 6));
+      addListOption.add(createOption(Icons.payment_rounded, 'Add Income', 7));
+      addListOption
+          .add(createOption(Icons.money_off_rounded, 'Add outcome', 8));
+      addListOption
+          .add(createOption(Icons.insert_drive_file_rounded, 'Add Product', 9));
+
+      editListOption.add(createOption(Icons.edit, 'Edit Customer', 10));
       editListOption
-          .add(createOption(Icons.document_scanner_rounded, 'Edit Order'));
-      editListOption.add(createOption(FontAwesomeIcons.safari, 'Edit Staff'));
-      editListOption.add(createOption(Icons.payment_rounded, 'Edit Income'));
-      editListOption.add(createOption(Icons.money_off_rounded, 'Edit outcome'));
+          .add(createOption(Icons.document_scanner_rounded, 'Edit Order', 11));
       editListOption
-          .add(createOption(Icons.insert_drive_file_rounded, 'Edit Product'));
+          .add(createOption(FontAwesomeIcons.safari, 'Edit Staff', 12));
+      editListOption
+          .add(createOption(Icons.payment_rounded, 'Edit Income', 13));
+      editListOption
+          .add(createOption(Icons.money_off_rounded, 'Edit outcome', 14));
+      editListOption.add(
+          createOption(Icons.insert_drive_file_rounded, 'Edit Product', 15));
+
+      deleteListOption.add(createOption(Icons.edit, 'Delete Customer', 16));
+      deleteListOption.add(
+          createOption(Icons.document_scanner_rounded, 'Delete Order', 17));
+      deleteListOption
+          .add(createOption(FontAwesomeIcons.safari, 'Delete Staff', 18));
+      deleteListOption
+          .add(createOption(Icons.payment_rounded, 'Delete Income', 19));
+      deleteListOption
+          .add(createOption(Icons.money_off_rounded, 'Delete outcome', 20));
+      deleteListOption.add(
+          createOption(Icons.insert_drive_file_rounded, 'Delete Product', 21));
     });
   }
 
@@ -70,7 +92,13 @@ class _HomeState extends State<Home> {
 
   void selectedPage(int index) {
     setState(() {
-      currentWidget = wed[index];
+      if (index < wed.length) {
+        currentWidget = wed[index];
+      } else {
+        if (kDebugMode) {
+          print('outOf rang =>  $index');
+        }
+      }
     });
   }
 
@@ -102,9 +130,9 @@ class _HomeState extends State<Home> {
     }
   }
 
-  PopupMenuItem createOption(IconData icon, String label) {
+  PopupMenuItem createOption(IconData icon, String label, int option) {
     return PopupMenuItem(
-      value: label,
+      value: option,
       child: ListTile(leading: Icon(icon), title: Text(label)),
     );
   }
@@ -114,6 +142,11 @@ class _HomeState extends State<Home> {
     return PopupMenuButton(
       icon: Icon(icon),
       itemBuilder: ((ctx) => optionsList),
+      onSelected: (value) {
+        setState(() {
+          selectedPage(value);
+        });
+      },
     );
   }
 
