@@ -28,17 +28,19 @@ class _HomeState extends State<Home> {
       editListOption.clear();
       deleteListOption.clear();
 
-      addListOption.add(createOption(Icons.person_add, 'Add Customer', 4));
       addListOption
-          .add(createOption(Icons.document_scanner_rounded, 'Add Order', 5));
-      addListOption.add(createOption(Icons.person_pin_rounded, 'Add Staff', 6));
+          .add(createOption(FontAwesomeIcons.userPlus, 'Add Customer', 4));
+      addListOption
+          .add(createOption(FontAwesomeIcons.fileInvoice, 'Add Order', 5));
+      addListOption.add(createOption(FontAwesomeIcons.user, 'Add Staff', 6));
       addListOption.add(createOption(Icons.payment_rounded, 'Add Income', 7));
       addListOption
           .add(createOption(Icons.money_off_rounded, 'Add outcome', 8));
       addListOption
           .add(createOption(Icons.insert_drive_file_rounded, 'Add Product', 9));
 
-      editListOption.add(createOption(Icons.edit, 'Edit Customer', 10));
+      editListOption
+          .add(createOption(FontAwesomeIcons.userPen, 'Edit Customer', 10));
       editListOption
           .add(createOption(Icons.document_scanner_rounded, 'Edit Order', 11));
       editListOption
@@ -50,7 +52,8 @@ class _HomeState extends State<Home> {
       editListOption.add(
           createOption(Icons.insert_drive_file_rounded, 'Edit Product', 15));
 
-      deleteListOption.add(createOption(Icons.edit, 'Delete Customer', 16));
+      deleteListOption
+          .add(createOption(FontAwesomeIcons.userXmark, 'Delete Customer', 16));
       deleteListOption.add(
           createOption(Icons.document_scanner_rounded, 'Delete Order', 17));
       deleteListOption
