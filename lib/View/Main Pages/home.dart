@@ -35,35 +35,35 @@ class _HomeState extends State<Home> {
       addListOption.add(createOption(FontAwesomeIcons.user, 'Add Staff', 6));
       addListOption.add(createOption(Icons.payment_rounded, 'Add Income', 7));
       addListOption
-          .add(createOption(Icons.money_off_rounded, 'Add outcome', 8));
+          .add(createOption(FontAwesomeIcons.moneyCheckDollar, 'Add outcome', 8));
       addListOption
           .add(createOption(Icons.insert_drive_file_rounded, 'Add Product', 9));
 
       editListOption
           .add(createOption(FontAwesomeIcons.userPen, 'Edit Customer', 10));
       editListOption
-          .add(createOption(Icons.document_scanner_rounded, 'Edit Order', 11));
+          .add(createOption(FontAwesomeIcons.filePen, 'Edit Order', 11));
       editListOption
-          .add(createOption(FontAwesomeIcons.safari, 'Edit Staff', 12));
+          .add(createOption(FontAwesomeIcons.pen, 'Edit Staff', 12));
       editListOption
           .add(createOption(Icons.payment_rounded, 'Edit Income', 13));
       editListOption
-          .add(createOption(Icons.money_off_rounded, 'Edit outcome', 14));
+          .add(createOption(FontAwesomeIcons.moneyBill, 'Edit outcome', 14));
       editListOption.add(
-          createOption(Icons.insert_drive_file_rounded, 'Edit Product', 15));
+          createOption(FontAwesomeIcons.penToSquare, 'Edit Product', 15));
 
       deleteListOption
           .add(createOption(FontAwesomeIcons.userXmark, 'Delete Customer', 16));
       deleteListOption.add(
-          createOption(Icons.document_scanner_rounded, 'Delete Order', 17));
+          createOption(FontAwesomeIcons.fileWaveform, 'Delete Order', 17));
       deleteListOption
-          .add(createOption(FontAwesomeIcons.safari, 'Delete Staff', 18));
+          .add(createOption(FontAwesomeIcons.userLargeSlash, 'Delete Staff', 18));
       deleteListOption
-          .add(createOption(Icons.payment_rounded, 'Delete Income', 19));
+          .add(createOption(FontAwesomeIcons.circleMinus, 'Delete Income', 19));
       deleteListOption
-          .add(createOption(Icons.money_off_rounded, 'Delete outcome', 20));
+          .add(createOption(FontAwesomeIcons.folderMinus, 'Delete outcome', 20));
       deleteListOption.add(
-          createOption(Icons.insert_drive_file_rounded, 'Delete Product', 21));
+          createOption(FontAwesomeIcons.fileCircleXmark, 'Delete Product', 21));
     });
   }
 
