@@ -6,6 +6,7 @@ import 'package:management_factory_system/View/Main%20Pages/Add/add_page.dart';
 import 'package:management_factory_system/View/Main%20Pages/Dashboard/dashboard.dart';
 import 'package:management_factory_system/View/Main%20Pages/Delete/delete_page.dart';
 import 'package:management_factory_system/View/Main%20Pages/Edit/edit_page.dart';
+import 'package:management_factory_system/View/Main%20Pages/login.dart';
 import 'package:management_factory_system/main.dart';
 
 class Home extends StatefulWidget {
@@ -34,8 +35,8 @@ class _HomeState extends State<Home> {
           .add(createOption(FontAwesomeIcons.fileInvoice, 'Add Order', 5));
       addListOption.add(createOption(FontAwesomeIcons.user, 'Add Staff', 6));
       addListOption.add(createOption(Icons.payment_rounded, 'Add Income', 7));
-      addListOption
-          .add(createOption(FontAwesomeIcons.moneyCheckDollar, 'Add outcome', 8));
+      addListOption.add(
+          createOption(FontAwesomeIcons.moneyCheckDollar, 'Add outcome', 8));
       addListOption
           .add(createOption(Icons.insert_drive_file_rounded, 'Add Product', 9));
 
@@ -43,25 +44,24 @@ class _HomeState extends State<Home> {
           .add(createOption(FontAwesomeIcons.userPen, 'Edit Customer', 10));
       editListOption
           .add(createOption(FontAwesomeIcons.filePen, 'Edit Order', 11));
-      editListOption
-          .add(createOption(FontAwesomeIcons.pen, 'Edit Staff', 12));
+      editListOption.add(createOption(FontAwesomeIcons.pen, 'Edit Staff', 12));
       editListOption
           .add(createOption(Icons.payment_rounded, 'Edit Income', 13));
       editListOption
           .add(createOption(FontAwesomeIcons.moneyBill, 'Edit outcome', 14));
-      editListOption.add(
-          createOption(FontAwesomeIcons.penToSquare, 'Edit Product', 15));
+      editListOption
+          .add(createOption(FontAwesomeIcons.penToSquare, 'Edit Product', 15));
 
       deleteListOption
           .add(createOption(FontAwesomeIcons.userXmark, 'Delete Customer', 16));
-      deleteListOption.add(
-          createOption(FontAwesomeIcons.fileWaveform, 'Delete Order', 17));
       deleteListOption
-          .add(createOption(FontAwesomeIcons.userLargeSlash, 'Delete Staff', 18));
+          .add(createOption(FontAwesomeIcons.fileWaveform, 'Delete Order', 17));
+      deleteListOption.add(
+          createOption(FontAwesomeIcons.userLargeSlash, 'Delete Staff', 18));
       deleteListOption
           .add(createOption(FontAwesomeIcons.circleMinus, 'Delete Income', 19));
-      deleteListOption
-          .add(createOption(FontAwesomeIcons.folderMinus, 'Delete outcome', 20));
+      deleteListOption.add(
+          createOption(FontAwesomeIcons.folderMinus, 'Delete outcome', 20));
       deleteListOption.add(
           createOption(FontAwesomeIcons.fileCircleXmark, 'Delete Product', 21));
     });
@@ -89,6 +89,12 @@ class _HomeState extends State<Home> {
         line(Icons.add, 'Add', 1),
         line(Icons.edit_note_rounded, 'Edit', 2),
         line(Icons.delete_rounded, 'Delete', 3),
+        div(),
+        SizedBox(
+          height: (MediaQuery.of(context).size.height / 4) ,
+        ),
+        divWithTxt('Sign out'),
+        signOutBtn()
       ]),
     );
   }
@@ -103,6 +109,25 @@ class _HomeState extends State<Home> {
         }
       }
     });
+  }
+
+  Row divWithTxt(String txt) {
+    return Row(children: [
+      Expanded(child: div()),
+      Text(
+        txt,
+      ),
+      Expanded(child: div()),
+    ]);
+  }
+
+  Divider div() {
+    return const Divider(
+      color: Colors.black,
+      thickness: 2,
+      endIndent: 20,
+      indent: 20,
+    );
   }
 
   ListTile line(IconData icon, String title, int index) {
@@ -158,22 +183,12 @@ class _HomeState extends State<Home> {
       centerTitle: true,
       backgroundColor: const Color.fromARGB(255, 45, 64, 65),
       title: const Text('Welcome'),
+      elevation: 50,
       actions: [
         upBarBtn(0, Icons.dashboard_rounded),
         option(ctx, Icons.add, addListOption),
         option(ctx, Icons.edit_note_rounded, editListOption),
         option(ctx, Icons.delete_rounded, deleteListOption),
-        const SizedBox(
-          width: 40,
-        ),
-        IconButton(
-          icon: const Icon(Icons.exit_to_app),
-          onPressed: () {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (_) => const MyApp()),
-            );
-          },
-        )
       ],
     );
   }
@@ -186,6 +201,17 @@ class _HomeState extends State<Home> {
           selectedPage(index);
           getSelectedBtn(index);
         });
+      },
+    );
+  }
+
+  IconButton signOutBtn() {
+    return IconButton(
+      icon: const Icon(Icons.exit_to_app),
+      onPressed: () {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => const Login()),
+        );
       },
     );
   }

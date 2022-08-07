@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:management_factory_system/Controller/my_scroll.dart';
-import 'package:management_factory_system/View/Main%20Pages/login.dart';
+import 'package:management_factory_system/View/Main%20Pages/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,7 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Login(),
+      body: Home(),
     );
   }
 }

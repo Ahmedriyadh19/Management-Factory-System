@@ -25,35 +25,37 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    return Background(
-        widget: SingleChildScrollView(
-      child: Center(
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            color: const Color.fromARGB(80, 7, 32, 34),
-          ),
-          margin: EdgeInsets.symmetric(vertical: (height / 2) - 100),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              userNameInput(),
-              passwordInput(),
-              Text(
-                catchLoginError,
-                style: const TextStyle(
-                  color: Colors.red,
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
+    return Scaffold(
+      body: Background(
+          widget: SingleChildScrollView(
+        child: Center(
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              color: const Color.fromARGB(80, 7, 32, 34),
+            ),
+            margin: EdgeInsets.symmetric(vertical: (height / 2) - 100),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                userNameInput(),
+                passwordInput(),
+                Text(
+                  catchLoginError,
+                  style: const TextStyle(
+                    color: Colors.red,
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              btn()
-            ],
+                btn()
+              ],
+            ),
           ),
         ),
-      ),
-    ));
+      )),
+    );
   }
 
   Container userNameInput() {
