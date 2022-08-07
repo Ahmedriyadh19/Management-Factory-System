@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:management_factory_system/View/Containers/background.dart';
@@ -7,7 +6,6 @@ import 'package:management_factory_system/View/Main%20Pages/Dashboard/dashboard.
 import 'package:management_factory_system/View/Main%20Pages/Delete/delete_page.dart';
 import 'package:management_factory_system/View/Main%20Pages/Edit/edit_page.dart';
 import 'package:management_factory_system/View/Main%20Pages/login.dart';
-import 'package:management_factory_system/main.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -17,96 +15,111 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  static List<bool> isSelectedBtn = [false, false, false, false];
-
+  static List<bool> isSelectedBtnList = [];
   static List<PopupMenuItem> addListOption = [];
   static List<PopupMenuItem> editListOption = [];
   static List<PopupMenuItem> deleteListOption = [];
 
   initializeOptionsMenuList() {
-    setState(() {
-      addListOption.clear();
-      editListOption.clear();
-      deleteListOption.clear();
+    isSelectedBtnList.clear();
+    addListOption.clear();
+    editListOption.clear();
+    deleteListOption.clear();
 
-      addListOption
-          .add(createOption(FontAwesomeIcons.userPlus, 'Add Customer', 4));
-      addListOption
-          .add(createOption(FontAwesomeIcons.fileInvoice, 'Add Order', 5));
-      addListOption.add(createOption(FontAwesomeIcons.user, 'Add Staff', 6));
-      addListOption.add(createOption(Icons.payment_rounded, 'Add Income', 7));
-      addListOption.add(
-          createOption(FontAwesomeIcons.moneyCheckDollar, 'Add outcome', 8));
-      addListOption
-          .add(createOption(Icons.insert_drive_file_rounded, 'Add Product', 9));
+    for (int i = 0; i < 22; i++) {
+      isSelectedBtnList.add(false);
+    }
 
-      editListOption
-          .add(createOption(FontAwesomeIcons.userPen, 'Edit Customer', 10));
-      editListOption
-          .add(createOption(FontAwesomeIcons.filePen, 'Edit Order', 11));
-      editListOption.add(createOption(FontAwesomeIcons.pen, 'Edit Staff', 12));
-      editListOption
-          .add(createOption(Icons.payment_rounded, 'Edit Income', 13));
-      editListOption
-          .add(createOption(FontAwesomeIcons.moneyBill, 'Edit outcome', 14));
-      editListOption
-          .add(createOption(FontAwesomeIcons.penToSquare, 'Edit Product', 15));
+    addListOption
+        .add(createOption(FontAwesomeIcons.userPlus, 'Add Customer', 4));
+    addListOption
+        .add(createOption(FontAwesomeIcons.fileInvoice, 'Add Order', 5));
+    addListOption.add(createOption(FontAwesomeIcons.user, 'Add Staff', 6));
+    addListOption.add(createOption(Icons.payment_rounded, 'Add Income', 7));
+    addListOption
+        .add(createOption(FontAwesomeIcons.moneyCheckDollar, 'Add outcome', 8));
+    addListOption
+        .add(createOption(Icons.insert_drive_file_rounded, 'Add Product', 9));
 
-      deleteListOption
-          .add(createOption(FontAwesomeIcons.userXmark, 'Delete Customer', 16));
-      deleteListOption
-          .add(createOption(FontAwesomeIcons.fileWaveform, 'Delete Order', 17));
-      deleteListOption.add(
-          createOption(FontAwesomeIcons.userLargeSlash, 'Delete Staff', 18));
-      deleteListOption
-          .add(createOption(FontAwesomeIcons.circleMinus, 'Delete Income', 19));
-      deleteListOption.add(
-          createOption(FontAwesomeIcons.folderMinus, 'Delete outcome', 20));
-      deleteListOption.add(
-          createOption(FontAwesomeIcons.fileCircleXmark, 'Delete Product', 21));
-    });
+    editListOption
+        .add(createOption(FontAwesomeIcons.userPen, 'Edit Customer', 10));
+    editListOption
+        .add(createOption(FontAwesomeIcons.filePen, 'Edit Order', 11));
+    editListOption.add(createOption(FontAwesomeIcons.pen, 'Edit Staff', 12));
+    editListOption.add(createOption(Icons.payment_rounded, 'Edit Income', 13));
+    editListOption
+        .add(createOption(FontAwesomeIcons.moneyBill, 'Edit outcome', 14));
+    editListOption
+        .add(createOption(FontAwesomeIcons.penToSquare, 'Edit Product', 15));
+
+    deleteListOption
+        .add(createOption(FontAwesomeIcons.userXmark, 'Delete Customer', 16));
+    deleteListOption
+        .add(createOption(FontAwesomeIcons.fileWaveform, 'Delete Order', 17));
+    deleteListOption
+        .add(createOption(FontAwesomeIcons.userLargeSlash, 'Delete Staff', 18));
+    deleteListOption
+        .add(createOption(FontAwesomeIcons.circleMinus, 'Delete Income', 19));
+    deleteListOption
+        .add(createOption(FontAwesomeIcons.folderMinus, 'Delete outcome', 20));
+    deleteListOption.add(
+        createOption(FontAwesomeIcons.fileCircleXmark, 'Delete Product', 21));
   }
 
-  static List<Widget> wed = [
+  static List<Widget> pages = [
     const Dashboard(),
     const AddPage(),
     const EditPage(),
     const DeletePage()
   ];
 
-  Widget currentWidget = wed[0];
+  Widget currentWidget = pages[0];
 
   Drawer drawer(BuildContext ctx) {
     return Drawer(
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+      backgroundColor: const Color.fromARGB(255, 125, 155, 156),
       elevation: 50,
-      child: ListView(children: [
-        Container(
-          height: 200,
-          color: const Color.fromARGB(255, 7, 32, 34),
-        ),
-        line(Icons.dashboard_rounded, 'Dashboard', 0),
-        line(Icons.add, 'Add', 1),
-        line(Icons.edit_note_rounded, 'Edit', 2),
-        line(Icons.delete_rounded, 'Delete', 3),
-        div(),
-        SizedBox(
-          height: (MediaQuery.of(context).size.height / 4) ,
-        ),
-        divWithTxt('Sign out'),
-        signOutBtn()
-      ]),
+      child: SizedBox(
+        height: double.infinity,
+        child: ListView(shrinkWrap: true, children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    height: 200,
+                    color: const Color.fromARGB(255, 7, 32, 34),
+                  ),
+                  line(Icons.dashboard_rounded, 'Dashboard', 0),
+                  line(Icons.add, 'Add', 1),
+                  line(Icons.edit_note_rounded, 'Edit', 2),
+                  line(Icons.delete_rounded, 'Delete', 3),
+                  div(),
+                ],
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  divWithTxt('Sign out'),
+                  signOutBtn(),
+                ],
+              ),
+            ],
+          ),
+        ]),
+      ),
     );
   }
 
   void selectedPage(int index) {
     setState(() {
-      if (index < wed.length) {
-        currentWidget = wed[index];
+      if (index < pages.length) {
+        currentWidget = pages[index];
+        print(isSelectedBtnList);
       } else {
-        if (kDebugMode) {
-          print('outOf rang =>  $index');
-        }
+        print('outOf rang =>  $index');
       }
     });
   }
@@ -135,10 +148,14 @@ class _HomeState extends State<Home> {
       leading: Icon(icon),
       title: Text(title),
       trailing: const Icon(Icons.keyboard_arrow_right_rounded),
-      hoverColor: Colors.blueAccent,
-      selectedColor: const Color.fromARGB(255, 7, 114, 62),
+      hoverColor: isSelectedBtnList[index]
+          ? Colors.greenAccent
+          : const Color.fromARGB(255, 255, 255, 255),
+      selectedColor: isSelectedBtnList[index]
+          ? const Color.fromARGB(255, 255, 255, 255)
+          : const Color.fromARGB(255, 0, 0, 0),
       iconColor: Colors.black,
-      selected: isSelectedBtn[index],
+      selected: isSelectedBtnList[index],
       onTap: () {
         setState(() {
           selectedPage(index);
@@ -149,11 +166,11 @@ class _HomeState extends State<Home> {
   }
 
   void getSelectedBtn(int index) {
-    for (int i = 0; i < isSelectedBtn.length; i++) {
+    for (int i = 0; i < isSelectedBtnList.length; i++) {
       if (i != index) {
-        isSelectedBtn[i] = false;
+        isSelectedBtnList[i] = false;
       } else {
-        isSelectedBtn[i] = true;
+        isSelectedBtnList[i] = true;
       }
     }
   }
@@ -217,8 +234,13 @@ class _HomeState extends State<Home> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
     initializeOptionsMenuList();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
         drawer: drawer(context),
         appBar: upBar(context),
@@ -227,4 +249,3 @@ class _HomeState extends State<Home> {
         ));
   }
 }
-// new customer, new payment, new
