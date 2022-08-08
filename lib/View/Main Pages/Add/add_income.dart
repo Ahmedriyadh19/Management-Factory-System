@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:management_factory_system/View/Containers/background.dart';
 
-class DeletePage extends StatefulWidget {
-  const DeletePage({Key? key}) : super(key: key);
+class AddIncomePage extends StatefulWidget {
+  const AddIncomePage({Key? key}) : super(key: key);
 
   @override
-  State<DeletePage> createState() => _DeletePageState();
+  State<AddIncomePage> createState() => _AddIncomePageState();
 }
 
-class _DeletePageState extends State<DeletePage> {
+class _AddIncomePageState extends State<AddIncomePage> {
   Widget bodyPage() {
-    return const Text('Delete');
+    return const Text('Add Income');
   }
 
   @override

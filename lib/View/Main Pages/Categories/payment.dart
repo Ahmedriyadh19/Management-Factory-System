@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:management_factory_system/View/Containers/background.dart';
 
-class AddPage extends StatefulWidget {
-  const AddPage({Key? key}) : super(key: key);
+class PaymentPage extends StatefulWidget {
+  const PaymentPage({Key? key}) : super(key: key);
 
   @override
-  State<AddPage> createState() => _AddPageState();
+  State<PaymentPage> createState() => _PaymentPageState();
 }
 
-class _AddPageState extends State<AddPage> {
+class _PaymentPageState extends State<PaymentPage> {
   Widget bodyPage() {
-    return const Text('Add');
+    return const Text('Payment');
   }
 
   @override

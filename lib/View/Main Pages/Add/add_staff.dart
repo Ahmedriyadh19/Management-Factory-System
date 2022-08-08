@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:management_factory_system/View/Containers/background.dart';
 
-class EditPage extends StatefulWidget {
-  const EditPage({Key? key}) : super(key: key);
+class AddStaffPage extends StatefulWidget {
+  const AddStaffPage({Key? key}) : super(key: key);
 
   @override
-  State<EditPage> createState() => _EditPageState();
+  State<AddStaffPage> createState() => _AddStaffPageState();
 }
 
-class _EditPageState extends State<EditPage> {
+class _AddStaffPageState extends State<AddStaffPage> {
   Widget bodyPage() {
-    return const Text('Edit');
+    return const Text('Add Staff');
   }
 
   @override

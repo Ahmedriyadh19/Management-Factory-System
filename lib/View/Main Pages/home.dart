@@ -2,10 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:management_factory_system/Controller/windows_configuration.dart';
 import 'package:management_factory_system/View/Containers/background.dart';
-import 'package:management_factory_system/View/Main%20Pages/Add/add_page.dart';
-import 'package:management_factory_system/View/Main%20Pages/Dashboard/dashboard.dart';
-import 'package:management_factory_system/View/Main%20Pages/Delete/delete_page.dart';
-import 'package:management_factory_system/View/Main%20Pages/Edit/edit_page.dart';
+import 'package:management_factory_system/View/Main%20Pages/Add/add_income.dart';
+import 'package:management_factory_system/View/Main%20Pages/Add/add_invoice.dart';
+import 'package:management_factory_system/View/Main%20Pages/Add/add_customer.dart';
+import 'package:management_factory_system/View/Main%20Pages/Add/add_outcome.dart';
+import 'package:management_factory_system/View/Main%20Pages/Add/add_product.dart';
+import 'package:management_factory_system/View/Main%20Pages/Add/add_staff.dart';
+import 'package:management_factory_system/View/Main%20Pages/Add/add_stock.dart';
+import 'package:management_factory_system/View/Main%20Pages/Categories/in_voice.dart';
+import 'package:management_factory_system/View/Main%20Pages/Categories/dashboard.dart';
+import 'package:management_factory_system/View/Main%20Pages/Categories/persons.dart';
+import 'package:management_factory_system/View/Main%20Pages/Categories/product.dart';
+import 'package:management_factory_system/View/Main%20Pages/Categories/payment.dart';
+import 'package:management_factory_system/View/Main%20Pages/Delete/delete_customer.dart';
+import 'package:management_factory_system/View/Main%20Pages/Delete/delete_income.dart';
+import 'package:management_factory_system/View/Main%20Pages/Delete/delete_invoice.dart';
+import 'package:management_factory_system/View/Main%20Pages/Delete/delete_outcome.dart';
+import 'package:management_factory_system/View/Main%20Pages/Delete/delete_product.dart';
+import 'package:management_factory_system/View/Main%20Pages/Delete/delete_staff.dart';
+import 'package:management_factory_system/View/Main%20Pages/Delete/delete_stock.dart';
+import 'package:management_factory_system/View/Main%20Pages/Edit/edit_customer.dart';
+import 'package:management_factory_system/View/Main%20Pages/Edit/edit_income.dart';
+import 'package:management_factory_system/View/Main%20Pages/Edit/edit_invoice.dart';
+import 'package:management_factory_system/View/Main%20Pages/Edit/edit_outcome.dart';
+import 'package:management_factory_system/View/Main%20Pages/Edit/edit_product.dart';
+import 'package:management_factory_system/View/Main%20Pages/Edit/edit_staff.dart';
+import 'package:management_factory_system/View/Main%20Pages/Edit/edit_stock.dart';
 import 'package:management_factory_system/View/Main%20Pages/login.dart';
 
 class Home extends StatefulWidget {
@@ -27,56 +49,78 @@ class _HomeState extends State<Home> {
     editListOption.clear();
     deleteListOption.clear();
 
-    for (int i = 0; i < 25; i++) {
+    for (int i = 0; i < 26; i++) {
       isSelectedBtnList.add(false);
     }
     addListOption
-        .add(createOption(FontAwesomeIcons.layerGroup, 'Add Stock', 4));
+        .add(createOption(FontAwesomeIcons.layerGroup, 'Add Stock', 5));
     addListOption
-        .add(createOption(FontAwesomeIcons.userPlus, 'Add Customer', 5));
+        .add(createOption(FontAwesomeIcons.userPlus, 'Add Customer', 6));
     addListOption
-        .add(createOption(FontAwesomeIcons.fileInvoice, 'Add Order', 6));
-    addListOption.add(createOption(FontAwesomeIcons.user, 'Add Staff', 7));
-    addListOption.add(createOption(Icons.payment_rounded, 'Add Income', 8));
+        .add(createOption(FontAwesomeIcons.fileInvoice, 'Add Invoice', 7));
+    addListOption.add(createOption(FontAwesomeIcons.user, 'Add Staff', 8));
+    addListOption.add(createOption(Icons.payment_rounded, 'Add Income', 9));
+    addListOption.add(
+        createOption(FontAwesomeIcons.moneyCheckDollar, 'Add outcome', 10));
     addListOption
-        .add(createOption(FontAwesomeIcons.moneyCheckDollar, 'Add outcome', 9));
-    addListOption
-        .add(createOption(Icons.insert_drive_file_rounded, 'Add Product', 10));
+        .add(createOption(Icons.insert_drive_file_rounded, 'Add Product', 11));
 
-    editListOption.add(createOption(FontAwesomeIcons.pen, 'Edit Stock', 11));
+    editListOption.add(createOption(FontAwesomeIcons.pen, 'Edit Stock', 12));
     editListOption
-        .add(createOption(FontAwesomeIcons.userPen, 'Edit Customer', 12));
+        .add(createOption(FontAwesomeIcons.userPen, 'Edit Customer', 13));
     editListOption
-        .add(createOption(FontAwesomeIcons.filePen, 'Edit Order', 13));
+        .add(createOption(FontAwesomeIcons.filePen, 'Edit Invoice', 14));
     editListOption
-        .add(createOption(FontAwesomeIcons.squarePen, 'Edit Staff', 14));
-    editListOption.add(createOption(Icons.payment_rounded, 'Edit Income', 15));
+        .add(createOption(FontAwesomeIcons.squarePen, 'Edit Staff', 15));
+    editListOption.add(createOption(Icons.payment_rounded, 'Edit Income', 16));
     editListOption
-        .add(createOption(FontAwesomeIcons.moneyBill, 'Edit outcome', 16));
+        .add(createOption(FontAwesomeIcons.moneyBill, 'Edit outcome', 17));
     editListOption
-        .add(createOption(FontAwesomeIcons.penToSquare, 'Edit Product', 17));
+        .add(createOption(FontAwesomeIcons.penToSquare, 'Edit Product', 18));
 
     deleteListOption
-        .add(createOption(FontAwesomeIcons.solidTrashCan, 'Delete Stock', 18));
+        .add(createOption(FontAwesomeIcons.solidTrashCan, 'Delete Stock', 19));
     deleteListOption
-        .add(createOption(FontAwesomeIcons.userXmark, 'Delete Customer', 19));
+        .add(createOption(FontAwesomeIcons.userXmark, 'Delete Customer', 20));
     deleteListOption
-        .add(createOption(FontAwesomeIcons.fileWaveform, 'Delete Order', 20));
+        .add(createOption(FontAwesomeIcons.fileWaveform, 'Delete Order', 21));
     deleteListOption
-        .add(createOption(FontAwesomeIcons.userLargeSlash, 'Delete Staff', 21));
+        .add(createOption(FontAwesomeIcons.userLargeSlash, 'Delete Staff', 22));
     deleteListOption
-        .add(createOption(FontAwesomeIcons.circleMinus, 'Delete Income', 22));
+        .add(createOption(FontAwesomeIcons.circleMinus, 'Delete Income', 23));
     deleteListOption
-        .add(createOption(FontAwesomeIcons.folderMinus, 'Delete outcome', 23));
+        .add(createOption(FontAwesomeIcons.folderMinus, 'Delete outcome', 24));
     deleteListOption.add(
-        createOption(FontAwesomeIcons.fileCircleXmark, 'Delete Product', 24));
+        createOption(FontAwesomeIcons.fileCircleXmark, 'Delete Product', 25));
   }
 
   static List<Widget> pages = [
     const Dashboard(),
-    const AddPage(),
-    const EditPage(),
-    const DeletePage()
+    const InvoicePage(),
+    const PaymentPage(),
+    const ProductPage(),
+    const PersonsPage(),
+    const AddStockPage(),
+    const AddCustomerPage(),
+    const AddInvoicePage(),
+    const AddStaffPage(),
+    const AddIncomePage(),
+    const AddOutcomePage(),
+    const AddProductPage(),
+    const EditStockPage(),
+    const EditCustomerPage(),
+    const EditInvoicePage(),
+    const EditStaffPage(),
+    const EditIncomePage(),
+    const EditOutcomePage(),
+    const EditProductPage(),
+    const DeleteStockPage(),
+    const DeleteCustomerPage(),
+    const DeleteInvoicePage(),
+    const DeleteStaffPage(),
+    const DeleteIncomePage(),
+    const DeleteOutcomePage(),
+    const DeleteProductPage(),
   ];
 
   Widget currentWidget = pages[0];
@@ -98,9 +142,10 @@ class _HomeState extends State<Home> {
                     color: const Color.fromARGB(255, 7, 32, 34),
                   ),
                   line(Icons.dashboard_rounded, 'Dashboard', 0),
-                  line(Icons.add, 'Add', 1),
-                  line(Icons.edit_note_rounded, 'Edit', 2),
-                  line(Icons.delete_rounded, 'Delete', 3),
+                  line(FontAwesomeIcons.fileInvoiceDollar, 'Invoice', 1),
+                  line(FontAwesomeIcons.moneyCheckDollar, 'Payment', 2),
+                  line(FontAwesomeIcons.box, 'Product', 3),
+                  line(Icons.person, 'Persons', 4),
                   div(),
                 ],
               ),
