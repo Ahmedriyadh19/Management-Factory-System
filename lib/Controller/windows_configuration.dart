@@ -1,8 +1,10 @@
+import 'dart:io';
+
+import 'package:desktop_window/desktop_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_window_close/flutter_window_close.dart';
 
-
-class WindowsConfiguration{
+class WindowsConfiguration {
   exit(BuildContext context) {
     FlutterWindowClose.setWindowShouldCloseHandler(() async {
       return await showDialog(
@@ -28,6 +30,11 @@ class WindowsConfiguration{
           });
     });
   }
+
+  windowSize() {
+    WidgetsFlutterBinding.ensureInitialized();
+    if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+      DesktopWindow.setMinWindowSize(const Size(1000, 700));
+    }
+  }
 }
-
-
