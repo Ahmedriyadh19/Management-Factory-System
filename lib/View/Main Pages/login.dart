@@ -26,7 +26,7 @@ class _LoginState extends State<Login> {
   @override
   void initState() {
     super.initState();
-    WindowsConfiguration().exit(context);
+    WindowsConfiguration().exitAction(context);
   }
 
   @override

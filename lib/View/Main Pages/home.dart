@@ -237,7 +237,7 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     initializeOptionsMenuList();
-    WindowsConfiguration().exit(context);
+    WindowsConfiguration().exitAction(context);
   }
 
   @override
