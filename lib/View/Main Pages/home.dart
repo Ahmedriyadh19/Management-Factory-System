@@ -9,11 +9,11 @@ import 'package:management_factory_system/View/Main%20Pages/Add/add_outcome.dart
 import 'package:management_factory_system/View/Main%20Pages/Add/add_product.dart';
 import 'package:management_factory_system/View/Main%20Pages/Add/add_staff.dart';
 import 'package:management_factory_system/View/Main%20Pages/Add/add_stock.dart';
-import 'package:management_factory_system/View/Main%20Pages/Categories/in_voice.dart';
-import 'package:management_factory_system/View/Main%20Pages/Categories/dashboard.dart';
-import 'package:management_factory_system/View/Main%20Pages/Categories/persons.dart';
-import 'package:management_factory_system/View/Main%20Pages/Categories/product.dart';
-import 'package:management_factory_system/View/Main%20Pages/Categories/payment.dart';
+import 'package:management_factory_system/View/Main%20Pages/Categories/categories_invoice.dart';
+import 'package:management_factory_system/View/Main%20Pages/Categories/categories_dashboard.dart';
+import 'package:management_factory_system/View/Main%20Pages/Categories/categories_persons.dart';
+import 'package:management_factory_system/View/Main%20Pages/Categories/categories_product.dart';
+import 'package:management_factory_system/View/Main%20Pages/Categories/categories_payment.dart';
 import 'package:management_factory_system/View/Main%20Pages/Delete/delete_customer.dart';
 import 'package:management_factory_system/View/Main%20Pages/Delete/delete_income.dart';
 import 'package:management_factory_system/View/Main%20Pages/Delete/delete_invoice.dart';
