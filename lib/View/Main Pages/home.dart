@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_window_close/flutter_window_close.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:management_factory_system/Controller/windows_configuration.dart';
 import 'package:management_factory_system/View/Containers/background.dart';
 import 'package:management_factory_system/View/Main%20Pages/Add/add_page.dart';
 import 'package:management_factory_system/View/Main%20Pages/Dashboard/dashboard.dart';
@@ -26,44 +28,49 @@ class _HomeState extends State<Home> {
     editListOption.clear();
     deleteListOption.clear();
 
-    for (int i = 0; i < 22; i++) {
+    for (int i = 0; i < 25; i++) {
       isSelectedBtnList.add(false);
     }
+    addListOption
+        .add(createOption(FontAwesomeIcons.layerGroup, 'Add Stock', 4));
+    addListOption
+        .add(createOption(FontAwesomeIcons.userPlus, 'Add Customer', 5));
+    addListOption
+        .add(createOption(FontAwesomeIcons.fileInvoice, 'Add Order', 6));
+    addListOption.add(createOption(FontAwesomeIcons.user, 'Add Staff', 7));
+    addListOption.add(createOption(Icons.payment_rounded, 'Add Income', 8));
+    addListOption
+        .add(createOption(FontAwesomeIcons.moneyCheckDollar, 'Add outcome', 9));
+    addListOption
+        .add(createOption(Icons.insert_drive_file_rounded, 'Add Product', 10));
 
-    addListOption
-        .add(createOption(FontAwesomeIcons.userPlus, 'Add Customer', 4));
-    addListOption
-        .add(createOption(FontAwesomeIcons.fileInvoice, 'Add Order', 5));
-    addListOption.add(createOption(FontAwesomeIcons.user, 'Add Staff', 6));
-    addListOption.add(createOption(Icons.payment_rounded, 'Add Income', 7));
-    addListOption
-        .add(createOption(FontAwesomeIcons.moneyCheckDollar, 'Add outcome', 8));
-    addListOption
-        .add(createOption(Icons.insert_drive_file_rounded, 'Add Product', 9));
-
+    editListOption.add(createOption(FontAwesomeIcons.pen, 'Edit Stock', 11));
     editListOption
-        .add(createOption(FontAwesomeIcons.userPen, 'Edit Customer', 10));
+        .add(createOption(FontAwesomeIcons.userPen, 'Edit Customer', 12));
     editListOption
-        .add(createOption(FontAwesomeIcons.filePen, 'Edit Order', 11));
-    editListOption.add(createOption(FontAwesomeIcons.pen, 'Edit Staff', 12));
-    editListOption.add(createOption(Icons.payment_rounded, 'Edit Income', 13));
+        .add(createOption(FontAwesomeIcons.filePen, 'Edit Order', 13));
     editListOption
-        .add(createOption(FontAwesomeIcons.moneyBill, 'Edit outcome', 14));
+        .add(createOption(FontAwesomeIcons.squarePen, 'Edit Staff', 14));
+    editListOption.add(createOption(Icons.payment_rounded, 'Edit Income', 15));
     editListOption
-        .add(createOption(FontAwesomeIcons.penToSquare, 'Edit Product', 15));
+        .add(createOption(FontAwesomeIcons.moneyBill, 'Edit outcome', 16));
+    editListOption
+        .add(createOption(FontAwesomeIcons.penToSquare, 'Edit Product', 17));
 
     deleteListOption
-        .add(createOption(FontAwesomeIcons.userXmark, 'Delete Customer', 16));
+        .add(createOption(FontAwesomeIcons.solidTrashCan, 'Delete Stock', 18));
     deleteListOption
-        .add(createOption(FontAwesomeIcons.fileWaveform, 'Delete Order', 17));
+        .add(createOption(FontAwesomeIcons.userXmark, 'Delete Customer', 19));
     deleteListOption
-        .add(createOption(FontAwesomeIcons.userLargeSlash, 'Delete Staff', 18));
+        .add(createOption(FontAwesomeIcons.fileWaveform, 'Delete Order', 20));
     deleteListOption
-        .add(createOption(FontAwesomeIcons.circleMinus, 'Delete Income', 19));
+        .add(createOption(FontAwesomeIcons.userLargeSlash, 'Delete Staff', 21));
     deleteListOption
-        .add(createOption(FontAwesomeIcons.folderMinus, 'Delete outcome', 20));
+        .add(createOption(FontAwesomeIcons.circleMinus, 'Delete Income', 22));
+    deleteListOption
+        .add(createOption(FontAwesomeIcons.folderMinus, 'Delete outcome', 23));
     deleteListOption.add(
-        createOption(FontAwesomeIcons.fileCircleXmark, 'Delete Product', 21));
+        createOption(FontAwesomeIcons.fileCircleXmark, 'Delete Product', 24));
   }
 
   static List<Widget> pages = [
@@ -231,6 +238,7 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     initializeOptionsMenuList();
+    WindowsConfiguration().exit(context);
   }
 
   @override

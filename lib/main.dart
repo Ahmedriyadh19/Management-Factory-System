@@ -1,8 +1,10 @@
 import 'dart:io';
 import 'package:desktop_window/desktop_window.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_window_close/flutter_window_close.dart';
 import 'package:management_factory_system/Controller/my_scroll.dart';
 import 'package:management_factory_system/View/Main%20Pages/home.dart';
+import 'package:management_factory_system/View/Main%20Pages/login.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Home(),
+      body: Login(),
     );
   }
 }

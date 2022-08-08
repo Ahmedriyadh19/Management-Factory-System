@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_window_close/flutter_window_close.dart';
+import 'package:management_factory_system/Controller/windows_configuration.dart';
 import 'package:management_factory_system/View/Containers/background.dart';
 import 'package:management_factory_system/View/Main%20Pages/home.dart';
 
@@ -20,6 +22,12 @@ class _LoginState extends State<Login> {
     setState(() {
       passwordVis = !passwordVis;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WindowsConfiguration().exit(context);
   }
 
   @override
