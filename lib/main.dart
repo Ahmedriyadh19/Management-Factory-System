@@ -1,9 +1,15 @@
+import 'dart:io';
+import 'package:desktop_window/desktop_window.dart';
 import 'package:flutter/material.dart';
 import 'package:management_factory_system/Controller/my_scroll.dart';
 import 'package:management_factory_system/View/Main%20Pages/home.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    DesktopWindow.setMinWindowSize(const Size(1000, 700));
+    runApp(const MyApp());
+  }
 }
 
 class MyApp extends StatelessWidget {

@@ -81,8 +81,7 @@ class _HomeState extends State<Home> {
       elevation: 50,
       child: SizedBox(
         height: double.infinity,
-        child: ListView(shrinkWrap: true, children: [
-          Column(
+        child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
@@ -105,10 +104,8 @@ class _HomeState extends State<Home> {
                   divWithTxt('Sign out'),
                   signOutBtn(),
                 ],
-              ),
-            ],
-          ),
-        ]),
+              )
+            ]),
       ),
     );
   }
@@ -117,9 +114,6 @@ class _HomeState extends State<Home> {
     setState(() {
       if (index < pages.length) {
         currentWidget = pages[index];
-        print(isSelectedBtnList);
-      } else {
-        print('outOf rang =>  $index');
       }
     });
   }
