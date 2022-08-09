@@ -10,7 +10,32 @@ class InvoicePage extends StatefulWidget {
 
 class _InvoicePageState extends State<InvoicePage> {
   Widget bodyPage() {
-    return const Text('Invoice');
+    return GridView(
+      padding: const EdgeInsets.all(50),
+      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 400,
+          mainAxisExtent: 200,
+          childAspectRatio: 3 / 2,
+          crossAxisSpacing: 20,
+          mainAxisSpacing: 20),
+      children: [
+        Container(
+          color: Colors.amber,
+        ),
+        Container(
+          color: Colors.amber,
+        ),
+        Container(
+          color: Colors.amber,
+        ),
+        Container(
+          color: Colors.amber,
+        ),
+        Container(
+          color: Colors.amber,
+        ),
+      ],
+    );
   }
 
   @override

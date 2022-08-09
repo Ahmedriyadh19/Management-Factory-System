@@ -244,7 +244,7 @@ class _HomeState extends State<Home> {
     return AppBar(
       centerTitle: true,
       backgroundColor: const Color.fromARGB(255, 45, 64, 65),
-      title: const Text('Welcome'),
+      title: const Center(child: Text('Welcome')),
       elevation: 50,
       actions: [
         upBarBtn(0, Icons.dashboard_rounded),
