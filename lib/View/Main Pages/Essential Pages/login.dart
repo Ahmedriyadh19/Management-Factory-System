@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:management_factory_system/Controller/windows_configuration.dart';
 import 'package:management_factory_system/View/Containers/background.dart';
-import 'package:management_factory_system/View/Main%20Pages/home.dart';
+import 'package:management_factory_system/View/Main%20Pages/Essential%20Pages/home.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
