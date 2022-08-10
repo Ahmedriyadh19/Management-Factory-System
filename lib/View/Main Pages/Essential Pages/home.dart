@@ -83,7 +83,7 @@ class _HomeState extends State<Home> {
     deleteListOption
         .add(createOption(FontAwesomeIcons.userXmark, 'Delete Customer', 20));
     deleteListOption
-        .add(createOption(FontAwesomeIcons.fileWaveform, 'Delete Order', 21));
+        .add(createOption(FontAwesomeIcons.fileWaveform, 'Delete Invoice', 21));
     deleteListOption
         .add(createOption(FontAwesomeIcons.userLargeSlash, 'Delete Staff', 22));
     deleteListOption
@@ -227,9 +227,10 @@ class _HomeState extends State<Home> {
     );
   }
 
-  PopupMenuButton option(
-      BuildContext ctx, IconData icon, List<PopupMenuEntry> optionsList) {
+  PopupMenuButton option(BuildContext ctx, IconData icon,
+      List<PopupMenuEntry> optionsList, String tooltips) {
     return PopupMenuButton(
+      tooltip: tooltips,
       icon: Icon(icon),
       itemBuilder: ((ctx) => optionsList),
       onSelected: (value) {
@@ -248,9 +249,9 @@ class _HomeState extends State<Home> {
       elevation: 50,
       actions: [
         upBarBtn(0, Icons.dashboard_rounded),
-        option(ctx, Icons.add, addListOption),
-        option(ctx, Icons.edit_note_rounded, editListOption),
-        option(ctx, Icons.delete_rounded, deleteListOption),
+        option(ctx, Icons.add, addListOption, 'Show add Menu'),
+        option(ctx, Icons.edit_note_rounded, editListOption, 'Show edit Menu'),
+        option(ctx, Icons.delete_rounded, deleteListOption, 'Show delete Menu'),
       ],
     );
   }
