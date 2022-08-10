@@ -79,11 +79,11 @@ class InvoicePage extends StatelessWidget {
   }
 
   VerticalDivider buildDiv() {
-    return const VerticalDivider(
-      color: Color.fromARGB(255, 0, 0, 0),
+    return VerticalDivider(
+      color: const Color.fromARGB(255, 0, 0, 0),
       thickness: 1,
-      endIndent: 40,
-      indent: 40,
+      endIndent: isOkay ? 70 : 40,
+      indent: isOkay ? 70 : 40,
     );
   }
 
