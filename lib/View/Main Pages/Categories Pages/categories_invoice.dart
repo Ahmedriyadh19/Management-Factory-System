@@ -1,5 +1,6 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:management_factory_system/View/Containers/background.dart';
 import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_invoice.dart';
 import 'package:management_factory_system/View/Main%20Pages/Delete%20Pages/delete_invoice.dart';
@@ -7,9 +8,12 @@ import 'package:management_factory_system/View/Main%20Pages/Display%20Pages/disp
 import 'package:management_factory_system/View/Main%20Pages/Edit%20Pages/edit_invoice.dart';
 
 class InvoicePage extends StatelessWidget {
-  const InvoicePage({
+  InvoicePage({
     Key? key,
   }) : super(key: key);
+
+  final bool isOkay =
+      Platform.isWindows || Platform.isLinux || Platform.isMacOS;
   static const List<Widget> bodyPages = [
     AddInvoicePage(option: 0, appBarTitle: 'Add new Invoice'),
     EditInvoicePage(option: 0, appBarTitle: 'Edit Invoice'),
@@ -26,9 +30,9 @@ class InvoicePage extends StatelessWidget {
   Widget bodyPage(BuildContext ctx) {
     return GridView(
         padding: const EdgeInsets.all(50),
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 500,
-            mainAxisExtent: 200,
+        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: isOkay ? 500 : 300,
+            mainAxisExtent: isOkay ? 200 : 100,
             childAspectRatio: 3 / 2,
             crossAxisSpacing: 20,
             mainAxisSpacing: 20),
@@ -54,30 +58,9 @@ class InvoicePage extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Container(
-                  margin: const EdgeInsets.only(
-                      bottom: 25, left: 5, right: 0, top: 25),
-                  child: Image.asset('lib/Assets/Images/$pathImage.png')),
-              const VerticalDivider(
-                color: Color.fromARGB(255, 0, 0, 0),
-                thickness: 1,
-                endIndent: 50,
-                indent: 50,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(nameMenu,
-                      style: const TextStyle(
-                          fontSize: 32, fontWeight: FontWeight.bold)),
-                  SizedBox(
-                      width: 200,
-                      child: Text(
-                        description,
-                        textAlign: TextAlign.left,
-                      )),
-                ],
-              )
+              buildImage(pathImage),
+              buildDiv(),
+              buildText(nameMenu, description)
             ],
           ),
         ),
@@ -86,6 +69,39 @@ class InvoicePage extends StatelessWidget {
         Navigator.of(ctx)
             .push(MaterialPageRoute(builder: (_) => bodyPages[action]));
       },
+    );
+  }
+
+  Container buildImage(String pathImage) {
+    return Container(
+        margin: const EdgeInsets.only(bottom: 25, left: 5, right: 0, top: 25),
+        child: Image.asset('lib/Assets/Images/$pathImage.png'));
+  }
+
+  VerticalDivider buildDiv() {
+    return const VerticalDivider(
+      color: Color.fromARGB(255, 0, 0, 0),
+      thickness: 1,
+      endIndent: 40,
+      indent: 40,
+    );
+  }
+
+  Column buildText(String nameMenu, String description) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(nameMenu,
+            style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
+        Container(
+            padding: const EdgeInsets.all(5),
+            color: const Color.fromARGB(104, 255, 255, 255),
+            width: 200,
+            child: Text(
+              description,
+              textAlign: TextAlign.justify,
+            )),
+      ],
     );
   }
 

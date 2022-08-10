@@ -96,7 +96,7 @@ class _HomeState extends State<Home> {
 
   static List<Widget> pages = [
     const Dashboard(),
-    const InvoicePage(),
+     InvoicePage(),
     const PaymentPage(),
     const ProductPage(),
     const PersonsPage(),
