@@ -19,13 +19,12 @@ class _BackgroundState extends State<Background> {
       width: double.maxFinite,
       decoration: const BoxDecoration(
           gradient: LinearGradient(colors: [
-            Color.fromARGB(255, 255, 255, 255),
-            
+        Color.fromARGB(255, 255, 255, 255),
         Color.fromARGB(255, 229, 214, 214),
         Color.fromARGB(255, 208, 173, 173),
         Color.fromARGB(255, 234, 171, 171),
         Color.fromARGB(255, 214, 137, 137),
-      /*  Color.fromARGB(255, 90, 106, 107),
+        /*  Color.fromARGB(255, 90, 106, 107),
         Color.fromARGB(255, 80, 106, 107),
         Color.fromARGB(255, 70, 106, 107),
         Color.fromARGB(255, 60, 106, 107),

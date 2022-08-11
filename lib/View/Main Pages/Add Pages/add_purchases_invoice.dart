@@ -10,7 +10,8 @@ class AddPurchasesInvoicePage extends StatefulWidget {
   final String? appBarTitle;
 
   @override
-  State<AddPurchasesInvoicePage> createState() => _AddPurchasesInvoicePageState();
+  State<AddPurchasesInvoicePage> createState() =>
+      _AddPurchasesInvoicePageState();
 }
 
 class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
@@ -23,7 +24,8 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
     return widget.option != 0
         ? Background(widget: bodyPage())
         : Scaffold(
-            appBar: createCustomizeAppBar(widget.appBarTitle!),
+            appBar:
+                CustomizeAppBar().createCustomizeAppBar(widget.appBarTitle!),
             body: Background(widget: bodyPage()),
           );
   }

@@ -8,10 +8,12 @@ class DeletePurchasesInvoicePage extends StatefulWidget {
   final int? option;
   final String? appBarTitle;
   @override
-  State<DeletePurchasesInvoicePage> createState() => _DeletePurchasesInvoicePageState();
+  State<DeletePurchasesInvoicePage> createState() =>
+      _DeletePurchasesInvoicePageState();
 }
 
-class _DeletePurchasesInvoicePageState extends State<DeletePurchasesInvoicePage> {
+class _DeletePurchasesInvoicePageState
+    extends State<DeletePurchasesInvoicePage> {
   Widget bodyPage() {
     return const Text('Delete Purchases Invoice');
   }
@@ -21,7 +23,8 @@ class _DeletePurchasesInvoicePageState extends State<DeletePurchasesInvoicePage>
     return widget.option != 0
         ? Background(widget: bodyPage())
         : Scaffold(
-            appBar: createCustomizeAppBar(widget.appBarTitle!),
+            appBar:
+                CustomizeAppBar().createCustomizeAppBar(widget.appBarTitle!),
             body: Background(widget: bodyPage()),
           );
   }

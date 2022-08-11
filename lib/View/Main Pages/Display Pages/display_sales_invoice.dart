@@ -22,7 +22,8 @@ class _DisplaySalesInvoicePageState extends State<DisplaySalesInvoicePage> {
     return widget.option != 0
         ? Background(widget: bodyPage())
         : Scaffold(
-            appBar: createCustomizeAppBar(widget.appBarTitle!),
+            appBar:
+                CustomizeAppBar().createCustomizeAppBar(widget.appBarTitle!),
             body: Background(widget: bodyPage()),
           );
   }

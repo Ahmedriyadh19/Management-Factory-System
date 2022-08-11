@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:management_factory_system/Controller/windows_configuration.dart';
+import 'package:management_factory_system/View/Containers/app_bar_customize.dart';
 import 'package:management_factory_system/View/Containers/background.dart';
 import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_customer.dart';
 import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_income.dart';
@@ -245,12 +246,9 @@ class _HomeState extends State<Home> {
   }
 
   AppBar upBar(BuildContext ctx) {
-    return AppBar(
-      centerTitle: true,
-      backgroundColor: const Color.fromARGB(255, 45, 64, 65),
-      title: const Center(child: Text('Welcome')),
-      elevation: 50,
-      actions: [
+    return CustomizeAppBar().createCustomizeAppBar(
+      'We',
+      actionsIcons: [
         upBarBtn(0, Icons.dashboard_rounded),
         option(ctx, Icons.add, addListOption, 'Show add Menu'),
         option(ctx, Icons.edit_note_rounded, editListOption, 'Show edit Menu'),
