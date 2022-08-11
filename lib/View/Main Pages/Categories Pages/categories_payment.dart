@@ -40,12 +40,27 @@ class PaymentPage extends StatelessWidget {
   Widget bodyPage(BuildContext ctx) {
     return ListView(
       children: [
+        const Center(
+          child: Text('PAYMENT RECEIVE',
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+        ),
         buildFormatPage([
           createItem('add income', 'Add Income', 0, ctx),
           createItem('edit income', 'Edit Income', 1, ctx),
           createItem('display income', 'View Income', 2, ctx),
           createItem('delete income', 'Delete Income', 3, ctx),
         ], 0),
+        Divider(
+          color: Colors.black,
+          thickness: isOkay ? 5 : 2,
+          endIndent: 50,
+          indent: 50,
+        ),
+        const SizedBox(height: 30),
+        const Center(
+          child: Text('PAYMENT SEND',
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+        ),
         buildFormatPage([
           createItem('add outcome', 'Add Outcome', 4, ctx),
           createItem('edit outcome', 'Edit Outcome', 5, ctx),
@@ -69,29 +84,32 @@ class PaymentPage extends StatelessWidget {
         children: items);
   }
 
-  GestureDetector createItem(
+  Tooltip createItem(
       String pathImage, String nameMenu, int action, BuildContext ctx) {
-    return GestureDetector(
-      child: Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(25),
-            color: const Color.fromARGB(190, 254, 255, 255)),
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              buildImage(pathImage),
-              buildDiv(),
-              buildText(nameMenu, descriptions[action])
-            ],
+    return Tooltip(
+      message: descriptions[action],
+      child: GestureDetector(
+        child: Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(25),
+              color: const Color.fromARGB(190, 254, 255, 255)),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                buildImage(pathImage),
+                buildDiv(),
+                buildText(nameMenu)
+              ],
+            ),
           ),
         ),
+        onTap: () {
+          Navigator.of(ctx)
+              .push(MaterialPageRoute(builder: (_) => bodyPages[action]));
+        },
       ),
-      onTap: () {
-        Navigator.of(ctx)
-            .push(MaterialPageRoute(builder: (_) => bodyPages[action]));
-      },
     );
   }
 
@@ -110,20 +128,12 @@ class PaymentPage extends StatelessWidget {
     );
   }
 
-  Column buildText(String nameMenu, String description) {
+  Column buildText(String nameMenu) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(nameMenu,
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-        Container(
-            padding: const EdgeInsets.all(5),
-            color: const Color.fromARGB(104, 255, 255, 255),
-            width: 200,
-            child: Text(
-              description,
-              textAlign: TextAlign.justify,
-            )),
       ],
     );
   }

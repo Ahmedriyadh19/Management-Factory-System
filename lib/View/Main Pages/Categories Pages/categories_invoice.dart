@@ -28,31 +28,46 @@ class InvoicePage extends StatelessWidget {
     DeletePurchasesInvoicePage(option: 0, appBarTitle: 'Delete Invoice')
   ];
   static const List<String> descriptions = [
-    'From here, you may create a new invoice for what you\'ve sold.',
-    'You may update past invoices that have been sold from your side by going to this page.',
-    'You may search and view any invoices that you have sold from your side here.',
-    'If you made a mistake in a previous invoice or would like to delete it in any way, you may do it from here.',
-    '',
-    '',
-    '',
-    '',
+    'From here, you may create a new sales invoice for what you\'ve sold.',
+    'You may update past sales invoices that have been sold from your side by going to this page.',
+    'You may search and view any sales invoices that you have sold from your side here.',
+    'If you made a mistake in a previous sales invoice or would like to delete it in any way, you may do it from here.',
+    'From here, you may create a new purchases invoice for what you\'ve sold.',
+    'You may update past purchases invoices that have been sold from your side by going to this page.',
+    'You may search and view any purchases invoices that you have sold from your side here.',
+    'If you made a mistake in a previous purchases invoice or would like to delete it in any way, you may do it from here.',
   ];
 
   Widget bodyPage(BuildContext ctx) {
     return ListView(
       children: [
+        const Center(
+          child: Text('SALES INVOICE',
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+        ),
         buildFormatPage([
           createItem('add sales invoice', 'Add Sales Invoice', 0, ctx),
           createItem('edit sales invoice', 'Edit Sales Invoice', 1, ctx),
-          createItem('display sales invoice', 'Display Sales Invoice', 2, ctx),
+          createItem('display sales invoice', 'View Sales Invoice', 2, ctx),
           createItem('delete sales invoice', 'Delete Sales Invoice', 3, ctx),
         ], 0),
+        Divider(
+          color: Colors.black,
+          thickness: isOkay ? 5 : 2,
+          endIndent: 50,
+          indent: 50,
+        ),
+        const SizedBox(height: 30),
+        const Center(
+          child: Text('PURCHASES INVOICE',
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+        ),
         buildFormatPage([
           createItem('add purchases invoice', 'Add Purchases Invoice', 4, ctx),
           createItem(
               'edit purchases invoice', 'Edit Purchases Invoice', 5, ctx),
           createItem(
-              'display purchases invoice', 'Display Purchases Invoice', 6, ctx),
+              'display purchases invoice', 'View Purchases Invoice', 6, ctx),
           createItem(
               'delete purchases invoice', 'Delete Purchases Invoice', 7, ctx),
         ], 0)
@@ -65,7 +80,7 @@ class InvoicePage extends StatelessWidget {
         shrinkWrap: option == 0 ? true : false,
         padding: const EdgeInsets.all(50),
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: isOkay ? 500 : 300,
+            maxCrossAxisExtent: isOkay ? 400 : 200,
             mainAxisExtent: isOkay ? 200 : 100,
             childAspectRatio: 3 / 2,
             crossAxisSpacing: 20,
@@ -73,29 +88,32 @@ class InvoicePage extends StatelessWidget {
         children: items);
   }
 
-  GestureDetector createItem(
+  Tooltip createItem(
       String pathImage, String nameMenu, int action, BuildContext ctx) {
-    return GestureDetector(
-      child: Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(25),
-            color: const Color.fromARGB(190, 254, 255, 255)),
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              buildImage(pathImage),
-              buildDiv(),
-              buildText(nameMenu, descriptions[action])
-            ],
+    return Tooltip(
+      message: descriptions[action],
+      child: GestureDetector(
+        child: Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(25),
+              color: const Color.fromARGB(190, 254, 255, 255)),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                buildImage(pathImage),
+                buildDiv(),
+                buildText(nameMenu)
+              ],
+            ),
           ),
         ),
+        onTap: () {
+          Navigator.of(ctx)
+              .push(MaterialPageRoute(builder: (_) => bodyPages[action]));
+        },
       ),
-      onTap: () {
-        Navigator.of(ctx)
-            .push(MaterialPageRoute(builder: (_) => bodyPages[action]));
-      },
     );
   }
 
@@ -114,20 +132,12 @@ class InvoicePage extends StatelessWidget {
     );
   }
 
-  Column buildText(String nameMenu, String description) {
+  Column buildText(String nameMenu) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(nameMenu,
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-        Container(
-            padding: const EdgeInsets.all(5),
-            color: const Color.fromARGB(104, 255, 255, 255),
-            width: 200,
-            child: Text(
-              description,
-              textAlign: TextAlign.justify,
-            )),
       ],
     );
   }
