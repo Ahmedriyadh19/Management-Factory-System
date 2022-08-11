@@ -14,6 +14,7 @@ import 'package:management_factory_system/View/Main%20Pages/Categories%20Pages/c
 import 'package:management_factory_system/View/Main%20Pages/Categories%20Pages/categories_payment.dart';
 import 'package:management_factory_system/View/Main%20Pages/Categories%20Pages/categories_persons.dart';
 import 'package:management_factory_system/View/Main%20Pages/Categories%20Pages/categories_product.dart';
+import 'package:management_factory_system/View/Main%20Pages/Categories%20Pages/categories_settings.dart';
 import 'package:management_factory_system/View/Main%20Pages/Delete%20Pages/delete_customer.dart';
 import 'package:management_factory_system/View/Main%20Pages/Delete%20Pages/delete_income.dart';
 import 'package:management_factory_system/View/Main%20Pages/Delete%20Pages/delete_sales_invoice.dart';
@@ -49,7 +50,7 @@ class _HomeState extends State<Home> {
     editListOption.clear();
     deleteListOption.clear();
 
-    for (int i = 0; i < 26; i++) {
+    for (int i = 0; i < 27; i++) {
       isSelectedBtnList.add(false);
     }
     addListOption
@@ -121,6 +122,7 @@ class _HomeState extends State<Home> {
     const DeleteIncomePage(),
     const DeleteOutcomePage(),
     const DeleteProductPage(),
+    const SettingsPage()
   ];
 
   Widget currentWidget = pages[0];
@@ -147,6 +149,7 @@ class _HomeState extends State<Home> {
                   line(FontAwesomeIcons.box, 'Product', 3),
                   line(Icons.person, 'Persons', 4),
                   div(),
+                  line(FontAwesomeIcons.gears, 'Settings', 26)
                 ],
               ),
               Column(
