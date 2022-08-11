@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:management_factory_system/View/Containers/app_bar_customize.dart';
 import 'package:management_factory_system/View/Containers/background.dart';
 
-class AddInvoicePage extends StatefulWidget {
-  const AddInvoicePage({Key? key, this.option, this.appBarTitle}) : super(key: key);
-
+class DisplaySalesInvoicePage extends StatefulWidget {
+  const DisplaySalesInvoicePage({Key? key, this.option, this.appBarTitle})
+      : super(key: key);
   final int? option;
   final String? appBarTitle;
-
   @override
-  State<AddInvoicePage> createState() => _AddInvoicePageState();
+  State<DisplaySalesInvoicePage> createState() =>
+      _DisplaySalesInvoicePageState();
 }
 
-class _AddInvoicePageState extends State<AddInvoicePage> {
+class _DisplaySalesInvoicePageState extends State<DisplaySalesInvoicePage> {
   Widget bodyPage() {
-    return const Text('Add Invoice');
+    return const Text('Display Sales Invoice');
   }
 
   @override

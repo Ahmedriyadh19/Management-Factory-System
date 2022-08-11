@@ -1,11 +1,14 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:management_factory_system/View/Containers/background.dart';
-import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_invoice.dart';
-import 'package:management_factory_system/View/Main%20Pages/Delete%20Pages/delete_invoice.dart';
-import 'package:management_factory_system/View/Main%20Pages/Display%20Pages/display_invoice.dart';
-import 'package:management_factory_system/View/Main%20Pages/Edit%20Pages/edit_invoice.dart';
+import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_purchases_invoice.dart';
+import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_sales_invoice.dart';
+import 'package:management_factory_system/View/Main%20Pages/Delete%20Pages/delete_purchases_invoice.dart';
+import 'package:management_factory_system/View/Main%20Pages/Delete%20Pages/delete_sales_invoice.dart';
+import 'package:management_factory_system/View/Main%20Pages/Display%20Pages/display_purchase_invoice.dart';
+import 'package:management_factory_system/View/Main%20Pages/Display%20Pages/display_sales_invoice.dart';
+import 'package:management_factory_system/View/Main%20Pages/Edit%20Pages/edit_purchase_invoice.dart';
+import 'package:management_factory_system/View/Main%20Pages/Edit%20Pages/edit_sales_invoice.dart';
 
 class InvoicePage extends StatelessWidget {
   InvoicePage({
@@ -15,20 +18,51 @@ class InvoicePage extends StatelessWidget {
   final bool isOkay =
       Platform.isWindows || Platform.isLinux || Platform.isMacOS;
   static const List<Widget> bodyPages = [
-    AddInvoicePage(option: 0, appBarTitle: 'Add new Invoice'),
-    EditInvoicePage(option: 0, appBarTitle: 'Edit Invoice'),
-    DisplayInvoicePage(option: 0, appBarTitle: 'View Invoice'),
-    DeleteInvoicePage(option: 0, appBarTitle: 'Delete Invoice')
+    AddSalesInvoicePage(option: 0, appBarTitle: 'Add new Sales Invoice'),
+    EditSalesInvoicePage(option: 0, appBarTitle: 'Edit Sales Invoice'),
+    DisplaySalesInvoicePage(option: 0, appBarTitle: 'View Sales Invoice'),
+    DeleteSalesInvoicePage(option: 0, appBarTitle: 'Delete Sales Invoice'),
+    AddPurchasesInvoicePage(option: 0, appBarTitle: 'Add new Invoice'),
+    EditPurchaseInvoicePage(option: 0, appBarTitle: 'Edit Invoice'),
+    DisplayPurchasesInvoicePage(option: 0, appBarTitle: 'View Invoice'),
+    DeletePurchasesInvoicePage(option: 0, appBarTitle: 'Delete Invoice')
   ];
   static const List<String> descriptions = [
     'From here, you may create a new invoice for what you\'ve sold.',
     'You may update past invoices that have been sold from your side by going to this page.',
     'You may search and view any invoices that you have sold from your side here.',
-    'If you made a mistake in a previous invoice or would like to delete it in any way, you may do it from here.'
+    'If you made a mistake in a previous invoice or would like to delete it in any way, you may do it from here.',
+    '',
+    '',
+    '',
+    '',
   ];
 
   Widget bodyPage(BuildContext ctx) {
+    return ListView(
+      children: [
+        buildFormatPage([
+          createItem('add sales invoice', 'Add Sales Invoice', 0, ctx),
+          createItem('edit sales invoice', 'Edit Sales Invoice', 1, ctx),
+          createItem('display sales invoice', 'Display Sales Invoice', 2, ctx),
+          createItem('delete sales invoice', 'Delete Sales Invoice', 3, ctx),
+        ], 0),
+        buildFormatPage([
+          createItem('add purchases invoice', 'Add Purchases Invoice', 4, ctx),
+          createItem(
+              'edit purchases invoice', 'Edit Purchases Invoice', 5, ctx),
+          createItem(
+              'display purchases invoice', 'Display Purchases Invoice', 6, ctx),
+          createItem(
+              'delete purchases invoice', 'Delete Purchases Invoice', 7, ctx),
+        ], 0)
+      ],
+    );
+  }
+
+  buildFormatPage(List<Widget> items, int option) {
     return GridView(
+        shrinkWrap: option == 0 ? true : false,
         padding: const EdgeInsets.all(50),
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
             maxCrossAxisExtent: isOkay ? 500 : 300,
@@ -36,18 +70,11 @@ class InvoicePage extends StatelessWidget {
             childAspectRatio: 3 / 2,
             crossAxisSpacing: 20,
             mainAxisSpacing: 20),
-        children: [
-          createItem('add_invoice', 'Add Invoice', descriptions[0], 0, ctx),
-          createItem('edit_invoice', 'Edit Invoice', descriptions[1], 1, ctx),
-          createItem(
-              'display_invoice', 'View Invoice', descriptions[2], 2, ctx),
-          createItem(
-              'delete_invoice', 'Delete Invoice', descriptions[3], 3, ctx),
-        ]);
+        children: items);
   }
 
-  GestureDetector createItem(String pathImage, String nameMenu,
-      String description, int action, BuildContext ctx) {
+  GestureDetector createItem(
+      String pathImage, String nameMenu, int action, BuildContext ctx) {
     return GestureDetector(
       child: Container(
         decoration: BoxDecoration(
@@ -60,7 +87,7 @@ class InvoicePage extends StatelessWidget {
             children: [
               buildImage(pathImage),
               buildDiv(),
-              buildText(nameMenu, description)
+              buildText(nameMenu, descriptions[action])
             ],
           ),
         ),
@@ -92,7 +119,7 @@ class InvoicePage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(nameMenu,
-            style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         Container(
             padding: const EdgeInsets.all(5),
             color: const Color.fromARGB(104, 255, 255, 255),

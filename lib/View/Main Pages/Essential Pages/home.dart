@@ -4,7 +4,7 @@ import 'package:management_factory_system/Controller/windows_configuration.dart'
 import 'package:management_factory_system/View/Containers/background.dart';
 import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_customer.dart';
 import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_income.dart';
-import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_invoice.dart';
+import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_sales_invoice.dart';
 import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_outcome.dart';
 import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_product.dart';
 import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_staff.dart';
@@ -16,14 +16,14 @@ import 'package:management_factory_system/View/Main%20Pages/Categories%20Pages/c
 import 'package:management_factory_system/View/Main%20Pages/Categories%20Pages/categories_product.dart';
 import 'package:management_factory_system/View/Main%20Pages/Delete%20Pages/delete_customer.dart';
 import 'package:management_factory_system/View/Main%20Pages/Delete%20Pages/delete_income.dart';
-import 'package:management_factory_system/View/Main%20Pages/Delete%20Pages/delete_invoice.dart';
+import 'package:management_factory_system/View/Main%20Pages/Delete%20Pages/delete_sales_invoice.dart';
 import 'package:management_factory_system/View/Main%20Pages/Delete%20Pages/delete_outcome.dart';
 import 'package:management_factory_system/View/Main%20Pages/Delete%20Pages/delete_product.dart';
 import 'package:management_factory_system/View/Main%20Pages/Delete%20Pages/delete_staff.dart';
 import 'package:management_factory_system/View/Main%20Pages/Delete%20Pages/delete_stock.dart';
 import 'package:management_factory_system/View/Main%20Pages/Edit%20Pages/edit_customer.dart';
 import 'package:management_factory_system/View/Main%20Pages/Edit%20Pages/edit_income.dart';
-import 'package:management_factory_system/View/Main%20Pages/Edit%20Pages/edit_invoice.dart';
+import 'package:management_factory_system/View/Main%20Pages/Edit%20Pages/edit_sales_invoice.dart';
 import 'package:management_factory_system/View/Main%20Pages/Edit%20Pages/edit_outcome.dart';
 import 'package:management_factory_system/View/Main%20Pages/Edit%20Pages/edit_product.dart';
 import 'package:management_factory_system/View/Main%20Pages/Edit%20Pages/edit_staff.dart';
@@ -96,27 +96,27 @@ class _HomeState extends State<Home> {
 
   static List<Widget> pages = [
     const Dashboard(),
-     InvoicePage(),
-    const PaymentPage(),
+    InvoicePage(),
+    PaymentPage(),
     const ProductPage(),
     const PersonsPage(),
     const AddStockPage(),
     const AddCustomerPage(),
-    const AddInvoicePage(),
+    const AddSalesInvoicePage(),
     const AddStaffPage(),
     const AddIncomePage(),
     const AddOutcomePage(),
     const AddProductPage(),
     const EditStockPage(),
     const EditCustomerPage(),
-    const EditInvoicePage(),
+    const EditSalesInvoicePage(),
     const EditStaffPage(),
     const EditIncomePage(),
     const EditOutcomePage(),
     const EditProductPage(),
     const DeleteStockPage(),
     const DeleteCustomerPage(),
-    const DeleteInvoicePage(),
+    const DeleteSalesInvoicePage(),
     const DeleteStaffPage(),
     const DeleteIncomePage(),
     const DeleteOutcomePage(),

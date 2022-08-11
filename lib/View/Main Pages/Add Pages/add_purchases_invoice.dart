@@ -2,22 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:management_factory_system/View/Containers/app_bar_customize.dart';
 import 'package:management_factory_system/View/Containers/background.dart';
 
-class DeleteOutcomePage extends StatefulWidget {
-  const DeleteOutcomePage({
-    Key? key,
-    this.option,
-    this.appBarTitle,
-  }) : super(key: key);
+class AddPurchasesInvoicePage extends StatefulWidget {
+  const AddPurchasesInvoicePage({Key? key, this.option, this.appBarTitle})
+      : super(key: key);
+
   final int? option;
   final String? appBarTitle;
 
   @override
-  State<DeleteOutcomePage> createState() => _DeleteOutcomePageState();
+  State<AddPurchasesInvoicePage> createState() => _AddPurchasesInvoicePageState();
 }
 
-class _DeleteOutcomePageState extends State<DeleteOutcomePage> {
+class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
   Widget bodyPage() {
-    return const Text('Delete Outcome');
+    return const Text('Add Purchases Invoice');
   }
 
   @override

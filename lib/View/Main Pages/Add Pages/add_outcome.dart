@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:management_factory_system/View/Containers/app_bar_customize.dart';
 import 'package:management_factory_system/View/Containers/background.dart';
 
 class AddOutcomePage extends StatefulWidget {
-  const AddOutcomePage({Key? key}) : super(key: key);
-
+  const AddOutcomePage({
+    Key? key,
+    this.option,
+    this.appBarTitle,
+  }) : super(key: key);
+  final int? option;
+  final String? appBarTitle;
   @override
   State<AddOutcomePage> createState() => _AddOutcomePageState();
 }
@@ -15,6 +21,11 @@ class _AddOutcomePageState extends State<AddOutcomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Background(widget: bodyPage());
+    return widget.option != 0
+        ? Background(widget: bodyPage())
+        : Scaffold(
+            appBar: createCustomizeAppBar(widget.appBarTitle!),
+            body: Background(widget: bodyPage()),
+          );
   }
 }
