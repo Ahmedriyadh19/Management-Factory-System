@@ -206,7 +206,12 @@ class _HomeState extends State<Home> {
   PopupMenuItem createOption(IconData icon, String label, int option) {
     return PopupMenuItem(
       value: option,
-      child: ListTile(leading: Icon(icon), title: Text(label)),
+      child: ListTile(
+          leading: Icon(icon, color: Colors.black),
+          title: Text(
+            label,
+            style: const TextStyle(color: Colors.black),
+          )),
     );
   }
 

@@ -26,7 +26,8 @@ class WindowsConfiguration {
                             backgroundColor: MaterialStateProperty.all(
                                 currentColor.withOpacity(1))),
                         onPressed: () => Navigator.of(context).pop(true),
-                        child: const Text('Yes')),
+                        child: const Text('Yes',
+                            style: TextStyle(color: Colors.black))),
                   ),
                   Tooltip(
                     message: 'No',
@@ -35,7 +36,10 @@ class WindowsConfiguration {
                             backgroundColor: MaterialStateProperty.all(
                                 currentColor.withOpacity(1))),
                         onPressed: () => Navigator.of(context).pop(false),
-                        child: const Text('No')),
+                        child: const Text(
+                          'No',
+                          style: TextStyle(color: Colors.black),
+                        )),
                   ),
                 ]);
           });

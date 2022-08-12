@@ -27,7 +27,6 @@ class _SettingsPageState extends State<SettingsPage> {
     MyDrawer.setNewColor(pickerColor);
     WindowsConfiguration.setNewColor(pickerColor);
     currentColorAppBar = pickerColor;
-
     Navigator.of(context).pop();
     Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Home()));
   }
@@ -58,15 +57,13 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Widget bodyPage(BuildContext ctx) {
-    return Column(
-      children: [
-        ElevatedButton(
-            style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(
-                    const Color.fromARGB(255, 27, 44, 46))),
-            onPressed: () => dialogChangeColor(ctx, currentColorAppBar),
-            child: const Text('AppBar')),
-      ],
+    return Center(
+      child: ElevatedButton(
+          style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(
+                  const Color.fromARGB(255, 27, 44, 46))),
+          onPressed: () => dialogChangeColor(ctx, currentColorAppBar),
+          child: const Text('Change color')),
     );
   }
 
