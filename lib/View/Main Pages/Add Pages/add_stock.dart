@@ -15,6 +15,6 @@ class _AddStockPageState extends State<AddStockPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Background(widget: bodyPage());
+    return Background(widget: bodyPage()).build();
   }
 }

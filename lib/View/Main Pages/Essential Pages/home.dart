@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:management_factory_system/Controller/windows_configuration.dart';
 import 'package:management_factory_system/View/Containers/app_bar_customize.dart';
 import 'package:management_factory_system/View/Containers/background.dart';
+import 'package:management_factory_system/View/Containers/my_drawer.dart';
 import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_customer.dart';
 import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_income.dart';
 import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_sales_invoice.dart';
@@ -128,8 +129,20 @@ class _HomeState extends State<Home> {
 
   Widget currentWidget = pages[0];
 
-  Drawer drawer(BuildContext ctx) {
-    return Drawer(
+  Drawer drawer() {
+    return MyDrawer.createCustomizeDrawer([
+      line(Icons.dashboard_rounded, 'Dashboard', 0),
+      line(FontAwesomeIcons.fileInvoiceDollar, 'Invoice', 1),
+      line(FontAwesomeIcons.moneyCheckDollar, 'Payment', 2),
+      line(FontAwesomeIcons.box, 'Product', 3),
+      line(Icons.person, 'Persons', 4),
+      div(),
+      line(FontAwesomeIcons.gears, 'Settings', 26)
+    ], [
+      divWithTxt('Sign out'),
+      signOutBtn(),
+    ]);
+    /* return Drawer(
       backgroundColor: const Color.fromARGB(255, 125, 155, 156),
       elevation: 50,
       child: SizedBox(
@@ -162,7 +175,7 @@ class _HomeState extends State<Home> {
               )
             ]),
       ),
-    );
+    );*/
   }
 
   void selectedPage(int index) {
@@ -247,7 +260,7 @@ class _HomeState extends State<Home> {
 
   AppBar upBar(BuildContext ctx) {
     return CustomizeAppBar().createCustomizeAppBar(
-      'We',
+      'Welcome',
       actionsIcons: [
         upBarBtn(0, Icons.dashboard_rounded),
         option(ctx, Icons.add, addListOption, 'Show add Menu'),
@@ -290,10 +303,10 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: drawer(context),
+        drawer: drawer(),
         appBar: upBar(context),
         body: Background(
           widget: currentWidget,
-        ));
+        ).build());
   }
 }

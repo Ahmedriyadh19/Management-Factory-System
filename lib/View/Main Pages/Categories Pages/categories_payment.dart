@@ -140,6 +140,6 @@ class PaymentPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Background(widget: bodyPage(context));
+    return Background(widget: bodyPage(context)).build();
   }
 }

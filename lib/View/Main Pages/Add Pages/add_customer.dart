@@ -15,6 +15,6 @@ class _AddCustomerPageState extends State<AddCustomerPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Background(widget: bodyPage());
+    return Background(widget: bodyPage()).build();
   }
 }

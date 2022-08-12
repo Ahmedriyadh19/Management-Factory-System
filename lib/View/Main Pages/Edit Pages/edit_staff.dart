@@ -15,6 +15,6 @@ class _EditStaffPageState extends State<EditStaffPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Background(widget: bodyPage());
+    return Background(widget: bodyPage()).build();
   }
 }

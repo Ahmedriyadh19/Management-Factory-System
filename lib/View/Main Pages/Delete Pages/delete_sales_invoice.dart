@@ -19,11 +19,11 @@ class _DeleteSalesInvoicePageState extends State<DeleteSalesInvoicePage> {
   @override
   Widget build(BuildContext context) {
     return widget.option != 0
-        ? Background(widget: bodyPage())
+        ? Background(widget: bodyPage()).build()
         : Scaffold(
             appBar:
                 CustomizeAppBar().createCustomizeAppBar(widget.appBarTitle!),
-            body: Background(widget: bodyPage()),
+            body: Background(widget: bodyPage()).build(),
           );
   }
 }

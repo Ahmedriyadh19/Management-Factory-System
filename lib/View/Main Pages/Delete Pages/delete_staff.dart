@@ -15,6 +15,6 @@ class _DeleteStaffPageState extends State<DeleteStaffPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Background(widget: bodyPage());
+    return Background(widget: bodyPage()).build();
   }
 }

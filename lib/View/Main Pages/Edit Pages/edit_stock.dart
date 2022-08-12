@@ -15,6 +15,6 @@ class _EditStockPageState extends State<EditStockPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Background(widget: bodyPage());
+    return Background(widget: bodyPage()).build();
   }
 }

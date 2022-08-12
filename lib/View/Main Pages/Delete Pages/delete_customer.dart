@@ -15,6 +15,6 @@ class _DeleteCustomerPageState extends State<DeleteCustomerPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Background(widget: bodyPage());
+    return Background(widget: bodyPage()).build();
   }
 }

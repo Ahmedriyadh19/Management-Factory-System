@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
 
-class CustomizeAppBar extends State<StatefulWidget> {
+class CustomizeAppBar {
   static Color currentColor = const Color.fromARGB(255, 45, 64, 65);
 
-  static setNewColor({Color? newColor}) {
-    if (newColor != null) {
-      currentColor = newColor;
-    }
+  static setNewColor(Color newColor) {
+    currentColor = newColor;
   }
 
-  @override
-  void initState() {
-    super.initState();
-    setNewColor();
-  }
-  AppBar createCustomizeAppBar(String title,{List<Widget>? actionsIcons}) {
+  AppBar createCustomizeAppBar(String title, {List<Widget>? actionsIcons}) {
     return AppBar(
       centerTitle: true,
       backgroundColor: currentColor,
@@ -22,10 +15,5 @@ class CustomizeAppBar extends State<StatefulWidget> {
       elevation: 50,
       actions: actionsIcons ?? [],
     );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }

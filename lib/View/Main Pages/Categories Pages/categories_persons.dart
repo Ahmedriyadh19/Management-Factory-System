@@ -15,6 +15,6 @@ class _PersonsPageState extends State<PersonsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Background(widget: bodyPage());
+    return Background(widget: bodyPage()).build();
   }
 }

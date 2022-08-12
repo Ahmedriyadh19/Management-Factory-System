@@ -15,6 +15,6 @@ class _DeleteStockPageState extends State<DeleteStockPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Background(widget: bodyPage());
+    return Background(widget: bodyPage()).build();
   }
 }

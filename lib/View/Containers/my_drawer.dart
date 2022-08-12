@@ -1,0 +1,37 @@
+import 'package:flutter/material.dart';
+
+class MyDrawer {
+  static Color currentColor = const Color(0x002d4041);
+
+  static setNewColor(Color newColor) {
+    currentColor = newColor;
+  }
+
+  static Drawer createCustomizeDrawer(List<Widget> up, List<Widget> down) {
+    up.insert(
+        0,
+        Container(
+          height: 200,
+          color: currentColor.withOpacity(1),
+        ));
+    return Drawer(
+      backgroundColor: currentColor.withOpacity(0.5),
+      elevation: 0,
+      child: SizedBox(
+        height: double.infinity,
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: up,
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: down,
+              )
+            ]),
+      ),
+    );
+  }
+}
