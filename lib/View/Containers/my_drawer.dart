@@ -12,11 +12,11 @@ class MyDrawer {
       0,
       Container(
         height: 200,
-        color: currentColor,
+        color: currentColor.withOpacity(0.95),
       ),
     );
     return Drawer(
-      backgroundColor: currentColor.withOpacity(0.5),
+      backgroundColor: currentColor.withOpacity(0.9),
       elevation: 50,
       child: SizedBox(
         height: double.infinity,
