@@ -4,15 +4,18 @@ class Background {
   final Widget? widget;
   static Color currentColor = const Color(0x002d4041);
 
+  static Color getColor() {
+    return currentColor;
+  }
+
   Background({this.widget});
 
   static setNewColor(Color newColor) {
     return <Color>[
       currentColor = newColor.withOpacity(0),
       currentColor = newColor.withOpacity(0.25),
-      currentColor = newColor.withOpacity(0.4),
-      currentColor = newColor.withOpacity(0.6),
-      currentColor = newColor.withOpacity(0.8),
+      currentColor = newColor.withOpacity(0.50),
+      currentColor = newColor.withOpacity(0.75),
       currentColor = newColor.withOpacity(1),
     ];
   }
@@ -24,8 +27,8 @@ class Background {
       decoration: BoxDecoration(
           gradient: LinearGradient(
               colors: setNewColor(currentColor),
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter)),
+              begin: Alignment.topRight,
+              end: Alignment.topCenter)),
       child: Center(child: widget),
     );
   }

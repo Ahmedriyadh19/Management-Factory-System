@@ -213,6 +213,7 @@ class _HomeState extends State<Home> {
   PopupMenuButton option(BuildContext ctx, IconData icon,
       List<PopupMenuEntry> optionsList, String tooltips) {
     return PopupMenuButton(
+      color: Background.getColor().withOpacity(0.8),
       tooltip: tooltips,
       icon: Icon(icon),
       itemBuilder: ((ctx) => optionsList),
@@ -250,7 +251,6 @@ class _HomeState extends State<Home> {
 
   IconButton signOutBtn(int index) {
     return IconButton(
-      
       tooltip: 'Exit',
       hoverColor: isSelectedBtnList[index]
           ? Colors.greenAccent

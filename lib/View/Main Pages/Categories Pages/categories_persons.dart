@@ -96,7 +96,7 @@ class _PersonsPageState extends State<PersonsPage> {
         child: Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(25),
-              color: const Color.fromARGB(190, 254, 255, 255)),
+              color: const Color.fromARGB(100, 254, 255, 255)),
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(

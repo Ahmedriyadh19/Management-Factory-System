@@ -11,7 +11,12 @@ class CustomizeAppBar {
     return AppBar(
       centerTitle: true,
       backgroundColor: currentColor,
-      title: Center(child: Text(title)),
+      iconTheme: const IconThemeData(color: Colors.black),
+      title: Center(
+          child: Text(
+        title,
+        style: const TextStyle(color: Colors.black),
+      )),
       elevation: 50,
       actions: actionsIcons ?? [],
     );

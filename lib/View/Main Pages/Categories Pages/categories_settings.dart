@@ -45,10 +45,12 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
         actions: <Widget>[
           ElevatedButton(
-            child: const Text('Got it'),
+            style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(pickerColor)),
             onPressed: () {
               saveChange();
             },
+            child: const Text('Got it'),
           ),
         ],
       ),
