@@ -52,7 +52,7 @@ class _HomeState extends State<Home> {
     editListOption.clear();
     deleteListOption.clear();
 
-    for (int i = 0; i < 27; i++) {
+    for (int i = 0; i < 28; i++) {
       isSelectedBtnList.add(false);
     }
     addListOption
@@ -139,43 +139,9 @@ class _HomeState extends State<Home> {
       div(),
       line(FontAwesomeIcons.gears, 'Settings', 26)
     ], [
-      divWithTxt('Sign out'),
-      signOutBtn(),
+      divWithTxt('EXIT'),
+      signOutBtn(27),
     ]);
-    /* return Drawer(
-      backgroundColor: const Color.fromARGB(255, 125, 155, 156),
-      elevation: 50,
-      child: SizedBox(
-        height: double.infinity,
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    height: 200,
-                    color: const Color.fromARGB(255, 7, 32, 34),
-                  ),
-                  line(Icons.dashboard_rounded, 'Dashboard', 0),
-                  line(FontAwesomeIcons.fileInvoiceDollar, 'Invoice', 1),
-                  line(FontAwesomeIcons.moneyCheckDollar, 'Payment', 2),
-                  line(FontAwesomeIcons.box, 'Product', 3),
-                  line(Icons.person, 'Persons', 4),
-                  div(),
-                  line(FontAwesomeIcons.gears, 'Settings', 26)
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  divWithTxt('Sign out'),
-                  signOutBtn(),
-                ],
-              )
-            ]),
-      ),
-    );*/
   }
 
   void selectedPage(int index) {
@@ -282,8 +248,13 @@ class _HomeState extends State<Home> {
     );
   }
 
-  IconButton signOutBtn() {
+  IconButton signOutBtn(int index) {
     return IconButton(
+      
+      tooltip: 'Exit',
+      hoverColor: isSelectedBtnList[index]
+          ? Colors.greenAccent
+          : const Color.fromARGB(255, 255, 255, 255),
       icon: const Icon(Icons.exit_to_app),
       onPressed: () {
         Navigator.of(context).pushReplacement(

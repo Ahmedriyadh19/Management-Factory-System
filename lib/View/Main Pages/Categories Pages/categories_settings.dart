@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:management_factory_system/Controller/windows_configuration.dart';
 import 'package:management_factory_system/View/Containers/app_bar_customize.dart';
 import 'package:management_factory_system/View/Containers/background.dart';
 import 'package:management_factory_system/View/Containers/my_drawer.dart';
@@ -20,6 +21,17 @@ class _SettingsPageState extends State<SettingsPage> {
     setState(() => pickerColor = color);
   }
 
+  void saveChange() {
+    CustomizeAppBar.setNewColor(pickerColor);
+    Background.setNewColor(pickerColor);
+    MyDrawer.setNewColor(pickerColor);
+    WindowsConfiguration.setNewColor(pickerColor);
+    currentColorAppBar = pickerColor;
+
+    Navigator.of(context).pop();
+    Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Home()));
+  }
+
   dialogChangeColor(BuildContext ctx, Color currentColor) async {
     await showDialog(
       context: ctx,
@@ -35,14 +47,7 @@ class _SettingsPageState extends State<SettingsPage> {
           ElevatedButton(
             child: const Text('Got it'),
             onPressed: () {
-              CustomizeAppBar.setNewColor(pickerColor);
-              Background.setNewColor(pickerColor);
-              MyDrawer.setNewColor(pickerColor);
-              currentColorAppBar = pickerColor;
-
-              Navigator.of(context).pop();
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (_) => const Home()));
+              saveChange();
             },
           ),
         ],

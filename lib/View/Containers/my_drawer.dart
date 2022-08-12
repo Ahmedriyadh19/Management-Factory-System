@@ -9,14 +9,15 @@ class MyDrawer {
 
   static Drawer createCustomizeDrawer(List<Widget> up, List<Widget> down) {
     up.insert(
-        0,
-        Container(
-          height: 200,
-          color: currentColor.withOpacity(1),
-        ));
+      0,
+      Container(
+        height: 200,
+        color: currentColor,
+      ),
+    );
     return Drawer(
       backgroundColor: currentColor.withOpacity(0.5),
-      elevation: 0,
+      elevation: 50,
       child: SizedBox(
         height: double.infinity,
         child: Column(

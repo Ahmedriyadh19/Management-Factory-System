@@ -33,12 +33,12 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: Background(widget: x(height)).build(),
+      body: Background(widget: loginBuild(height)).build(),
     );
   }
 
-  x(double height) {
-    SingleChildScrollView(
+  loginBuild(double height) {
+    return SingleChildScrollView(
       child: Center(
         child: Container(
           decoration: BoxDecoration(
