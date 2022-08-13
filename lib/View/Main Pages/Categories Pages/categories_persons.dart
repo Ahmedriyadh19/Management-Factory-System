@@ -97,15 +97,18 @@ class _PersonsPageState extends State<PersonsPage> {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(25),
               color: const Color.fromARGB(100, 254, 255, 255)),
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                buildImage(pathImage),
-                buildDiv(),
-                buildText(nameMenu)
-              ],
+          child: Center(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  buildImage(pathImage),
+                  buildDiv(),
+                  const SizedBox(width: 5),
+                  buildText(nameMenu)
+                ],
+              ),
             ),
           ),
         ),

@@ -27,8 +27,8 @@ class Background {
       decoration: BoxDecoration(
           gradient: LinearGradient(
               colors: setNewColor(currentColor),
-              begin: Alignment.topRight,
-              end: Alignment.topCenter)),
+              begin: Alignment.bottomLeft,
+              end: Alignment.topRight)),
       child: Center(child: widget),
     );
   }

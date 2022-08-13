@@ -76,7 +76,7 @@ class PaymentPage extends StatelessWidget {
         shrinkWrap: option == 0 ? true : false,
         padding: const EdgeInsets.all(50),
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: isOkay ? 500 : 300,
+            maxCrossAxisExtent: isOkay ? 400 : 200,
             mainAxisExtent: isOkay ? 200 : 100,
             childAspectRatio: 3 / 2,
             crossAxisSpacing: 20,
@@ -93,15 +93,18 @@ class PaymentPage extends StatelessWidget {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(25),
               color: const Color.fromARGB(100, 254, 255, 255)),
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                buildImage(pathImage),
-                buildDiv(),
-                buildText(nameMenu)
-              ],
+          child: Center(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  buildImage(pathImage),
+                  buildDiv(),
+                  const SizedBox(width: 5),
+                  buildText(nameMenu)
+                ],
+              ),
             ),
           ),
         ),
