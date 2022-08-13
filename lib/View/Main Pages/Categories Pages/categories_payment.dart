@@ -76,7 +76,7 @@ class PaymentPage extends StatelessWidget {
         shrinkWrap: option == 0 ? true : false,
         padding: const EdgeInsets.all(50),
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: isOkay ? 400 : 200,
+            maxCrossAxisExtent: isOkay ? 400 : 300,
             mainAxisExtent: isOkay ? 200 : 100,
             childAspectRatio: 3 / 2,
             crossAxisSpacing: 20,
