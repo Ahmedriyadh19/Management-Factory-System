@@ -38,7 +38,7 @@ class InvoicePage extends StatelessWidget {
     'If you made a mistake in a previous purchases invoice or would like to delete it in any way, you may do it from here.',
   ];
 
-  Widget bodyPage(BuildContext ctx) {
+  ListView bodyPage(BuildContext ctx) {
     return ListView(
       children: [
         const Center(
@@ -57,7 +57,6 @@ class InvoicePage extends StatelessWidget {
           endIndent: 50,
           indent: 50,
         ),
-        const SizedBox(height: 30),
         const Center(
           child: Text('PURCHASES INVOICE',
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
@@ -80,8 +79,8 @@ class InvoicePage extends StatelessWidget {
         shrinkWrap: option == 0 ? true : false,
         padding: const EdgeInsets.all(50),
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: isOkay ? 400 : 300,
-            mainAxisExtent: isOkay ? 200 : 100,
+            maxCrossAxisExtent: isOkay ? 300 : 200,
+            mainAxisExtent: isOkay ? 150 : 50,
             childAspectRatio: 3 / 2,
             crossAxisSpacing: 20,
             mainAxisSpacing: 20),
@@ -140,7 +139,7 @@ class InvoicePage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(nameMenu,
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
       ],
     );
   }

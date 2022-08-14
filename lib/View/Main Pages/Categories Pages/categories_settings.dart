@@ -60,8 +60,7 @@ class _SettingsPageState extends State<SettingsPage> {
     return Center(
       child: ElevatedButton(
           style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(
-                  const Color.fromARGB(255, 27, 44, 46))),
+              backgroundColor: MaterialStateProperty.all(pickerColor)),
           onPressed: () => dialogChangeColor(ctx, currentColorAppBar),
           child: const Text('Change color')),
     );

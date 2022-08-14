@@ -10,14 +10,9 @@ import 'package:management_factory_system/View/Main%20Pages/Display%20Pages/disp
 import 'package:management_factory_system/View/Main%20Pages/Edit%20Pages/edit_customer.dart';
 import 'package:management_factory_system/View/Main%20Pages/Edit%20Pages/edit_staff.dart';
 
-class PersonsPage extends StatefulWidget {
-  const PersonsPage({Key? key}) : super(key: key);
-
-  @override
-  State<PersonsPage> createState() => _PersonsPageState();
-}
-
-class _PersonsPageState extends State<PersonsPage> {
+class PersonsPage extends StatelessWidget {
+  PersonsPage({Key? key}) : super(key: key);
+  
   final bool isOkay =
       Platform.isWindows || Platform.isLinux || Platform.isMacOS;
   static const List<Widget> bodyPages = [
@@ -41,47 +36,49 @@ class _PersonsPageState extends State<PersonsPage> {
     'If you made a mistake in a previous purchases invoice or would like to delete it in any way, you may do it from here.',
   ];
 
-  Widget bodyPage(BuildContext ctx) {
+  ListView bodyPage(BuildContext ctx) {
     return ListView(
       children: [
         const Center(
           child: Text('CUSTOMER',
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
         ),
-        buildFormatPage([
-          createItem('add customer', 'Add Customer', 0, ctx),
-          createItem('edit customer', 'Edit Customer', 1, ctx),
-          createItem('display customer', 'View Customer', 2, ctx),
-          createItem('delete customer', 'Delete Customer', 3, ctx),
-        ], 0),
+        Center(
+          child: buildFormatPage([
+            createItem('add customer', 'Add Customer', 0, ctx),
+            createItem('edit customer', 'Edit Customer', 1, ctx),
+            createItem('display customer', 'View Customer', 2, ctx),
+            createItem('delete customer', 'Delete Customer', 3, ctx),
+          ], 0),
+        ),
         Divider(
           color: Colors.black,
           thickness: isOkay ? 5 : 2,
           endIndent: 50,
           indent: 50,
         ),
-        const SizedBox(height: 30),
         const Center(
           child: Text('STAFF',
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
         ),
-        buildFormatPage([
+        Center(
+            child: buildFormatPage([
           createItem('add staff', 'Add Staff', 4, ctx),
           createItem('edit staff', 'Edit Staff', 5, ctx),
           createItem('display staff', 'View Staff', 6, ctx),
           createItem('delete staff', 'Delete Staff', 7, ctx),
-        ], 0)
+        ], 0)),
       ],
     );
   }
 
-  buildFormatPage(List<Widget> items, int option) {
+  GridView buildFormatPage(List<Widget> items, int option) {
     return GridView(
         shrinkWrap: option == 0 ? true : false,
         padding: const EdgeInsets.all(50),
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: isOkay ? 400 : 300,
-            mainAxisExtent: isOkay ? 200 : 100,
+            maxCrossAxisExtent: isOkay ? 300 : 200,
+            mainAxisExtent: isOkay ? 150 : 50,
             childAspectRatio: 3 / 2,
             crossAxisSpacing: 20,
             mainAxisSpacing: 20),
@@ -140,7 +137,7 @@ class _PersonsPageState extends State<PersonsPage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(nameMenu,
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
       ],
     );
   }
