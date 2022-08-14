@@ -65,11 +65,10 @@ class _AddCustomerPageState extends State<AddCustomerPage> {
             } else {
               emptyDataVisible();
               validity();
-              showDone(context);
             }
           });
         },
-        child: Text(txt));
+        child: Text(txt, style: const TextStyle(color: Colors.black)));
   }
 
   void emptyDataVisible() {
@@ -84,6 +83,8 @@ class _AddCustomerPageState extends State<AddCustomerPage> {
         myControllerNewCustomer[0].text.trim().isEmpty) {
       errorsTexts[0] = 'Please at least input the customer name';
       errorTextHint = 'Check the input';
+    } else {
+      showDone(context);
     }
   }
 
@@ -142,7 +143,8 @@ class _AddCustomerPageState extends State<AddCustomerPage> {
                 onPressed: () {
                   Navigator.of(ctx).pop();
                 },
-                child: const Text('Okay'),
+                child:
+                    const Text('Okay', style: TextStyle(color: Colors.black)),
               )
             ],
           );

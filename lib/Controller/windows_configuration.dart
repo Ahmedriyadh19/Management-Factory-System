@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_window_close/flutter_window_close.dart';
 
 class WindowsConfiguration {
-  static Color currentColor = const Color(0x002d4041);
+  static Color currentColor = const Color.fromARGB(255, 45, 64, 65);
   static setNewColor(Color newColor) {
     currentColor = newColor;
   }

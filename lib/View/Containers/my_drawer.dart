@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MyDrawer {
-  static Color currentColor = const Color(0x002d4041);
+  static Color currentColor = const Color.fromARGB(255, 45, 64, 65);
 
   static setNewColor(Color newColor) {
     currentColor = newColor;

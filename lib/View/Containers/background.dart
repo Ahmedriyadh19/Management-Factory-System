@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Background {
   final Widget? widget;
-  static Color currentColor = const Color(0x002d4041);
+  static Color currentColor = const Color.fromARGB(255, 45, 64, 65);
 
   static Color getColor() {
     return currentColor;
