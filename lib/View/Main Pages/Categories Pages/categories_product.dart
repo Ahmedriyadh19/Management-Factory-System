@@ -16,14 +16,14 @@ class ProductPage extends StatelessWidget {
   final bool isOkay =
       Platform.isWindows || Platform.isLinux || Platform.isMacOS;
   static const List<Widget> bodyPages = [
-    AddStockPage(),
-    EditStockPage(),
-    DisplayStockPage(),
-    DeleteStockPage(),
-    AddProductPage(),
-    EditProductPage(),
-    DisplayProductPage(),
-    DeleteProductPage()
+    AddStockPage(option: 0, appBarTitle: 'Add Stock'),
+    EditStockPage(option: 0, appBarTitle: 'Edit Stock'),
+    DisplayStockPage(option: 0, appBarTitle: 'View Stock'),
+    DeleteStockPage(option: 0, appBarTitle: 'Delete Stock'),
+    AddProductPage(option: 0, appBarTitle: 'Add Product'),
+    EditProductPage(option: 0, appBarTitle: 'Edit Product'),
+    DisplayProductPage(option: 0, appBarTitle: 'View Product'),
+    DeleteProductPage(option: 0, appBarTitle: 'Delete Product')
   ];
   static const List<String> descriptions = [
     'From here, you may create a new sales invoice for what you\'ve sold.',

@@ -81,7 +81,7 @@ class _AddCustomerPageState extends State<AddCustomerPage> {
   void validity() {
     if (myControllerNewCustomer[0].text.isEmpty ||
         myControllerNewCustomer[0].text.trim().isEmpty) {
-      errorsTexts[0] = 'Please at least input the customer name';
+      errorsTexts[0] = 'Please at least input Me !';
       errorTextHint = 'Check the input';
     } else {
       showDone(context);
@@ -142,6 +142,7 @@ class _AddCustomerPageState extends State<AddCustomerPage> {
                         Background.currentColor.withOpacity(1))),
                 onPressed: () {
                   Navigator.of(ctx).pop();
+                  emptyAllData();
                 },
                 child:
                     const Text('Okay', style: TextStyle(color: Colors.black)),
