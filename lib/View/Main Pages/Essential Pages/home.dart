@@ -46,7 +46,7 @@ class _HomeState extends State<Home> {
   static List<PopupMenuItem> editListOption = [];
   static List<PopupMenuItem> deleteListOption = [];
 
-  initializeOptionsMenuList() {
+  void initializeOptionsMenuList() {
     isSelectedBtnList.clear();
     addListOption.clear();
     editListOption.clear();
@@ -97,7 +97,7 @@ class _HomeState extends State<Home> {
         createOption(FontAwesomeIcons.fileCircleXmark, 'Delete Product', 25));
   }
 
-  static List<Widget> pages = [
+  static final List<Widget> pages = [
     const Dashboard(),
     InvoicePage(),
     PaymentPage(),
@@ -260,7 +260,7 @@ class _HomeState extends State<Home> {
       hoverColor: isSelectedBtnList[index]
           ? Colors.greenAccent
           : const Color.fromARGB(255, 255, 255, 255),
-      icon: const Icon(Icons.exit_to_app),
+      icon: const Icon(FontAwesomeIcons.personWalkingArrowLoopLeft),
       onPressed: () {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (_) => const Login()),

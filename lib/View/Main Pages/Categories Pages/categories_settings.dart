@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:management_factory_system/Controller/windows_configuration.dart';
@@ -31,8 +32,8 @@ class _SettingsPageState extends State<SettingsPage> {
     Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Home()));
   }
 
-  dialogChangeColor(BuildContext ctx, Color currentColor) async {
-    await showDialog(
+  Future dialogChangeColor(BuildContext ctx, Color currentColor) async {
+    return await showDialog(
       context: ctx,
       builder: (ctx) => AlertDialog(
         title: const Text('Pick a color!'),
@@ -57,13 +58,22 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Widget bodyPage(BuildContext ctx) {
-    return Center(
-      child: ElevatedButton(
-          style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(pickerColor)),
-          onPressed: () => dialogChangeColor(ctx, currentColorAppBar),
-          child: const Text('Change color')),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        butts('Change Color'),
+      ],
     );
+  }
+
+  ElevatedButton butts(String txt) {
+    return ElevatedButton(
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(pickerColor)),
+        onPressed: () => {
+              dialogChangeColor(context, currentColorAppBar)
+            },
+        child: Text(txt));
   }
 
   @override

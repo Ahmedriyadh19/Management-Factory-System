@@ -1,5 +1,8 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:management_factory_system/Controller/windows_configuration.dart';
+import 'package:management_factory_system/Database/database_helper.dart';
 import 'package:management_factory_system/View/Containers/background.dart';
 import 'package:management_factory_system/View/Main%20Pages/Essential%20Pages/home.dart';
 
@@ -11,11 +14,21 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  bool isDatabaseConnected = DatabaseHelper.isDatabaseEx;
   bool passwordVis = true;
-  String catchLoginError = '';
+  static String? targetPath;
+  static String catchLoginError = '';
+  static List<PopupMenuItem> optionDatabase = [];
   static List<String?> errorsTexts = List.generate(2, (i) => null);
   static List<TextEditingController> myControllerLogin =
       List.generate(2, (i) => TextEditingController());
+
+  initializeOptionsDatabaseMenuList() {
+    optionDatabase
+        .add(createOption(FontAwesomeIcons.folderPlus, 'New Database file', 0));
+    optionDatabase
+        .add(createOption(FontAwesomeIcons.link, 'Link your Database', 1));
+  }
 
   setVisibility() {
     setState(() {
@@ -27,6 +40,7 @@ class _LoginState extends State<Login> {
   void initState() {
     super.initState();
     WindowsConfiguration().exitAction(context);
+    initializeOptionsDatabaseMenuList();
   }
 
   @override
@@ -41,26 +55,56 @@ class _LoginState extends State<Login> {
     return SingleChildScrollView(
       child: Center(
         child: Container(
+          width: 405,
+          height: 300,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
             color: const Color.fromARGB(80, 7, 32, 34),
           ),
-          margin: EdgeInsets.symmetric(vertical: (height / 2) - 100),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              userNameInput(),
-              passwordInput(),
-              Text(
-                catchLoginError,
-                style: const TextStyle(
-                  color: Colors.red,
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
+              inputBorder(
+                inputField(
+                    editingController: myControllerLogin[0],
+                    errorText: errorsTexts[0],
+                    hint: 'Input User name',
+                    isPassword: false,
+                    label: 'User Name',
+                    icon: Icons.person),
+              ),
+              inputBorder(inputField(
+                  editingController: myControllerLogin[1],
+                  errorText: errorsTexts[1],
+                  hint: 'Input Password',
+                  isPassword: true,
+                  label: 'Password',
+                  icon: Icons.lock_rounded)),
+              Center(
+                child: Text(
+                  catchLoginError,
+                  style: const TextStyle(
+                    color: Colors.red,
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-              btn()
+              Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: Row(children: [
+                  const SizedBox(
+                    width: 135,
+                    child: Text(''),
+                  ),
+                  SizedBox(width: 135, child: btn()),
+                  SizedBox(
+                      width: 135,
+                      child:
+                          option(FontAwesomeIcons.database, optionDatabase, ''))
+                ]),
+              )
             ],
           ),
         ),
@@ -68,75 +112,60 @@ class _LoginState extends State<Login> {
     );
   }
 
-  Container userNameInput() {
+  Container inputBorder(Widget w) {
     return Container(
-      width: 350,
       margin: const EdgeInsets.all(20),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           color: const Color.fromARGB(255, 169, 225, 228)),
-      child: TextField(
-        decoration: InputDecoration(
+      child: w,
+    );
+  }
+
+  TextField inputField(
+      {required IconData icon,
+      required String label,
+      required String hint,
+      String? errorText,
+      required bool isPassword,
+      required TextEditingController editingController}) {
+    return TextField(
+      decoration: InputDecoration(
           border: InputBorder.none,
           focusedBorder: InputBorder.none,
           enabledBorder: InputBorder.none,
           errorBorder: InputBorder.none,
           disabledBorder: InputBorder.none,
-          icon: const Icon(
-            Icons.person,
+          icon: Icon(
+            icon,
             color: Colors.black,
           ),
-          labelText: "User Name",
-          hintText: 'Input your User name',
-          errorText: errorsTexts[1],
+          labelText: label,
+          hintText: hint,
+          errorText: errorText,
           labelStyle: const TextStyle(color: Colors.black),
           iconColor: Colors.black,
-        ),
-        keyboardType: TextInputType.name,
-        controller: myControllerLogin[0],
-      ),
+          suffixIcon: isPassword ? hidePassword() : null),
+      keyboardType: isPassword
+          ? TextInputType.visiblePassword
+          : TextInputType.emailAddress,
+      obscureText: isPassword ? passwordVis : false,
+      controller: editingController,
     );
   }
 
-  Container passwordInput() {
-    return Container(
-      margin: const EdgeInsets.all(20),
-      width: 350,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          color: const Color.fromARGB(255, 169, 225, 228)),
-      child: TextField(
-        decoration: InputDecoration(
-            border: InputBorder.none,
-            focusedBorder: InputBorder.none,
-            enabledBorder: InputBorder.none,
-            errorBorder: InputBorder.none,
-            disabledBorder: InputBorder.none,
-            icon: const Icon(
-              Icons.lock_rounded,
-              color: Colors.black,
-            ),
-            labelText: "Password",
-            hintText: 'Password',
-            errorText: errorsTexts[1],
-            labelStyle: const TextStyle(color: Colors.black),
-            iconColor: Colors.black,
-            suffixIcon: IconButton(
-                onPressed: setVisibility,
-                icon: passwordVis
-                    ? const Icon(
-                        Icons.visibility,
-                        color: Colors.black,
-                      )
-                    : const Icon(
-                        Icons.visibility_off,
-                        color: Colors.black,
-                      ))),
-        keyboardType: TextInputType.visiblePassword,
-        obscureText: passwordVis,
-        controller: myControllerLogin[1],
-      ),
-    );
+  IconButton hidePassword() {
+    return IconButton(
+        onPressed: setVisibility,
+        icon: passwordVis
+            ? const Icon(
+                Icons.visibility,
+                color: Colors.black,
+              )
+            : const Icon(
+                Icons.visibility_off,
+                color: Colors.black,
+              ));
   }
 
   void setDefaulted() {
@@ -147,31 +176,73 @@ class _LoginState extends State<Login> {
     catchLoginError = '';
   }
 
-  Container btn() {
-    return Container(
-      margin: const EdgeInsets.all(20),
-      child: FloatingActionButton.extended(
-        label: const Text('Login'),
-        icon: const Icon(Icons.login_rounded),
-        backgroundColor: Colors.black12,
-        elevation: 0,
-        hoverColor: const Color.fromARGB(255, 7, 114, 62),
-        onPressed: () {
-          if (myControllerLogin[0].text == '' &&
-              myControllerLogin[1].text == '') {
-            setDefaulted();
-            setState(() {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (_) => const Home()),
-              );
-            });
-          } else {
-            setState(() {
+  FloatingActionButton btn() {
+    return FloatingActionButton.extended(
+      label: const Text(''),
+      icon: const Icon(FontAwesomeIcons.personWalkingArrowRight),
+      backgroundColor: Colors.black12,
+      elevation: 0,
+      hoverColor: const Color.fromARGB(255, 7, 114, 62),
+      onPressed: () {
+        if (myControllerLogin[0].text == '' &&
+                myControllerLogin[1].text == '' &&
+            isDatabaseConnected) {
+          setDefaulted();
+          setState(() {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (_) => const Home()),
+            );
+          });
+        } else {
+          setState(() {
+            if (!isDatabaseConnected) {
+              catchLoginError = 'Please select your database File';
+            } else {
               catchLoginError = 'incorrect username or password';
-            });
-          }
-        },
-      ),
+            }
+          });
+        }
+      },
+    );
+  }
+
+  PopupMenuButton option(
+      IconData icon, List<PopupMenuEntry> optionsList, String tooltips) {
+    return PopupMenuButton(
+      color: Background.getColor().withOpacity(0.8),
+      tooltip: tooltips,
+      icon: Icon(icon),
+      itemBuilder: ((ctx) => optionsList),
+      onSelected: (value) {
+        getOptionPick(value);
+      },
+    );
+  }
+
+  void getOptionPick(int op) async {
+    if (op == 0) {
+      String? selectedDirectory = await FilePicker.platform.getDirectoryPath();
+
+      if (selectedDirectory != null) {
+        targetPath = selectedDirectory;
+      }
+    } else {
+      FilePickerResult? result = await FilePicker.platform.pickFiles();
+      if (result != null) {
+        targetPath = result.files.single.path;
+      }
+    }
+  }
+
+  PopupMenuItem createOption(IconData icon, String label, int option) {
+    return PopupMenuItem(
+      value: option,
+      child: ListTile(
+          leading: Icon(icon, color: Colors.black),
+          title: Text(
+            label,
+            style: const TextStyle(color: Colors.black),
+          )),
     );
   }
 }

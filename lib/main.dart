@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:management_factory_system/Controller/my_scroll.dart';
 import 'package:management_factory_system/Controller/windows_configuration.dart';
-import 'package:management_factory_system/View/Main%20Pages/Essential%20Pages/home.dart';
+import 'package:management_factory_system/View/Main%20Pages/Essential%20Pages/login.dart';
 
 void main() {
   WindowsConfiguration().windowSize();
@@ -31,9 +31,14 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Home(),
+      body: Login(),
     );
   }
 }
