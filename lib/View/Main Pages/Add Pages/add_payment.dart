@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:management_factory_system/View/Containers/app_bar_customize.dart';
 import 'package:management_factory_system/View/Containers/background.dart';
 
-class DisplayOutcomePage extends StatefulWidget {
-  const DisplayOutcomePage({
+class AddPaymentPage extends StatefulWidget {
+  const AddPaymentPage({
     Key? key,
     this.option,
     this.appBarTitle,
@@ -11,12 +11,12 @@ class DisplayOutcomePage extends StatefulWidget {
   final int? option;
   final String? appBarTitle;
   @override
-  State<DisplayOutcomePage> createState() => _DisplayOutcomePageState();
+  State<AddPaymentPage> createState() => _AddPaymentPageState();
 }
 
-class _DisplayOutcomePageState extends State<DisplayOutcomePage> {
+class _AddPaymentPageState extends State<AddPaymentPage> {
   Widget bodyPage() {
-    return const Text('Display Outcome');
+    return const Text('Add Payment');
   }
 
   @override

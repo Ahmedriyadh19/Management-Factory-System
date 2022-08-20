@@ -5,9 +5,8 @@ import 'package:management_factory_system/View/Containers/app_bar_customize.dart
 import 'package:management_factory_system/View/Containers/background.dart';
 import 'package:management_factory_system/View/Containers/my_drawer.dart';
 import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_customer.dart';
-import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_income.dart';
+import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_payment.dart';
 import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_sales_invoice.dart';
-import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_outcome.dart';
 import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_product.dart';
 import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_staff.dart';
 import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_stock.dart';
@@ -18,16 +17,14 @@ import 'package:management_factory_system/View/Main%20Pages/Categories%20Pages/c
 import 'package:management_factory_system/View/Main%20Pages/Categories%20Pages/categories_product.dart';
 import 'package:management_factory_system/View/Main%20Pages/Categories%20Pages/categories_settings.dart';
 import 'package:management_factory_system/View/Main%20Pages/Delete%20Pages/delete_customer.dart';
-import 'package:management_factory_system/View/Main%20Pages/Delete%20Pages/delete_income.dart';
+import 'package:management_factory_system/View/Main%20Pages/Delete%20Pages/delete_payment.dart';
 import 'package:management_factory_system/View/Main%20Pages/Delete%20Pages/delete_sales_invoice.dart';
-import 'package:management_factory_system/View/Main%20Pages/Delete%20Pages/delete_outcome.dart';
 import 'package:management_factory_system/View/Main%20Pages/Delete%20Pages/delete_product.dart';
 import 'package:management_factory_system/View/Main%20Pages/Delete%20Pages/delete_staff.dart';
 import 'package:management_factory_system/View/Main%20Pages/Delete%20Pages/delete_stock.dart';
 import 'package:management_factory_system/View/Main%20Pages/Edit%20Pages/edit_customer.dart';
-import 'package:management_factory_system/View/Main%20Pages/Edit%20Pages/edit_income.dart';
+import 'package:management_factory_system/View/Main%20Pages/Edit%20Pages/edit_payment.dart';
 import 'package:management_factory_system/View/Main%20Pages/Edit%20Pages/edit_sales_invoice.dart';
-import 'package:management_factory_system/View/Main%20Pages/Edit%20Pages/edit_outcome.dart';
 import 'package:management_factory_system/View/Main%20Pages/Edit%20Pages/edit_product.dart';
 import 'package:management_factory_system/View/Main%20Pages/Edit%20Pages/edit_staff.dart';
 import 'package:management_factory_system/View/Main%20Pages/Edit%20Pages/edit_stock.dart';
@@ -45,56 +42,53 @@ class _HomeState extends State<Home> {
   static List<PopupMenuItem> addListOption = [];
   static List<PopupMenuItem> editListOption = [];
   static List<PopupMenuItem> deleteListOption = [];
+  static int lvl = 0;
 
   void initializeOptionsMenuList() {
     isSelectedBtnList.clear();
     addListOption.clear();
     editListOption.clear();
     deleteListOption.clear();
+    lvl = 5;
 
-    for (int i = 0; i < 28; i++) {
+    for (int i = 0; i < 25; i++) {
       isSelectedBtnList.add(false);
     }
     addListOption
-        .add(createOption(FontAwesomeIcons.layerGroup, 'Add Stock', 5));
+        .add(createOption(FontAwesomeIcons.layerGroup, 'Add Stock', lvl++));
     addListOption
-        .add(createOption(FontAwesomeIcons.userPlus, 'Add Customer', 6));
+        .add(createOption(FontAwesomeIcons.userPlus, 'Add Customer', lvl++));
     addListOption
-        .add(createOption(FontAwesomeIcons.fileInvoice, 'Add Invoice', 7));
-    addListOption.add(createOption(FontAwesomeIcons.user, 'Add Staff', 8));
-    addListOption.add(createOption(Icons.payment_rounded, 'Add Income', 9));
+        .add(createOption(FontAwesomeIcons.fileInvoice, 'Add Invoice', lvl++));
+    addListOption.add(createOption(FontAwesomeIcons.user, 'Add Staff', lvl++));
+    addListOption.add(createOption(Icons.payment_rounded, 'Add Income', lvl++));
     addListOption.add(
-        createOption(FontAwesomeIcons.moneyCheckDollar, 'Add outcome', 10));
-    addListOption
-        .add(createOption(Icons.insert_drive_file_rounded, 'Add Product', 11));
+        createOption(Icons.insert_drive_file_rounded, 'Add Product', lvl++));
 
-    editListOption.add(createOption(FontAwesomeIcons.pen, 'Edit Stock', 12));
+    editListOption.add(createOption(FontAwesomeIcons.pen, 'Edit Stock', lvl++));
     editListOption
-        .add(createOption(FontAwesomeIcons.userPen, 'Edit Customer', 13));
+        .add(createOption(FontAwesomeIcons.userPen, 'Edit Customer', lvl++));
     editListOption
-        .add(createOption(FontAwesomeIcons.filePen, 'Edit Invoice', 14));
+        .add(createOption(FontAwesomeIcons.filePen, 'Edit Invoice', lvl++));
     editListOption
-        .add(createOption(FontAwesomeIcons.squarePen, 'Edit Staff', 15));
-    editListOption.add(createOption(Icons.payment_rounded, 'Edit Income', 16));
+        .add(createOption(FontAwesomeIcons.squarePen, 'Edit Staff', lvl++));
     editListOption
-        .add(createOption(FontAwesomeIcons.moneyBill, 'Edit outcome', 17));
+        .add(createOption(Icons.payment_rounded, 'Edit Income', lvl++));
     editListOption
-        .add(createOption(FontAwesomeIcons.penToSquare, 'Edit Product', 18));
+        .add(createOption(FontAwesomeIcons.penToSquare, 'Edit Product', lvl++));
 
-    deleteListOption
-        .add(createOption(FontAwesomeIcons.solidTrashCan, 'Delete Stock', 19));
-    deleteListOption
-        .add(createOption(FontAwesomeIcons.userXmark, 'Delete Customer', 20));
-    deleteListOption
-        .add(createOption(FontAwesomeIcons.fileWaveform, 'Delete Invoice', 21));
-    deleteListOption
-        .add(createOption(FontAwesomeIcons.userLargeSlash, 'Delete Staff', 22));
-    deleteListOption
-        .add(createOption(FontAwesomeIcons.circleMinus, 'Delete Income', 23));
-    deleteListOption
-        .add(createOption(FontAwesomeIcons.folderMinus, 'Delete outcome', 24));
     deleteListOption.add(
-        createOption(FontAwesomeIcons.fileCircleXmark, 'Delete Product', 25));
+        createOption(FontAwesomeIcons.solidTrashCan, 'Delete Stock', lvl++));
+    deleteListOption.add(
+        createOption(FontAwesomeIcons.userXmark, 'Delete Customer', lvl++));
+    deleteListOption.add(
+        createOption(FontAwesomeIcons.fileWaveform, 'Delete Invoice', lvl++));
+    deleteListOption.add(
+        createOption(FontAwesomeIcons.userLargeSlash, 'Delete Staff', lvl++));
+    deleteListOption.add(
+        createOption(FontAwesomeIcons.circleMinus, 'Delete Income', lvl++));
+    deleteListOption.add(createOption(
+        FontAwesomeIcons.fileCircleXmark, 'Delete Product', lvl++));
   }
 
   static final List<Widget> pages = [
@@ -107,22 +101,19 @@ class _HomeState extends State<Home> {
     const AddCustomerPage(),
     const AddSalesInvoicePage(),
     const AddStaffPage(),
-    const AddIncomePage(),
-    const AddOutcomePage(),
+    const AddPaymentPage(),
     const AddProductPage(),
     const EditStockPage(),
     const EditCustomerPage(),
     const EditSalesInvoicePage(),
     const EditStaffPage(),
-    const EditIncomePage(),
-    const EditOutcomePage(),
+    const EditPaymentPage(),
     const EditProductPage(),
     const DeleteStockPage(),
     const DeleteCustomerPage(),
     const DeleteSalesInvoicePage(),
     const DeleteStaffPage(),
-    const DeleteIncomePage(),
-    const DeleteOutcomePage(),
+    const DeletePaymentPage(),
     const DeleteProductPage(),
     const SettingsPage()
   ];
@@ -137,16 +128,16 @@ class _HomeState extends State<Home> {
       line(FontAwesomeIcons.box, 'Product & Store', 3),
       line(Icons.person, 'Persons', 4),
       div(),
-      line(FontAwesomeIcons.gears, 'Settings', 26)
+      line(FontAwesomeIcons.gears, 'Settings', lvl)
     ], [
       divWithTxt('EXIT'),
-      signOutBtn(27),
+      signOutBtn(lvl),
     ]);
   }
 
   void selectedPage(int index) {
     setState(() {
-      if (index < pages.length) {
+      if (index < pages.length && index < isSelectedBtnList.length) {
         currentWidget = pages[index];
       }
     });

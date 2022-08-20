@@ -1,14 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:management_factory_system/View/Containers/background.dart';
-import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_income.dart';
-import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_outcome.dart';
-import 'package:management_factory_system/View/Main%20Pages/Delete%20Pages/delete_income.dart';
-import 'package:management_factory_system/View/Main%20Pages/Delete%20Pages/delete_outcome.dart';
-import 'package:management_factory_system/View/Main%20Pages/Display%20Pages/display_income.dart';
-import 'package:management_factory_system/View/Main%20Pages/Display%20Pages/display_outcome.dart';
-import 'package:management_factory_system/View/Main%20Pages/Edit%20Pages/edit_income.dart';
-import 'package:management_factory_system/View/Main%20Pages/Edit%20Pages/edit_outcome.dart';
+import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_payment.dart';
+import 'package:management_factory_system/View/Main%20Pages/Delete%20Pages/delete_payment.dart';
+import 'package:management_factory_system/View/Main%20Pages/Display%20Pages/display_payment.dart';
+import 'package:management_factory_system/View/Main%20Pages/Edit%20Pages/edit_payment.dart';
 
 class PaymentPage extends StatelessWidget {
   final bool isOkay =
@@ -16,14 +12,10 @@ class PaymentPage extends StatelessWidget {
 
   PaymentPage({Key? key}) : super(key: key);
   static const List<Widget> bodyPages = [
-    AddIncomePage(option: 0, appBarTitle: 'Add Income'),
-    EditIncomePage(option: 0, appBarTitle: 'Edit Income'),
+    AddPaymentPage(option: 0, appBarTitle: 'Add Income'),
+    EditPaymentPage(option: 0, appBarTitle: 'Edit Income'),
     DisplayIncomePage(option: 0, appBarTitle: 'View Income'),
-    DeleteIncomePage(option: 0, appBarTitle: 'Delete Income'),
-    AddOutcomePage(option: 0, appBarTitle: 'Add Outcome'),
-    EditOutcomePage(option: 0, appBarTitle: 'Edit Outcome'),
-    DisplayOutcomePage(option: 0, appBarTitle: 'View Outcome'),
-    DeleteOutcomePage(option: 0, appBarTitle: 'Delete Outcome'),
+    DeletePaymentPage(option: 0, appBarTitle: 'Delete Income'),
   ];
   static const List<String> descriptions = [
     'From here, you may create a new invoice for what you\'ve sold.',
@@ -49,22 +41,6 @@ class PaymentPage extends StatelessWidget {
           createItem('display income', 'View Income', 2, ctx),
           createItem('delete income', 'Delete Income', 3, ctx),
         ], 0),
-        Divider(
-          color: Colors.black,
-          thickness: isOkay ? 5 : 2,
-          endIndent: 50,
-          indent: 50,
-        ),
-        const Center(
-          child: Text('PAYMENT SEND',
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
-        ),
-        buildFormatPage([
-          createItem('add outcome', 'Add Outcome', 4, ctx),
-          createItem('edit outcome', 'Edit Outcome', 5, ctx),
-          createItem('display outcome', 'View Outcome', 6, ctx),
-          createItem('delete outcome', 'Delete Outcome', 7, ctx),
-        ], 0)
       ],
     );
   }

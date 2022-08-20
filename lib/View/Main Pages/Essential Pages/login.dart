@@ -24,6 +24,7 @@ class _LoginState extends State<Login> {
       List.generate(2, (i) => TextEditingController());
 
   initializeOptionsDatabaseMenuList() {
+    optionDatabase.clear();
     optionDatabase
         .add(createOption(FontAwesomeIcons.folderPlus, 'New Database file', 0));
     optionDatabase
@@ -185,8 +186,8 @@ class _LoginState extends State<Login> {
       hoverColor: const Color.fromARGB(255, 7, 114, 62),
       onPressed: () {
         if (myControllerLogin[0].text == '' &&
-                myControllerLogin[1].text == '' &&
-            isDatabaseConnected) {
+                myControllerLogin[1].text == '' ||
+            !isDatabaseConnected) {
           setDefaulted();
           setState(() {
             Navigator.of(context).pushReplacement(
