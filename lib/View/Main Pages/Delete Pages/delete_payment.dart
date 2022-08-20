@@ -16,7 +16,7 @@ class DeletePaymentPage extends StatefulWidget {
 
 class _DeletePaymentPageState extends State<DeletePaymentPage> {
   Widget bodyPage() {
-    return const Text('Delete Income');
+    return const Text('Delete Payment');
   }
 
   @override

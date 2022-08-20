@@ -16,7 +16,7 @@ class EditPaymentPage extends StatefulWidget {
 
 class _EditPaymentPageState extends State<EditPaymentPage> {
   Widget bodyPage() {
-    return const Text('Edit Income');
+    return const Text('Edit Payment');
   }
 
   @override

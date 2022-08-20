@@ -10,36 +10,35 @@ class PaymentPage extends StatelessWidget {
   final bool isOkay =
       Platform.isWindows || Platform.isLinux || Platform.isMacOS;
 
+  static int lvl = 0;
+
   PaymentPage({Key? key}) : super(key: key);
   static const List<Widget> bodyPages = [
-    AddPaymentPage(option: 0, appBarTitle: 'Add Income'),
-    EditPaymentPage(option: 0, appBarTitle: 'Edit Income'),
-    DisplayIncomePage(option: 0, appBarTitle: 'View Income'),
-    DeletePaymentPage(option: 0, appBarTitle: 'Delete Income'),
+    AddPaymentPage(option: 0, appBarTitle: 'Add Payment'),
+    EditPaymentPage(option: 0, appBarTitle: 'Edit Payment'),
+    DisplayPaymentPage(option: 0, appBarTitle: 'View Payment'),
+    DeletePaymentPage(option: 0, appBarTitle: 'Delete Payment'),
   ];
   static const List<String> descriptions = [
     'From here, you may create a new invoice for what you\'ve sold.',
     'You may update past invoices that have been sold from your side by going to this page.',
     'You may search and view any invoices that you have sold from your side here.',
     'If you made a mistake in a previous invoice or would like to delete it in any way, you may do it from here.',
-    '',
-    '',
-    '',
-    '',
   ];
 
   ListView bodyPage(BuildContext ctx) {
+    lvl = 0;
     return ListView(
       children: [
         const Center(
-          child: Text('PAYMENT RECEIVE',
+          child: Text('PAYMENT',
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
         ),
         buildFormatPage([
-          createItem('add income', 'Add Income', 0, ctx),
-          createItem('edit income', 'Edit Income', 1, ctx),
-          createItem('display income', 'View Income', 2, ctx),
-          createItem('delete income', 'Delete Income', 3, ctx),
+          createItem('add payment', 'Add Payment', lvl++, ctx),
+          createItem('edit payment', 'Edit Payment', lvl++, ctx),
+          createItem('display payment', 'View Payment', lvl++, ctx),
+          createItem('delete payment', 'Delete Payment', lvl++, ctx),
         ], 0),
       ],
     );

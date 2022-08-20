@@ -23,7 +23,7 @@ class InvoicePage extends StatelessWidget {
     DisplaySalesInvoicePage(option: 0, appBarTitle: 'View Sales Invoice'),
     DeleteSalesInvoicePage(option: 0, appBarTitle: 'Delete Sales Invoice'),
     AddPurchasesInvoicePage(option: 0, appBarTitle: 'Add new Invoice'),
-    EditPurchaseInvoicePage(option: 0, appBarTitle: 'Edit Invoice'),
+    EditPurchasesInvoicePage(option: 0, appBarTitle: 'Edit Invoice'),
     DisplayPurchasesInvoicePage(option: 0, appBarTitle: 'View Invoice'),
     DeletePurchasesInvoicePage(option: 0, appBarTitle: 'Delete Invoice')
   ];
