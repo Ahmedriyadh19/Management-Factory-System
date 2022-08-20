@@ -28,6 +28,8 @@ class _AddCustomerPageState extends State<AddCustomerPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          const Text('Add New Customer',
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
           fieldInput(
               'Customer name', 'Input Customer Name', Icons.person, 0, ctx),
           fieldInput('Customer Phone', 'Input Customer Phone',

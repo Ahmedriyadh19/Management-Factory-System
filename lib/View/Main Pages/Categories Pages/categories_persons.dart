@@ -12,7 +12,7 @@ import 'package:management_factory_system/View/Main%20Pages/Edit%20Pages/edit_st
 
 class PersonsPage extends StatelessWidget {
   PersonsPage({Key? key}) : super(key: key);
-  
+
   final bool isOkay =
       Platform.isWindows || Platform.isLinux || Platform.isMacOS;
   static const List<Widget> bodyPages = [
@@ -39,6 +39,7 @@ class PersonsPage extends StatelessWidget {
   ListView bodyPage(BuildContext ctx) {
     return ListView(
       children: [
+        const SizedBox(height: 30),
         const Center(
           child: Text('CUSTOMER',
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
@@ -57,6 +58,7 @@ class PersonsPage extends StatelessWidget {
           endIndent: 50,
           indent: 50,
         ),
+        const SizedBox(height: 30),
         const Center(
           child: Text('STAFF',
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),

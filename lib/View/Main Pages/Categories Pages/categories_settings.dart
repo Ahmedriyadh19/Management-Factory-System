@@ -1,4 +1,3 @@
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:management_factory_system/Controller/windows_configuration.dart';
@@ -61,7 +60,12 @@ class _SettingsPageState extends State<SettingsPage> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        butts('Change Color'),
+        const Text('Settings',
+            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+        const SizedBox(height: 30),
+        butts(
+          'Change Color',
+        ),
       ],
     );
   }
@@ -70,10 +74,8 @@ class _SettingsPageState extends State<SettingsPage> {
     return ElevatedButton(
         style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(pickerColor)),
-        onPressed: () => {
-              dialogChangeColor(context, currentColorAppBar)
-            },
-        child: Text(txt));
+        onPressed: () => {dialogChangeColor(context, currentColorAppBar)},
+        child: Text(txt, style: const TextStyle(color: Colors.black)));
   }
 
   @override

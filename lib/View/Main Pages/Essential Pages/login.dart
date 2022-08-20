@@ -60,7 +60,7 @@ class _LoginState extends State<Login> {
           height: 300,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
-            color: const Color.fromARGB(80, 7, 32, 34),
+            color: Background.getColor().withOpacity(0.4),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -118,7 +118,7 @@ class _LoginState extends State<Login> {
       margin: const EdgeInsets.all(20),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: const Color.fromARGB(255, 169, 225, 228)),
+          color: Background.getColor().withOpacity(0.4)),
       child: w,
     );
   }

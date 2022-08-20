@@ -39,6 +39,7 @@ class ProductPage extends StatelessWidget {
   ListView bodyPage(BuildContext ctx) {
     return ListView(
       children: [
+        const SizedBox(height: 30),
         const Center(
           child: Text('STOCK',
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
@@ -55,6 +56,7 @@ class ProductPage extends StatelessWidget {
           endIndent: 50,
           indent: 50,
         ),
+        const SizedBox(height: 30),
         const Center(
           child: Text('PRODUCT',
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),

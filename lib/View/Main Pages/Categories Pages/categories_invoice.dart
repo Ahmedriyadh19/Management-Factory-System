@@ -41,6 +41,7 @@ class InvoicePage extends StatelessWidget {
   ListView bodyPage(BuildContext ctx) {
     return ListView(
       children: [
+        const SizedBox(height: 30),
         const Center(
           child: Text('SALES INVOICE',
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
@@ -57,6 +58,7 @@ class InvoicePage extends StatelessWidget {
           endIndent: 50,
           indent: 50,
         ),
+        const SizedBox(height: 30),
         const Center(
           child: Text('PURCHASES INVOICE',
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),

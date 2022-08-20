@@ -30,6 +30,7 @@ class PaymentPage extends StatelessWidget {
     lvl = 0;
     return ListView(
       children: [
+        const SizedBox(height: 30),
         const Center(
           child: Text('PAYMENT',
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
