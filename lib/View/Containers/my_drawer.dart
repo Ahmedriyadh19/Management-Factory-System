@@ -1,22 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:management_factory_system/Controller/colors.dart';
 
 class MyDrawer {
-  static Color currentColor = const Color.fromARGB(255, 45, 64, 65);
-
-  static setNewColor(Color newColor) {
-    currentColor = newColor;
-  }
-
   static Drawer createCustomizeDrawer(List<Widget> up, List<Widget> down) {
     up.insert(
       0,
       Container(
         height: 200,
-        color: currentColor.withOpacity(0.95),
+        color: MyColors.myColor.withOpacity(0.95),
       ),
     );
     return Drawer(
-      backgroundColor: currentColor.withOpacity(0.9),
+      backgroundColor: MyColors.myColor.withOpacity(0.9),
       elevation: 50,
       child: SizedBox(
         height: double.infinity,

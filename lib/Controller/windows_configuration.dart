@@ -2,12 +2,10 @@ import 'dart:io';
 import 'package:desktop_window/desktop_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_window_close/flutter_window_close.dart';
+import 'package:management_factory_system/Controller/colors.dart';
 
 class WindowsConfiguration {
-  static Color currentColor = const Color.fromARGB(255, 45, 64, 65);
-  static setNewColor(Color newColor) {
-    currentColor = newColor;
-  }
+  static Color currentColor = MyColors.myColor;
 
   exitAction(BuildContext context) {
     FlutterWindowClose.setWindowShouldCloseHandler(() async {

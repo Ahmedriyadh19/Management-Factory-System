@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:management_factory_system/Controller/windows_configuration.dart';
-import 'package:management_factory_system/View/Containers/app_bar_customize.dart';
 import 'package:management_factory_system/View/Containers/background.dart';
-import 'package:management_factory_system/View/Containers/my_drawer.dart';
+import 'package:management_factory_system/Controller/colors.dart';
 import 'package:management_factory_system/View/Main%20Pages/Essential%20Pages/home.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -14,19 +12,17 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  static Color currentColorAppBar = const Color.fromARGB(255, 45, 64, 65);
-  static Color pickerColor = const Color.fromARGB(255, 45, 64, 65);
+  static Color pickerColor = MyColors.myColor;
 
   void changeColor(Color color) {
     setState(() => pickerColor = color);
   }
 
   void saveChange() {
-    CustomizeAppBar.setNewColor(pickerColor);
-    Background.setNewColor(pickerColor);
-    MyDrawer.setNewColor(pickerColor);
-    WindowsConfiguration.setNewColor(pickerColor);
-    currentColorAppBar = pickerColor;
+    setState(() {
+      MyColors.setNewColor(pickerColor);
+    });
+
     Navigator.of(context).pop();
     Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Home()));
   }
@@ -74,7 +70,7 @@ class _SettingsPageState extends State<SettingsPage> {
     return ElevatedButton(
         style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(pickerColor)),
-        onPressed: () => {dialogChangeColor(context, currentColorAppBar)},
+        onPressed: () => {dialogChangeColor(context, pickerColor)},
         child: Text(txt, style: const TextStyle(color: Colors.black)));
   }
 

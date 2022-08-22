@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:management_factory_system/Controller/windows_configuration.dart';
 import 'package:management_factory_system/View/Containers/app_bar_customize.dart';
 import 'package:management_factory_system/View/Containers/background.dart';
+import 'package:management_factory_system/Controller/colors.dart';
 import 'package:management_factory_system/View/Containers/my_drawer.dart';
 import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_customer.dart';
 import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_payment.dart';
@@ -117,18 +118,20 @@ class _HomeState extends State<Home> {
     addListOption.add(
         createOption(Icons.insert_drive_file_rounded, 'Add Product', lvl++));
 
-    viewListOption.add(createOption(FontAwesomeIcons.store, 'View Stock', lvl++));
+    viewListOption
+        .add(createOption(FontAwesomeIcons.store, 'View Stock', lvl++));
     viewListOption
         .add(createOption(FontAwesomeIcons.peopleRoof, 'View Customer', lvl++));
-    viewListOption
-        .add(createOption(FontAwesomeIcons.receipt, 'View Sales Invoice', lvl++));
     viewListOption.add(
-        createOption(FontAwesomeIcons.receipt, 'View Purchases Invoice', lvl++));
-    viewListOption.add(createOption(FontAwesomeIcons.personCane, 'View Staff', lvl++));
+        createOption(FontAwesomeIcons.receipt, 'View Sales Invoice', lvl++));
+    viewListOption.add(createOption(
+        FontAwesomeIcons.receipt, 'View Purchases Invoice', lvl++));
     viewListOption
-        .add(createOption(FontAwesomeIcons.moneyBillWave, 'View Payment', lvl++));
-    viewListOption
-        .add(createOption(FontAwesomeIcons.rectangleList, 'View Product', lvl++));
+        .add(createOption(FontAwesomeIcons.personCane, 'View Staff', lvl++));
+    viewListOption.add(
+        createOption(FontAwesomeIcons.moneyBillWave, 'View Payment', lvl++));
+    viewListOption.add(
+        createOption(FontAwesomeIcons.rectangleList, 'View Product', lvl++));
 
     editListOption.add(createOption(FontAwesomeIcons.pen, 'Edit Stock', lvl++));
     editListOption
@@ -253,7 +256,7 @@ class _HomeState extends State<Home> {
   PopupMenuButton option(BuildContext ctx, IconData icon,
       List<PopupMenuEntry> optionsList, String tooltips) {
     return PopupMenuButton(
-      color: Background.getColor().withOpacity(0.8),
+      color: MyColors.myColor.withOpacity(0.8),
       tooltip: tooltips,
       icon: Icon(icon),
       itemBuilder: ((ctx) => optionsList),

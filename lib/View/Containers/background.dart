@@ -1,22 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:management_factory_system/Controller/colors.dart';
 
 class Background {
   final Widget? widget;
-  static Color currentColor = const Color.fromARGB(255, 45, 64, 65);
-
-  static Color getColor() {
-    return currentColor;
-  }
 
   Background({this.widget});
 
-  static setNewColor(Color newColor) {
+  _setNewColor() {
     return <Color>[
-      currentColor = newColor.withOpacity(0),
-      currentColor = newColor.withOpacity(0.25),
-      currentColor = newColor.withOpacity(0.50),
-      currentColor = newColor.withOpacity(0.75),
-      currentColor = newColor.withOpacity(1),
+      MyColors.myColor.withOpacity(0.20),
+      MyColors.myColor.withOpacity(1),
     ];
   }
 
@@ -26,7 +19,7 @@ class Background {
       width: double.maxFinite,
       decoration: BoxDecoration(
           gradient: LinearGradient(
-              colors: setNewColor(currentColor),
+              colors: _setNewColor(),
               begin: Alignment.bottomLeft,
               end: Alignment.topRight)),
       child: Center(child: widget),

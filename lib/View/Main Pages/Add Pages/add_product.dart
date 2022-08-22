@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:management_factory_system/View/Containers/app_bar_customize.dart';
 import 'package:management_factory_system/View/Containers/background.dart';
+import 'package:management_factory_system/Controller/colors.dart';
 
 class AddProductPage extends StatefulWidget {
-  const AddProductPage({Key? key,
+  const AddProductPage({
+    Key? key,
     this.option,
     this.appBarTitle,
   }) : super(key: key);
-final int? option;
+  final int? option;
   final String? appBarTitle;
   @override
   State<AddProductPage> createState() => _AddProductPageState();
@@ -34,12 +36,11 @@ class _AddProductPageState extends State<AddProductPage> {
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
           fieldInput(
               'Product name', 'Input Product Name', Icons.person, 0, ctx),
-          fieldInput('Package Phone', 'Input Package Phone',
+          fieldInput('Package Phone', 'Input Package Pcs',
               Icons.phone_android_rounded, 1, ctx),
-          fieldInput('Customer Address', 'Input Customer Address',
-              Icons.location_on, 2, ctx),
-          fieldInput('Customer Email', 'Input Customer Email',
-              Icons.email_rounded, 3, ctx),
+          fieldInput('Price', 'Input The Price', Icons.location_on, 2, ctx),
+          fieldInput(
+              'Expire Date', 'Input Expire Date', Icons.email_rounded, 3, ctx),
           Text(errorTextHint, style: const TextStyle(color: Colors.red)),
           const SizedBox(height: 10),
           Center(
@@ -61,7 +62,7 @@ class _AddProductPageState extends State<AddProductPage> {
     return ElevatedButton(
         style: ButtonStyle(
             backgroundColor:
-                MaterialStateProperty.all(Background.currentColor)),
+                MaterialStateProperty.all(MyColors.myColor)),
         onPressed: () {
           setState(() {
             if (op == 0) {
@@ -107,7 +108,7 @@ class _AddProductPageState extends State<AddProductPage> {
       margin: const EdgeInsets.all(20),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: Background.currentColor.withOpacity(0.4)),
+          color: MyColors.myColor.withOpacity(0.4)),
       child: TextField(
         decoration: InputDecoration(
           border: InputBorder.none,
@@ -136,14 +137,14 @@ class _AddProductPageState extends State<AddProductPage> {
         context: ctx,
         builder: (ctx) {
           return AlertDialog(
-            backgroundColor: Background.currentColor.withOpacity(0.7),
+            backgroundColor: MyColors.myColor.withOpacity(0.7),
             title: const Text('Success'),
             content: const Text('Your record has saved successfully'),
             actions: [
               ElevatedButton(
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(
-                        Background.currentColor.withOpacity(1))),
+                        MyColors.myColor.withOpacity(1))),
                 onPressed: () {
                   Navigator.of(ctx).pop();
                   emptyAllData();

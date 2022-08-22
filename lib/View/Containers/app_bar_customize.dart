@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:management_factory_system/Controller/colors.dart';
 
 class CustomizeAppBar {
-  static Color currentColor = const Color.fromARGB(255, 45, 64, 65);
-
-  static setNewColor(Color newColor) {
-    currentColor = newColor;
-  }
-
   AppBar createCustomizeAppBar(String title, {List<Widget>? actionsIcons}) {
     return AppBar(
       centerTitle: true,
-      backgroundColor: currentColor,
+      backgroundColor: MyColors.myColor,
       iconTheme: const IconThemeData(color: Colors.black),
       title: Center(
           child: Text(

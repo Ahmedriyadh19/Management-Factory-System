@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:management_factory_system/Controller/windows_configuration.dart';
 import 'package:management_factory_system/Database/database_helper.dart';
 import 'package:management_factory_system/View/Containers/background.dart';
+import 'package:management_factory_system/Controller/colors.dart';
 import 'package:management_factory_system/View/Main%20Pages/Essential%20Pages/home.dart';
 
 class Login extends StatefulWidget {
@@ -16,8 +17,11 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   bool isDatabaseConnected = DatabaseHelper.isDatabaseEx;
   bool passwordVis = true;
+  bool hasTargetPath = false;
+  bool hasError = false;
+  static double heightCont = 300;
   static String? targetPath;
-  static String catchLoginError = '';
+  static String? catchLoginError;
   static List<PopupMenuItem> optionDatabase = [];
   static List<String?> errorsTexts = List.generate(2, (i) => null);
   static List<TextEditingController> myControllerLogin =
@@ -57,10 +61,10 @@ class _LoginState extends State<Login> {
       child: Center(
         child: Container(
           width: 405,
-          height: 300,
+          height: heightCont,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
-            color: Background.getColor().withOpacity(0.4),
+            color: MyColors.myColor.withOpacity(0.4),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -82,16 +86,18 @@ class _LoginState extends State<Login> {
                   isPassword: true,
                   label: 'Password',
                   icon: Icons.lock_rounded)),
-              Center(
-                child: Text(
-                  catchLoginError,
-                  style: const TextStyle(
-                    color: Colors.red,
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
+              hasError
+                  ? Center(
+                      child: Text(
+                        catchLoginError!,
+                        style: const TextStyle(
+                          color: Colors.red,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    )
+                  : Container(),
               Padding(
                 padding: const EdgeInsets.only(top: 20),
                 child: Row(children: [
@@ -102,10 +108,15 @@ class _LoginState extends State<Login> {
                   SizedBox(width: 135, child: btn()),
                   SizedBox(
                       width: 135,
-                      child:
-                          option(FontAwesomeIcons.database, optionDatabase, ''))
+                      child: option(FontAwesomeIcons.database, optionDatabase,
+                          'Select File'))
                 ]),
-              )
+              ),
+              hasTargetPath
+                  ? Container(
+                      margin: const EdgeInsets.all(15),
+                      child: Text(targetPath!))
+                  : Container()
             ],
           ),
         ),
@@ -118,7 +129,7 @@ class _LoginState extends State<Login> {
       margin: const EdgeInsets.all(20),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: Background.getColor().withOpacity(0.4)),
+          color: MyColors.myColor.withOpacity(0.4)),
       child: w,
     );
   }
@@ -174,7 +185,8 @@ class _LoginState extends State<Login> {
       myControllerLogin[i].clear();
       errorsTexts[i] = null;
     }
-    catchLoginError = '';
+    catchLoginError = null;
+    hasError = false;
   }
 
   FloatingActionButton btn() {
@@ -185,17 +197,21 @@ class _LoginState extends State<Login> {
       elevation: 0,
       hoverColor: const Color.fromARGB(255, 7, 114, 62),
       onPressed: () {
-        if (myControllerLogin[0].text == '' &&
-                myControllerLogin[1].text == '' ||
-            !isDatabaseConnected) {
-          setDefaulted();
+        if ((myControllerLogin[0].text == '' &&
+                myControllerLogin[1].text == '') ||
+            isDatabaseConnected) {
           setState(() {
+            hasTargetPath = false;
+            targetPath = null;
+            heightCont = 300;
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (_) => const Home()),
             );
           });
+          setDefaulted();
         } else {
           setState(() {
+            hasError = true;
             if (!isDatabaseConnected) {
               catchLoginError = 'Please select your database File';
             } else {
@@ -210,7 +226,7 @@ class _LoginState extends State<Login> {
   PopupMenuButton option(
       IconData icon, List<PopupMenuEntry> optionsList, String tooltips) {
     return PopupMenuButton(
-      color: Background.getColor().withOpacity(0.8),
+      color: MyColors.myColor.withOpacity(0.8),
       tooltip: tooltips,
       icon: Icon(icon),
       itemBuilder: ((ctx) => optionsList),
@@ -225,12 +241,22 @@ class _LoginState extends State<Login> {
       String? selectedDirectory = await FilePicker.platform.getDirectoryPath();
 
       if (selectedDirectory != null) {
-        targetPath = selectedDirectory;
+        setState(() {
+          hasTargetPath = true;
+          heightCont = 370;
+          targetPath = selectedDirectory;
+          isDatabaseConnected = true;
+        });
       }
     } else {
       FilePickerResult? result = await FilePicker.platform.pickFiles();
       if (result != null) {
-        targetPath = result.files.single.path;
+        setState(() {
+          hasTargetPath = true;
+          heightCont = 370;
+          targetPath = result.files.single.path;
+          isDatabaseConnected = true;
+        });
       }
     }
   }
