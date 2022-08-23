@@ -5,15 +5,13 @@ import 'package:flutter_window_close/flutter_window_close.dart';
 import 'package:management_factory_system/Controller/colors.dart';
 
 class WindowsConfiguration {
-  static Color currentColor = MyColors.myColor;
-
   exitAction(BuildContext context) {
     FlutterWindowClose.setWindowShouldCloseHandler(() async {
       return await showDialog(
           context: context,
           builder: (context) {
             return AlertDialog(
-                backgroundColor: currentColor.withOpacity(0.7),
+                backgroundColor: MyColors.myColor.withOpacity(0.7),
                 title: const Text('Do you really want to Exit?'),
                 actions: [
                   Tooltip(
@@ -21,7 +19,7 @@ class WindowsConfiguration {
                     child: ElevatedButton(
                         style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
-                                currentColor.withOpacity(1))),
+                                MyColors.myColor.withOpacity(1))),
                         onPressed: () => Navigator.of(context).pop(true),
                         child: const Text('Yes',
                             style: TextStyle(color: Colors.black))),
@@ -31,7 +29,7 @@ class WindowsConfiguration {
                     child: ElevatedButton(
                         style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
-                                currentColor.withOpacity(1))),
+                                MyColors.myColor.withOpacity(1))),
                         onPressed: () => Navigator.of(context).pop(false),
                         child: const Text(
                           'No',

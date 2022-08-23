@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:management_factory_system/View/Containers/app_bar_customize.dart';
 import 'package:management_factory_system/View/Containers/background.dart';
 import 'package:management_factory_system/Controller/colors.dart';
+import 'package:month_year_picker/month_year_picker.dart';
 
 class AddProductPage extends StatefulWidget {
   const AddProductPage({
@@ -34,13 +36,14 @@ class _AddProductPageState extends State<AddProductPage> {
         children: [
           const Text('Add New Product',
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+          fieldInput('Product name', 'Input Product Name',
+              Icons.crop_square_rounded, 0, ctx),
+          fieldInput('Package Number', 'Input Package Pcs',
+              Icons.align_horizontal_left_rounded, 1, ctx),
           fieldInput(
-              'Product name', 'Input Product Name', Icons.person, 0, ctx),
-          fieldInput('Package Phone', 'Input Package Pcs',
-              Icons.phone_android_rounded, 1, ctx),
-          fieldInput('Price', 'Input The Price', Icons.location_on, 2, ctx),
-          fieldInput(
-              'Expire Date', 'Input Expire Date', Icons.email_rounded, 3, ctx),
+              'Price', 'Input The Price', Icons.price_change_rounded, 2, ctx),
+          fieldInput('Expire Date', 'Input Expire Date',
+              Icons.date_range_rounded, 3, ctx),
           Text(errorTextHint, style: const TextStyle(color: Colors.red)),
           const SizedBox(height: 10),
           Center(
@@ -61,8 +64,7 @@ class _AddProductPageState extends State<AddProductPage> {
   ElevatedButton buttonAction(String txt, int op) {
     return ElevatedButton(
         style: ButtonStyle(
-            backgroundColor:
-                MaterialStateProperty.all(MyColors.myColor)),
+            backgroundColor: MaterialStateProperty.all(MyColors.myColor)),
         onPressed: () {
           setState(() {
             if (op == 0) {
@@ -110,6 +112,7 @@ class _AddProductPageState extends State<AddProductPage> {
           borderRadius: BorderRadius.circular(15),
           color: MyColors.myColor.withOpacity(0.4)),
       child: TextField(
+        readOnly: index == 3 ? true : false,
         decoration: InputDecoration(
           border: InputBorder.none,
           focusedBorder: InputBorder.none,
@@ -128,6 +131,43 @@ class _AddProductPageState extends State<AddProductPage> {
         ),
         keyboardType: TextInputType.name,
         controller: myControllerNewCustomer[index],
+        onTap: index == 3
+            ? () async {
+                final DateTime? pickedDate = await showMonthYearPicker(
+                  context: context,
+                  initialDate: DateTime.now().add(const Duration(days: 730)),
+                  firstDate: DateTime.now(),
+                  lastDate: DateTime.now().add(const Duration(days: 2555)),
+                  builder: (context, child) {
+                    return Theme(
+                      data: Theme.of(context).copyWith(
+                        colorScheme: ColorScheme.light(
+                          primary: MyColors.myColor,
+                        ),
+                        textButtonTheme: TextButtonThemeData(
+                          style: TextButton.styleFrom(
+                            primary: MyColors.myColor.withOpacity(0.5),
+                          ),
+                        ),
+                      ),
+                      child: child!,
+                    );
+                  },
+                );
+                if (pickedDate != null) {
+                  String formattedDate =
+                      DateFormat('yyyy-MM-dd').format(pickedDate);
+
+                  setState(() {
+                    myControllerNewCustomer[3].text = formattedDate;
+                  });
+                } else {
+                  setState(() {
+                    hint = "Date is not selected";
+                  });
+                }
+              }
+            : null,
       ),
     );
   }
