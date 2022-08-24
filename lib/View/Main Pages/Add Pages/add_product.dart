@@ -24,13 +24,14 @@ class _AddProductPageState extends State<AddProductPage> {
     emptyAllData();
   }
 
-  static String errorTextHint = '';
+  static String? errorTextHint;
+  static bool hasError = false;
 
   static List<String?> errorsTexts = List.generate(4, (i) => null);
-  static List<TextEditingController> myControllerNewCustomer =
+  static List<TextEditingController> myControllerNewProduct =
       List.generate(4, (i) => TextEditingController());
   Widget bodyPage(BuildContext ctx) {
-    return Center(
+    return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -44,7 +45,9 @@ class _AddProductPageState extends State<AddProductPage> {
               'Price', 'Input The Price', Icons.price_change_rounded, 2, ctx),
           fieldInput('Expire Date', 'Input Expire Date',
               Icons.date_range_rounded, 3, ctx),
-          Text(errorTextHint, style: const TextStyle(color: Colors.red)),
+          hasError
+              ? Text(errorTextHint!, style: const TextStyle(color: Colors.red))
+              : Container(),
           const SizedBox(height: 10),
           Center(
             child: Row(
@@ -82,12 +85,14 @@ class _AddProductPageState extends State<AddProductPage> {
     for (int i = 0; i < errorsTexts.length; i++) {
       errorsTexts[i] = null;
     }
-    errorTextHint = '';
+    errorTextHint = null;
+    hasError = false;
   }
 
   void validity() {
-    if (myControllerNewCustomer[0].text.isEmpty ||
-        myControllerNewCustomer[0].text.trim().isEmpty) {
+    if (myControllerNewProduct[0].text.isEmpty ||
+        myControllerNewProduct[0].text.trim().isEmpty) {
+      hasError = true;
       errorsTexts[0] = 'Please at least input Me !';
       errorTextHint = 'Check the input';
     } else {
@@ -98,9 +103,10 @@ class _AddProductPageState extends State<AddProductPage> {
   void emptyAllData() {
     for (int i = 0; i < errorsTexts.length; i++) {
       errorsTexts[i] = null;
-      myControllerNewCustomer[i].clear();
+      myControllerNewProduct[i].clear();
     }
-    errorTextHint = '';
+    errorTextHint = null;
+    hasError = false;
   }
 
   Container fieldInput(String label, String hint, IconData icon, int index,
@@ -130,7 +136,7 @@ class _AddProductPageState extends State<AddProductPage> {
           iconColor: Colors.black,
         ),
         keyboardType: TextInputType.name,
-        controller: myControllerNewCustomer[index],
+        controller: myControllerNewProduct[index],
         onTap: index == 3
             ? () async {
                 final DateTime? pickedDate = await showMonthYearPicker(
@@ -159,7 +165,7 @@ class _AddProductPageState extends State<AddProductPage> {
                       DateFormat('yyyy-MM-dd').format(pickedDate);
 
                   setState(() {
-                    myControllerNewCustomer[3].text = formattedDate;
+                    myControllerNewProduct[3].text = formattedDate;
                   });
                 } else {
                   setState(() {

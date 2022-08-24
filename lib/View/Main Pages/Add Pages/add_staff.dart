@@ -19,13 +19,14 @@ class _AddStaffPageState extends State<AddStaffPage> {
     emptyAllData();
   }
 
-  static String errorTextHint = '';
+  static String? errorTextHint;
+  static bool hasError = false;
 
   static List<String?> errorsTexts = List.generate(2, (i) => null);
   static List<TextEditingController> myControllerNewCustomer =
       List.generate(2, (i) => TextEditingController());
   Widget bodyPage(BuildContext ctx) {
-    return Center(
+    return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -34,7 +35,9 @@ class _AddStaffPageState extends State<AddStaffPage> {
           fieldInput('Staff name', 'Input Staff Name', Icons.person, 0, ctx),
           fieldInput('Staff Phone', 'Input Staff Phone',
               Icons.phone_android_rounded, 1, ctx),
-          Text(errorTextHint, style: const TextStyle(color: Colors.red)),
+          hasError
+              ? Text(errorTextHint!, style: const TextStyle(color: Colors.red))
+              : Container(),
           const SizedBox(height: 10),
           Center(
             child: Row(
@@ -54,8 +57,7 @@ class _AddStaffPageState extends State<AddStaffPage> {
   ElevatedButton buttonAction(String txt, int op) {
     return ElevatedButton(
         style: ButtonStyle(
-            backgroundColor:
-                MaterialStateProperty.all(MyColors.myColor)),
+            backgroundColor: MaterialStateProperty.all(MyColors.myColor)),
         onPressed: () {
           setState(() {
             if (op == 0) {
@@ -73,12 +75,14 @@ class _AddStaffPageState extends State<AddStaffPage> {
     for (int i = 0; i < errorsTexts.length; i++) {
       errorsTexts[i] = null;
     }
-    errorTextHint = '';
+    errorTextHint = null;
+    hasError = false;
   }
 
   void validity() {
     if (myControllerNewCustomer[0].text.isEmpty ||
         myControllerNewCustomer[0].text.trim().isEmpty) {
+      hasError = true;
       errorsTexts[0] = 'Please at least input Me !';
       errorTextHint = 'Check the input';
     } else {
@@ -91,7 +95,8 @@ class _AddStaffPageState extends State<AddStaffPage> {
       errorsTexts[i] = null;
       myControllerNewCustomer[i].clear();
     }
-    errorTextHint = '';
+    errorTextHint = null;
+    hasError = false;
   }
 
   Container fieldInput(String label, String hint, IconData icon, int index,
