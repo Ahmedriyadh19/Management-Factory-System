@@ -20,13 +20,18 @@ class AddPurchasesInvoicePage extends StatefulWidget {
 
 class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
   static String? errorTextHint;
-  static bool hasError = false;
+  static String? invoiceTotalError;
   static String? gstError;
+  static bool hasError = false;
   TextEditingController gstController = TextEditingController();
+  TextEditingController invoiceTotalController = TextEditingController();
   static List<List<TextEditingController>> controllerList = [];
   static List<List<String?>> errorList = [];
   static List<Align> rowHolder = [];
+  static List<double> holdTotal = [];
   static int pointer = 0;
+  final RegExp mySplit = RegExp(r'RM |,');
+  final NumberFormat total = NumberFormat("#,##0.00");
 
   @override
   void initState() {
@@ -47,7 +52,14 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
           )),
           hasError ? Text(errorTextHint!) : Container(),
           const SizedBox(height: 10),
-          fieldInput(hint: 'Add GST', label: 'GST'),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              fieldInput(hint: 'Add GST', label: 'GST', isGst: true),
+              fieldInput(
+                  hint: 'Invoice Total', label: 'Invoice Total', isGst: false),
+            ],
+          ),
           const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -73,6 +85,9 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
       pointer = 0;
       gstError = null;
       gstController.clear();
+      invoiceTotalController.clear();
+      holdTotal.clear();
+      invoiceTotalError = null;
     });
     addRow();
   }
@@ -109,6 +124,7 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
         numberOfError++;
       }
     }
+    print(invoiceTotalController.text);
     if (numberOfError == 0) {
       showDone(context);
     }
@@ -152,7 +168,7 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
             fieldInput(
                 hint: 'Price', index: 2, label: 'Item Price', option: indexes),
             fieldInput(
-                hint: 'Total', index: 3, label: 'Item Total', option: indexes),
+                hint: 'Total', label: 'Item Total', index: 3, option: indexes),
             const SizedBox(width: 20),
             ElevatedButton(
               style: ButtonStyle(
@@ -206,15 +222,19 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
       if (rowHolder.isEmpty) {
         addRow();
       }
+
+      if (index < holdTotal.length || index == 0) {
+        holdTotal.removeAt(index);
+      }
+      getTotalInvoice();
     });
   }
 
   bool validRow(int where) {
-    final NumberFormat total = NumberFormat("#,##0.00", "en_US");
     bool rowError = true;
     int q;
-    double p;
-    String price;
+    double p, price;
+    String priceString;
     if (rowHolder.isNotEmpty) {
       setState(() {
         for (int i = 0; i < controllerList[where].length; i++) {
@@ -229,7 +249,8 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
               controllerList[where][2].text.isNotEmpty) {
             q = int.parse(controllerList[where][1].text.split(',').join());
             p = double.parse(
-                controllerList[where][2].text.split(RegExp(r'RM |,')).join());
+                controllerList[where][2].text.split(mySplit).join());
+
             if (q <= 0) {
               errorList[where][1] = 'Please input valid data';
               deleteRowWithKeep(where);
@@ -240,20 +261,42 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
               deleteRowWithKeep(where);
               rowError = false;
             }
+
             if (rowError) {
-              price = (q * p).toStringAsFixed(2);
+              price = (q * p);
+              holdTotal.add(price);
+              priceString = price.toStringAsFixed(2);
               controllerList[where].last.text =
-                  'RM ${total.format(double.parse(price))}';
+                  'RM ${total.format(double.parse(priceString))}';
             }
           }
         }
       });
+      getTotalInvoice();
     }
 
     return rowError;
   }
 
-  Container fieldInput({String? label, String? hint, int? index, int? option}) {
+  void getTotalInvoice() {
+    double g = 0, totalAll = 0;
+    String totalAllString;
+    setState(() {
+      if (gstController.text.isNotEmpty) {
+        g = double.parse(gstController.text.split(mySplit).join());
+      }
+      totalAll += g;
+      for (int i = 0; i < holdTotal.length; i++) {
+        totalAll += holdTotal[i];
+      }
+      totalAllString = totalAll.toStringAsFixed(2);
+      invoiceTotalController.text =
+          'RM ${total.format(double.parse(totalAllString))}';
+    });
+  }
+
+  Container fieldInput(
+      {String? label, String? hint, int? index, int? option, bool? isGst}) {
     return Container(
       width: index == 0 ? 250 : 130,
       margin: const EdgeInsets.all(10),
@@ -271,10 +314,15 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
           hintText: hint,
           errorText: option != null && index != null
               ? errorList[option][index]
-              : gstError,
+              : isGst != null && isGst
+                  ? gstError
+                  : invoiceTotalError,
           labelStyle: const TextStyle(color: Colors.black),
           iconColor: Colors.black,
         ),
+        readOnly: ((index != null && index == 3) || (isGst != null && !isGst))
+            ? true
+            : false,
         inputFormatters: index == 0
             ? null
             : <TextInputFormatter>[
@@ -283,9 +331,11 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
                     : CurrencyTextInputFormatter(symbol: 'RM ')
               ],
         keyboardType: index == 0 ? TextInputType.name : TextInputType.number,
-        controller: option != null && index != null
+        controller: (option != null && index != null)
             ? controllerList[option][index]
-            : gstController,
+            : (isGst != null && isGst)
+                ? gstController
+                : invoiceTotalController,
       ),
     );
   }
