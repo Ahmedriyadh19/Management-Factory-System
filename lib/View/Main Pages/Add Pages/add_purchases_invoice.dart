@@ -1,4 +1,7 @@
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:management_factory_system/Controller/colors.dart';
 import 'package:management_factory_system/View/Containers/app_bar_customize.dart';
 import 'package:management_factory_system/View/Containers/background.dart';
@@ -20,10 +23,11 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
   static bool hasError = false;
   static String? gstError;
   TextEditingController gstController = TextEditingController();
-
-  static List<dynamic> invoiceInfo = [];
+  static List<List<TextEditingController>> controllerList = [];
+  static List<List<String?>> errorList = [];
   static List<Align> rowHolder = [];
   static int pointer = 0;
+
   @override
   void initState() {
     addRow();
@@ -66,7 +70,8 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
   void setDefault() {
     setState(() {
       rowHolder.clear();
-      invoiceInfo.clear();
+      errorList.clear();
+      controllerList.clear();
       pointer = 0;
       gstError = null;
       gstController.clear();
@@ -99,6 +104,18 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
         });
   }
 
+  void validationAll() {
+    int numberOfError = 0;
+    for (var i = 0; i < rowHolder.length; i++) {
+      if (!validRow(i)) {
+        numberOfError++;
+      }
+    }
+    if (numberOfError == 0) {
+      showDone(context);
+    }
+  }
+
   ElevatedButton buttons(String txt, int op) {
     return ElevatedButton(
       style: ButtonStyle(
@@ -110,7 +127,7 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
           if (op == 0) {
             setDefault();
           } else if (op == 1) {
-            showDone(context);
+            validationAll();
           } else {
             addRow();
           }
@@ -157,29 +174,85 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
   }
 
   void addRow() {
-    setState(() {
-      invoiceInfo.add([
-        [null, null, null, null],
-        [
+    if (validRow(pointer - 1)) {
+      setState(() {
+        errorList.add([null, null, null, null]);
+        controllerList.add([
           TextEditingController(),
           TextEditingController(),
           TextEditingController(),
           TextEditingController()
-        ]
-      ]);
-      rowHolder.add(invoiceBuildOneItem(pointer++));
+        ]);
+        rowHolder.add(invoiceBuildOneItem(pointer++));
+      });
+    }
+  }
+
+  void deleteRowWithKeep(int index) {
+    setState(() {
+      rowHolder.removeAt(index);
+      rowHolder.insert(index, invoiceBuildOneItem(index));
     });
   }
 
   void deleteRow(int index) {
     setState(() {
-      invoiceInfo.removeAt(index);
+      errorList.removeAt(index);
+      controllerList.removeAt(index);
       rowHolder.clear();
       pointer--;
       for (int i = 0; i < pointer; i++) {
         rowHolder.add(invoiceBuildOneItem(i));
       }
+
+      if (rowHolder.isEmpty) {
+        addRow();
+      }
     });
+  }
+
+  bool validRow(int where) {
+    final NumberFormat total = NumberFormat("#,##0.00", "en_US");
+    bool rowError = true;
+    int q;
+    double p;
+    String price;
+    if (rowHolder.isNotEmpty) {
+      setState(() {
+        for (int i = 0; i < controllerList[where].length; i++) {
+          if (controllerList[where][i].text.isEmpty && i != 3) {
+            errorList[where][i] = 'Please input data';
+            deleteRowWithKeep(where);
+            rowError = false;
+          } else if (controllerList[where][i].text.isNotEmpty) {
+            errorList[where][i] = null;
+            deleteRowWithKeep(where);
+          } else if (controllerList[where][1].text.isNotEmpty &&
+              controllerList[where][2].text.isNotEmpty) {
+            q = int.parse(controllerList[where][1].text.split(',').join());
+            p = double.parse(
+                controllerList[where][2].text.split(RegExp(r'RM |,')).join());
+            if (q <= 0) {
+              errorList[where][1] = 'Please input valid data';
+              deleteRowWithKeep(where);
+              rowError = false;
+            }
+            if (p <= 0) {
+              errorList[where][2] = 'Please input valid data';
+              deleteRowWithKeep(where);
+              rowError = false;
+            }
+            if (rowError) {
+              price = (q * p).toStringAsFixed(2);
+              controllerList[where].last.text =
+                  'RM ${total.format(double.parse(price))}';
+            }
+          }
+        }
+      });
+    }
+
+    return rowError;
   }
 
   Container fieldInput({String? label, String? hint, int? index, int? option}) {
@@ -198,13 +271,23 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
           disabledBorder: InputBorder.none,
           labelText: label,
           hintText: hint,
-          errorText: option != null ? invoiceInfo[option][0][index] : gstError,
+          errorText: option != null && index != null
+              ? errorList[option][index]
+              : gstError,
           labelStyle: const TextStyle(color: Colors.black),
           iconColor: Colors.black,
         ),
-        keyboardType: TextInputType.name,
-        controller:
-            option != null ? invoiceInfo[option][1][index] : gstController,
+        inputFormatters: index == 0
+            ? null
+            : <TextInputFormatter>[
+                index == 1
+                    ? CurrencyTextInputFormatter(symbol: '', decimalDigits: 0)
+                    : CurrencyTextInputFormatter(symbol: 'RM ')
+              ],
+        keyboardType: index == 0 ? TextInputType.name : TextInputType.number,
+        controller: option != null && index != null
+            ? controllerList[option][index]
+            : gstController,
       ),
     );
   }
