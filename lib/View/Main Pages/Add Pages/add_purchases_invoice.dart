@@ -30,7 +30,7 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
 
   @override
   void initState() {
-    addRow();
+    setDefault();
     super.initState();
   }
 
@@ -47,10 +47,8 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
           )),
           hasError ? Text(errorTextHint!) : Container(),
           const SizedBox(height: 10),
-          rowHolder.isNotEmpty
-              ? fieldInput(hint: 'Add GST', label: 'GST')
-              : Container(),
-          const SizedBox(height: 20),
+          fieldInput(hint: 'Add GST', label: 'GST'),
+          const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -79,7 +77,7 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
     addRow();
   }
 
-  showDone(BuildContext ctx) async {
+  Future showDone(BuildContext ctx) async {
     return await showDialog(
         context: ctx,
         builder: (ctx) {
