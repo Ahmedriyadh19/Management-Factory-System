@@ -8,8 +8,8 @@ class Background {
 
   _setNewColor() {
     return <Color>[
-      MyColors.myColor.withOpacity(0.20),
-      MyColors.myColor.withOpacity(1),
+      MyColors.myColorContainer.withOpacity(0.20),
+      MyColors.myColorContainer.withOpacity(1),
     ];
   }
 

@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:management_factory_system/Controller/colors.dart';
 import 'package:management_factory_system/View/Containers/background.dart';
 import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_purchases_invoice.dart';
 import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_sales_invoice.dart';
@@ -42,9 +43,12 @@ class InvoicePage extends StatelessWidget {
     return ListView(
       children: [
         const SizedBox(height: 30),
-        const Center(
+        Center(
           child: Text('SALES INVOICE',
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+              style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: MyColors.myColorFont)),
         ),
         buildFormatPage([
           createItem('add sales invoice', 'Add Sales Invoice', 0, ctx),
@@ -59,9 +63,12 @@ class InvoicePage extends StatelessWidget {
           indent: 50,
         ),
         const SizedBox(height: 30),
-        const Center(
+        Center(
           child: Text('PURCHASES INVOICE',
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+              style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: MyColors.myColorFont)),
         ),
         buildFormatPage([
           createItem('add purchases invoice', 'Add Purchases Invoice', 4, ctx),
@@ -97,7 +104,7 @@ class InvoicePage extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(25),
-              color: const Color.fromARGB(100, 254, 255, 255)),
+              color: MyColors.myColorContainer.withOpacity(0.8)),
           child: Center(
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
@@ -141,7 +148,10 @@ class InvoicePage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(nameMenu,
-            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+            style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                color: MyColors.myColorFont)),
       ],
     );
   }

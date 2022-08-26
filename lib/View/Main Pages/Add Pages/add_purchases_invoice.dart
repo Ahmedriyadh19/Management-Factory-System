@@ -40,39 +40,49 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
   }
 
   Widget bodyPage() {
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const SizedBox(height: 20),
-          Center(
-              child: Column(
-            children: rowHolder,
-          )),
-          hasError ? Text(errorTextHint!) : Container(),
-          const SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              fieldInput(hint: 'Add GST', label: 'GST', isGst: true),
-              fieldInput(
-                  hint: 'Invoice Total', label: 'Invoice Total', isGst: false),
-            ],
-          ),
-          const SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              buttons('Clear All', 0),
-              const SizedBox(width: 20),
-              buttons('Save', 1),
-              const SizedBox(width: 20),
-              buttons('Add', 2),
-            ],
-          ),
-          const SizedBox(height: 50)
-        ],
+    return SizedBox(
+      width: 810,
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text('Add New Purchases Invoice',
+                style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: MyColors.myColorFont)),
+            const SizedBox(height: 20),
+            Center(
+                child: Column(
+              children: rowHolder,
+            )),
+            hasError ? Text(errorTextHint!) : Container(),
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                fieldInput(hint: 'Add GST', label: 'GST', isGst: true),
+                fieldInput(
+                    hint: 'Invoice Total',
+                    label: 'Invoice Total',
+                    isGst: false),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                buttons('Clear All', 0),
+                const SizedBox(width: 20),
+                buttons('Save', 1),
+                const SizedBox(width: 20),
+                buttons('Add', 2),
+              ],
+            ),
+            const SizedBox(height: 50)
+          ],
+        ),
       ),
     );
   }
@@ -97,20 +107,20 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
         context: ctx,
         builder: (ctx) {
           return AlertDialog(
-            backgroundColor: MyColors.myColor.withOpacity(0.7),
+            backgroundColor: MyColors.myColorContainer.withOpacity(0.7),
             title: const Text('Success'),
             content: const Text('Your record has saved successfully'),
             actions: [
               ElevatedButton(
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(
-                        MyColors.myColor.withOpacity(1))),
+                        MyColors.myColorContainer.withOpacity(1))),
                 onPressed: () {
                   Navigator.of(ctx).pop();
                   setDefault();
                 },
                 child:
-                    const Text('Okay', style: TextStyle(color: Colors.black)),
+                    Text('Okay', style: TextStyle(color: MyColors.myColorFont)),
               )
             ],
           );
@@ -124,7 +134,6 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
         numberOfError++;
       }
     }
-    print(invoiceTotalController.text);
     if (numberOfError == 0) {
       showDone(context);
     }
@@ -133,9 +142,9 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
   ElevatedButton buttons(String txt, int op) {
     return ElevatedButton(
       style: ButtonStyle(
-          backgroundColor:
-              MaterialStateProperty.all(MyColors.myColor.withOpacity(1))),
-      child: Text(txt, style: const TextStyle(color: Colors.black)),
+          backgroundColor: MaterialStateProperty.all(
+              MyColors.myColorContainer.withOpacity(1))),
+      child: Text(txt, style: TextStyle(color: MyColors.myColorFont)),
       onPressed: () {
         setState(() {
           if (op == 0) {
@@ -157,7 +166,8 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
         scrollDirection: Axis.horizontal,
         child: Row(
           children: [
-            Text('${indexes + 1}'),
+            Text('${indexes + 1}',
+                style: TextStyle(color: MyColors.myColorFont)),
             fieldInput(
                 hint: 'Name', index: 0, label: 'Item Name', option: indexes),
             fieldInput(
@@ -172,10 +182,11 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
             const SizedBox(width: 20),
             ElevatedButton(
               style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(MyColors.myColor)),
-              child: const Icon(
+                  backgroundColor:
+                      MaterialStateProperty.all(MyColors.myColorContainer)),
+              child: Icon(
                 Icons.delete_forever_rounded,
-                color: Colors.black,
+                color: MyColors.myColorIcon,
               ),
               onPressed: () {
                 deleteRow(indexes);
@@ -223,7 +234,7 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
         addRow();
       }
 
-      if (index < holdTotal.length || index == 0) {
+      if (index < holdTotal.length || holdTotal.isNotEmpty) {
         holdTotal.removeAt(index);
       }
       getTotalInvoice();
@@ -302,7 +313,7 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
       margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: MyColors.myColor.withOpacity(0.4)),
+          color: MyColors.myColorContainer.withOpacity(0.4)),
       child: TextField(
         decoration: InputDecoration(
           border: InputBorder.none,
@@ -317,8 +328,8 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
               : isGst != null && isGst
                   ? gstError
                   : invoiceTotalError,
-          labelStyle: const TextStyle(color: Colors.black),
-          iconColor: Colors.black,
+          labelStyle: TextStyle(color: MyColors.myColorFont),
+          iconColor: MyColors.myColorIcon,
         ),
         readOnly: ((index != null && index == 3) || (isGst != null && !isGst))
             ? true

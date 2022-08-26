@@ -5,12 +5,12 @@ class CustomizeAppBar {
   AppBar createCustomizeAppBar(String title, {List<Widget>? actionsIcons}) {
     return AppBar(
       centerTitle: true,
-      backgroundColor: MyColors.myColor,
-      iconTheme: const IconThemeData(color: Colors.black),
+      backgroundColor: MyColors.myColorContainer,
+      iconTheme: IconThemeData(color: MyColors.myColorIcon),
       title: Center(
           child: Text(
         title,
-        style: const TextStyle(color: Colors.black),
+        style: TextStyle(color: MyColors.myColorFont),
       )),
       elevation: 50,
       actions: actionsIcons ?? [],

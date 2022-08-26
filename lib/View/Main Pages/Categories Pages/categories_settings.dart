@@ -12,26 +12,45 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  static Color pickerColor = MyColors.myColor;
+  static Color pickerColor = MyColors.myColorContainer;
+
+  /* static Color PickerColorContainer = MyColors.myColorContainer;
+  static Color PickerColorFont = MyColors.myColorFont;
+  static Color PickerColorIcon = MyColors.myColorIcon;
+  static Color PickerColorHover = MyColors.myColorHover;
+  static Color PickerColorSelected = MyColors.myColorSelected;*/
 
   void changeColor(Color color) {
     setState(() => pickerColor = color);
   }
 
-  void saveChange() {
+  void saveChange(int op) {
     setState(() {
-      MyColors.setNewColor(pickerColor);
+      if (op == 0) {
+        MyColors.setNewColorContainer(pickerColor);
+      } else if (op == 1) {
+        MyColors.setNewColorIcons(pickerColor);
+      } else if (op == 2) {
+        MyColors.setNewColorFonts(pickerColor);
+      } else if (op == 3) {
+        MyColors.setNewColorHover(pickerColor);
+      } else {
+        MyColors.setNewColorSelected(pickerColor);
+      }
     });
 
     Navigator.of(context).pop();
     Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Home()));
   }
 
-  Future dialogChangeColor(BuildContext ctx, Color currentColor) async {
+  Future dialogChangeColor(BuildContext ctx, Color currentColor, int op) async {
     return await showDialog(
       context: ctx,
       builder: (ctx) => AlertDialog(
-        title: const Text('Pick a color!'),
+        title: Text(
+          'Pick a color!',
+          style: TextStyle(color: MyColors.myColorFont),
+        ),
         content: SingleChildScrollView(
           child: ColorPicker(
             pickerColor: currentColor,
@@ -41,11 +60,15 @@ class _SettingsPageState extends State<SettingsPage> {
         actions: <Widget>[
           ElevatedButton(
             style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(pickerColor)),
+                backgroundColor:
+                    MaterialStateProperty.all(MyColors.myColorContainer)),
             onPressed: () {
-              saveChange();
+              saveChange(op);
             },
-            child: const Text('Got it'),
+            child: Text(
+              'Got it',
+              style: TextStyle(color: MyColors.myColorFont),
+            ),
           ),
         ],
       ),
@@ -54,24 +77,30 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Widget bodyPage(BuildContext ctx) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        const Text('Settings',
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+        Text('Settings',
+            style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: MyColors.myColorFont)),
         const SizedBox(height: 30),
-        butts(
-          'Change Color',
-        ),
+        butts('Change Containers Container', 0),
+        butts('Change Icons Color', 1),
+        butts('Change Fonts Color', 2),
+        butts('Change Hover Color', 3),
+        butts('Change Selected Color', 4)
       ],
     );
   }
 
-  ElevatedButton butts(String txt) {
+  ElevatedButton butts(String txt, int op) {
     return ElevatedButton(
         style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(pickerColor)),
-        onPressed: () => {dialogChangeColor(context, pickerColor)},
-        child: Text(txt, style: const TextStyle(color: Colors.black)));
+            backgroundColor:
+                MaterialStateProperty.all(MyColors.myColorContainer)),
+        onPressed: () => {dialogChangeColor(context, pickerColor, op)},
+        child: Text(txt, style: TextStyle(color: MyColors.myColorFont)));
   }
 
   @override

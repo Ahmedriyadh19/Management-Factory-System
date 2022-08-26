@@ -11,7 +11,7 @@ class WindowsConfiguration {
           context: context,
           builder: (context) {
             return AlertDialog(
-                backgroundColor: MyColors.myColor.withOpacity(0.7),
+                backgroundColor: MyColors.myColorContainer.withOpacity(0.7),
                 title: const Text('Do you really want to Exit?'),
                 actions: [
                   Tooltip(
@@ -19,7 +19,7 @@ class WindowsConfiguration {
                     child: ElevatedButton(
                         style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
-                                MyColors.myColor.withOpacity(1))),
+                                MyColors.myColorContainer.withOpacity(1))),
                         onPressed: () => Navigator.of(context).pop(true),
                         child: const Text('Yes',
                             style: TextStyle(color: Colors.black))),
@@ -29,7 +29,7 @@ class WindowsConfiguration {
                     child: ElevatedButton(
                         style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
-                                MyColors.myColor.withOpacity(1))),
+                                MyColors.myColorContainer.withOpacity(1))),
                         onPressed: () => Navigator.of(context).pop(false),
                         child: const Text(
                           'No',

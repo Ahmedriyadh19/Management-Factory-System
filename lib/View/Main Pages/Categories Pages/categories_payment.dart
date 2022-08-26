@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:management_factory_system/Controller/colors.dart';
 import 'package:management_factory_system/View/Containers/background.dart';
 import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_payment.dart';
 import 'package:management_factory_system/View/Main%20Pages/Delete%20Pages/delete_payment.dart';
@@ -31,9 +32,12 @@ class PaymentPage extends StatelessWidget {
     return ListView(
       children: [
         const SizedBox(height: 30),
-        const Center(
+        Center(
           child: Text('PAYMENT',
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+              style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: MyColors.myColorFont)),
         ),
         buildFormatPage([
           createItem('add payment', 'Add Payment', lvl++, ctx),
@@ -66,7 +70,7 @@ class PaymentPage extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(25),
-              color: const Color.fromARGB(100, 254, 255, 255)),
+              color: MyColors.myColorContainer.withOpacity(0.8)),
           child: Center(
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
@@ -110,7 +114,10 @@ class PaymentPage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(nameMenu,
-            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+            style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                color: MyColors.myColorFont)),
       ],
     );
   }

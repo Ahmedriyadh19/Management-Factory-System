@@ -213,13 +213,14 @@ class _HomeState extends State<Home> {
     return ListTile(
       leading: Icon(icon),
       title: Text(title),
-      trailing: const Icon(Icons.keyboard_arrow_right_rounded),
-      hoverColor: isSelectedBtnList[index]
-          ? Colors.greenAccent
-          : const Color.fromARGB(255, 255, 255, 255),
+      trailing: Icon(
+        Icons.keyboard_arrow_right_rounded,
+        color: MyColors.myColorIcon,
+      ),
+      hoverColor: MyColors.myColorHover,
       selectedColor: isSelectedBtnList[index]
-          ? const Color.fromARGB(255, 255, 255, 255)
-          : const Color.fromARGB(255, 0, 0, 0),
+          ? MyColors.myColorSelected
+          : MyColors.myColorFont,
       iconColor: Colors.black,
       selected: isSelectedBtnList[index],
       onTap: () {
@@ -245,10 +246,10 @@ class _HomeState extends State<Home> {
     return PopupMenuItem(
       value: option,
       child: ListTile(
-          leading: Icon(icon, color: Colors.black),
+          leading: Icon(icon, color: MyColors.myColorIcon),
           title: Text(
             label,
-            style: const TextStyle(color: Colors.black),
+            style: TextStyle(color: MyColors.myColorFont),
           )),
     );
   }
@@ -256,7 +257,7 @@ class _HomeState extends State<Home> {
   PopupMenuButton option(BuildContext ctx, IconData icon,
       List<PopupMenuEntry> optionsList, String tooltips) {
     return PopupMenuButton(
-      color: MyColors.myColor.withOpacity(0.8),
+      color: MyColors.myColorContainer.withOpacity(0.8),
       tooltip: tooltips,
       icon: Icon(icon),
       itemBuilder: ((ctx) => optionsList),
@@ -297,7 +298,7 @@ class _HomeState extends State<Home> {
     return IconButton(
       tooltip: 'Exit',
       hoverColor: isSelectedBtnList[index]
-          ? Colors.greenAccent
+          ? MyColors.myColorHover
           : const Color.fromARGB(255, 255, 255, 255),
       icon: const Icon(FontAwesomeIcons.personWalkingArrowLoopLeft),
       onPressed: () {

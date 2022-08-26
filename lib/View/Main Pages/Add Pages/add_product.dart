@@ -35,8 +35,11 @@ class _AddProductPageState extends State<AddProductPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text('Add New Product',
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+          Text('Add New Product',
+              style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: MyColors.myColorFont)),
           fieldInput('Product name', 'Input Product Name',
               Icons.crop_square_rounded, 0, ctx),
           fieldInput('Package Number', 'Input Package Pcs',
@@ -67,7 +70,8 @@ class _AddProductPageState extends State<AddProductPage> {
   ElevatedButton buttonAction(String txt, int op) {
     return ElevatedButton(
         style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(MyColors.myColor)),
+            backgroundColor:
+                MaterialStateProperty.all(MyColors.myColorContainer)),
         onPressed: () {
           setState(() {
             if (op == 0) {
@@ -78,7 +82,7 @@ class _AddProductPageState extends State<AddProductPage> {
             }
           });
         },
-        child: Text(txt, style: const TextStyle(color: Colors.black)));
+        child: Text(txt, style: TextStyle(color: MyColors.myColorFont)));
   }
 
   void emptyDataVisible() {
@@ -116,7 +120,7 @@ class _AddProductPageState extends State<AddProductPage> {
       margin: const EdgeInsets.all(20),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: MyColors.myColor.withOpacity(0.4)),
+          color: MyColors.myColorContainer.withOpacity(0.4)),
       child: TextField(
         readOnly: index == 3 ? true : false,
         decoration: InputDecoration(
@@ -127,13 +131,13 @@ class _AddProductPageState extends State<AddProductPage> {
           disabledBorder: InputBorder.none,
           icon: Icon(
             icon,
-            color: Colors.black,
+            color: MyColors.myColorIcon,
           ),
           labelText: label,
           hintText: hint,
           errorText: errorsTexts[index],
-          labelStyle: const TextStyle(color: Colors.black),
-          iconColor: Colors.black,
+          labelStyle: TextStyle(color: MyColors.myColorFont),
+          iconColor: MyColors.myColorIcon,
         ),
         keyboardType: TextInputType.name,
         controller: myControllerNewProduct[index],
@@ -148,11 +152,11 @@ class _AddProductPageState extends State<AddProductPage> {
                     return Theme(
                       data: Theme.of(context).copyWith(
                         colorScheme: ColorScheme.light(
-                          primary: MyColors.myColor,
+                          primary: MyColors.myColorContainer,
                         ),
                         textButtonTheme: TextButtonThemeData(
                           style: TextButton.styleFrom(
-                            primary: MyColors.myColor.withOpacity(0.5),
+                            primary: MyColors.myColorContainer.withOpacity(0.5),
                           ),
                         ),
                       ),
@@ -183,20 +187,20 @@ class _AddProductPageState extends State<AddProductPage> {
         context: ctx,
         builder: (ctx) {
           return AlertDialog(
-            backgroundColor: MyColors.myColor.withOpacity(0.7),
+            backgroundColor: MyColors.myColorContainer.withOpacity(0.7),
             title: const Text('Success'),
             content: const Text('Your record has saved successfully'),
             actions: [
               ElevatedButton(
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(
-                        MyColors.myColor.withOpacity(1))),
+                        MyColors.myColorContainer.withOpacity(1))),
                 onPressed: () {
                   Navigator.of(ctx).pop();
                   emptyAllData();
                 },
                 child:
-                    const Text('Okay', style: TextStyle(color: Colors.black)),
+                    Text('Okay', style: TextStyle(color: MyColors.myColorFont)),
               )
             ],
           );

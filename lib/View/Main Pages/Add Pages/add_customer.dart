@@ -18,6 +18,7 @@ class _AddCustomerPageState extends State<AddCustomerPage> {
     super.initState();
     emptyAllData();
   }
+
   static String? errorTextHint;
   static bool hasError = false;
   static List<String?> errorsTexts = List.generate(4, (i) => null);
@@ -28,8 +29,11 @@ class _AddCustomerPageState extends State<AddCustomerPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text('Add New Customer',
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+          Text('Add New Customer',
+              style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: MyColors.myColorFont)),
           fieldInput(
               'Customer name', 'Input Customer Name', Icons.person, 0, ctx),
           fieldInput('Customer Phone', 'Input Customer Phone',
@@ -60,7 +64,8 @@ class _AddCustomerPageState extends State<AddCustomerPage> {
   ElevatedButton buttonAction(String txt, int op) {
     return ElevatedButton(
         style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(MyColors.myColor)),
+            backgroundColor:
+                MaterialStateProperty.all(MyColors.myColorContainer)),
         onPressed: () {
           setState(() {
             if (op == 0) {
@@ -71,7 +76,7 @@ class _AddCustomerPageState extends State<AddCustomerPage> {
             }
           });
         },
-        child: Text(txt, style: const TextStyle(color: Colors.black)));
+        child: Text(txt, style: TextStyle(color: MyColors.myColorFont)));
   }
 
   void emptyDataVisible() {
@@ -109,7 +114,7 @@ class _AddCustomerPageState extends State<AddCustomerPage> {
       margin: const EdgeInsets.all(20),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: MyColors.myColor.withOpacity(0.4)),
+          color: MyColors.myColorContainer.withOpacity(0.4)),
       child: TextField(
         decoration: InputDecoration(
           border: InputBorder.none,
@@ -119,13 +124,13 @@ class _AddCustomerPageState extends State<AddCustomerPage> {
           disabledBorder: InputBorder.none,
           icon: Icon(
             icon,
-            color: Colors.black,
+            color: MyColors.myColorIcon,
           ),
           labelText: label,
           hintText: hint,
           errorText: errorsTexts[index],
-          labelStyle: const TextStyle(color: Colors.black),
-          iconColor: Colors.black,
+          labelStyle: TextStyle(color: MyColors.myColorFont),
+          iconColor: MyColors.myColorIcon,
         ),
         keyboardType: TextInputType.name,
         controller: myControllerNewCustomer[index],
@@ -138,20 +143,20 @@ class _AddCustomerPageState extends State<AddCustomerPage> {
         context: ctx,
         builder: (ctx) {
           return AlertDialog(
-            backgroundColor: MyColors.myColor.withOpacity(0.7),
+            backgroundColor: MyColors.myColorContainer.withOpacity(0.7),
             title: const Text('Success'),
             content: const Text('Your record has saved successfully'),
             actions: [
               ElevatedButton(
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(
-                        MyColors.myColor.withOpacity(1))),
+                        MyColors.myColorContainer.withOpacity(1))),
                 onPressed: () {
                   Navigator.of(ctx).pop();
                   emptyAllData();
                 },
                 child:
-                    const Text('Okay', style: TextStyle(color: Colors.black)),
+                    Text('Okay', style: TextStyle(color: MyColors.myColorFont)),
               )
             ],
           );

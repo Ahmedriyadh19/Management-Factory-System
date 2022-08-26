@@ -64,7 +64,7 @@ class _LoginState extends State<Login> {
           height: heightCont,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
-            color: MyColors.myColor.withOpacity(0.4),
+            color: MyColors.myColorContainer.withOpacity(0.4),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -129,7 +129,7 @@ class _LoginState extends State<Login> {
       margin: const EdgeInsets.all(20),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: MyColors.myColor.withOpacity(0.4)),
+          color: MyColors.myColorContainer.withOpacity(0.4)),
       child: w,
     );
   }
@@ -150,13 +150,13 @@ class _LoginState extends State<Login> {
           disabledBorder: InputBorder.none,
           icon: Icon(
             icon,
-            color: Colors.black,
+            color: MyColors.myColorIcon,
           ),
           labelText: label,
           hintText: hint,
           errorText: errorText,
-          labelStyle: const TextStyle(color: Colors.black),
-          iconColor: Colors.black,
+          labelStyle: TextStyle(color: MyColors.myColorFont),
+          iconColor: MyColors.myColorIcon,
           suffixIcon: isPassword ? hidePassword() : null),
       keyboardType: isPassword
           ? TextInputType.visiblePassword
@@ -170,13 +170,13 @@ class _LoginState extends State<Login> {
     return IconButton(
         onPressed: setVisibility,
         icon: passwordVis
-            ? const Icon(
+            ? Icon(
                 Icons.visibility,
-                color: Colors.black,
+                color: MyColors.myColorIcon,
               )
-            : const Icon(
+            : Icon(
                 Icons.visibility_off,
-                color: Colors.black,
+                color: MyColors.myColorIcon,
               ));
   }
 
@@ -195,7 +195,7 @@ class _LoginState extends State<Login> {
       icon: const Icon(FontAwesomeIcons.personWalkingArrowRight),
       backgroundColor: Colors.black12,
       elevation: 0,
-      hoverColor: const Color.fromARGB(255, 7, 114, 62),
+      hoverColor: MyColors.myColorHover,
       onPressed: () {
         if ((myControllerLogin[0].text == '' &&
                 myControllerLogin[1].text == '') ||
@@ -226,9 +226,12 @@ class _LoginState extends State<Login> {
   PopupMenuButton option(
       IconData icon, List<PopupMenuEntry> optionsList, String tooltips) {
     return PopupMenuButton(
-      color: MyColors.myColor.withOpacity(0.8),
+      color: MyColors.myColorContainer.withOpacity(0.8),
       tooltip: tooltips,
-      icon: Icon(icon),
+      icon: Icon(
+        icon,
+        color: MyColors.myColorIcon,
+      ),
       itemBuilder: ((ctx) => optionsList),
       onSelected: (value) {
         getOptionPick(value);
@@ -265,10 +268,10 @@ class _LoginState extends State<Login> {
     return PopupMenuItem(
       value: option,
       child: ListTile(
-          leading: Icon(icon, color: Colors.black),
+          leading: Icon(icon, color: MyColors.myColorIcon),
           title: Text(
             label,
-            style: const TextStyle(color: Colors.black),
+            style: TextStyle(color: MyColors.myColorFont),
           )),
     );
   }
