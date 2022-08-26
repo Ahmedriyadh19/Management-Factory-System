@@ -234,17 +234,21 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
         addRow();
       }
 
-      if (index < holdTotal.length || holdTotal.isNotEmpty) {
+      if (index < holdTotal.length && holdTotal.isNotEmpty) {
         holdTotal.removeAt(index);
       }
+
+      if (holdTotal.isEmpty) {
+        invoiceTotalController.clear();
+      }
+
       getTotalInvoice();
     });
   }
 
   bool validRow(int where) {
-    bool rowError = true;
-    int q;
-    double p, price;
+    bool rowError = true, hasNoCountError = true;
+    double q, p, price;
     String priceString;
     if (rowHolder.isNotEmpty) {
       setState(() {
@@ -256,30 +260,36 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
           } else if (controllerList[where][i].text.isNotEmpty) {
             errorList[where][i] = null;
             deleteRowWithKeep(where);
-          } else if (controllerList[where][1].text.isNotEmpty &&
-              controllerList[where][2].text.isNotEmpty) {
-            q = int.parse(controllerList[where][1].text.split(',').join());
-            p = double.parse(
-                controllerList[where][2].text.split(mySplit).join());
+          }
+        }
 
-            if (q <= 0) {
-              errorList[where][1] = 'Please input valid data';
-              deleteRowWithKeep(where);
-              rowError = false;
-            }
-            if (p <= 0) {
-              errorList[where][2] = 'Please input valid data';
-              deleteRowWithKeep(where);
-              rowError = false;
-            }
+        if (controllerList[where][1].text.isNotEmpty &&
+            controllerList[where][2].text.isNotEmpty) {
+          q = double.parse(controllerList[where][1].text.split(',').join());
+          p = double.parse(controllerList[where][2].text.split(mySplit).join());
 
-            if (rowError) {
-              price = (q * p);
+          if (q <= 0) {
+            errorList[where][1] = 'Please input valid data';
+            deleteRowWithKeep(where);
+            hasNoCountError = false;
+            rowError = false;
+          }
+          if (p <= 0) {
+            errorList[where][2] = 'Please input valid data';
+            deleteRowWithKeep(where);
+            rowError = false;
+            hasNoCountError = false;
+          }
+
+          if (hasNoCountError) {
+            price = (q * p);
+            if (holdTotal.length < rowHolder.length) {
               holdTotal.add(price);
-              priceString = price.toStringAsFixed(2);
-              controllerList[where].last.text =
-                  'RM ${total.format(double.parse(priceString))}';
             }
+
+            priceString = price.toStringAsFixed(3);
+            controllerList[where].last.text =
+                'RM ${total.format(double.parse(priceString))}';
           }
         }
       });
@@ -297,12 +307,14 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
         g = double.parse(gstController.text.split(mySplit).join());
       }
       totalAll += g;
-      for (int i = 0; i < holdTotal.length; i++) {
-        totalAll += holdTotal[i];
+      if (holdTotal.isNotEmpty) {
+        for (int i = 0; i < holdTotal.length; i++) {
+          totalAll += holdTotal[i];
+        }
+        totalAllString = totalAll.toStringAsFixed(2);
+        invoiceTotalController.text =
+            'RM ${total.format(double.parse(totalAllString))}';
       }
-      totalAllString = totalAll.toStringAsFixed(2);
-      invoiceTotalController.text =
-          'RM ${total.format(double.parse(totalAllString))}';
     });
   }
 
@@ -338,7 +350,7 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
             ? null
             : <TextInputFormatter>[
                 index == 1
-                    ? CurrencyTextInputFormatter(symbol: '', decimalDigits: 0)
+                    ? CurrencyTextInputFormatter(symbol: '')
                     : CurrencyTextInputFormatter(symbol: 'RM ')
               ],
         keyboardType: index == 0 ? TextInputType.name : TextInputType.number,

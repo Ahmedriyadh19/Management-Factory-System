@@ -7,7 +7,7 @@ class MyDrawer {
       0,
       Container(
         height: 200,
-        color: MyColors.myColorContainer.withOpacity(0.5),
+        color: MyColors.myColorContainer.withOpacity(0),
       ),
     );
     return Drawer(

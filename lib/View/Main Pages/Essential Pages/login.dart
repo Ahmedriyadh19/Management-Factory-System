@@ -103,7 +103,6 @@ class _LoginState extends State<Login> {
                 child: Row(children: [
                   const SizedBox(
                     width: 135,
-                    child: Text(''),
                   ),
                   SizedBox(width: 135, child: btn()),
                   SizedBox(
@@ -192,8 +191,11 @@ class _LoginState extends State<Login> {
   FloatingActionButton btn() {
     return FloatingActionButton.extended(
       label: const Text(''),
-      icon: const Icon(FontAwesomeIcons.personWalkingArrowRight),
-      backgroundColor: Colors.black12,
+      icon: Icon(
+        FontAwesomeIcons.personWalkingArrowRight,
+        color: MyColors.myColorIcon,
+      ),
+      backgroundColor: MyColors.myColorContainer.withOpacity(0.5),
       elevation: 0,
       hoverColor: MyColors.myColorHover,
       onPressed: () {
