@@ -3,17 +3,14 @@ import 'package:management_factory_system/View/Containers/app_bar_customize.dart
 import 'package:management_factory_system/View/Containers/background.dart';
 
 class DisplayPurchasesInvoicePage extends StatefulWidget {
-  const DisplayPurchasesInvoicePage({Key? key, this.option, this.appBarTitle})
-      : super(key: key);
+  const DisplayPurchasesInvoicePage({Key? key, this.option, this.appBarTitle}) : super(key: key);
   final int? option;
   final String? appBarTitle;
   @override
-  State<DisplayPurchasesInvoicePage> createState() =>
-      _DisplayPurchasesInvoicePageState();
+  State<DisplayPurchasesInvoicePage> createState() => _DisplayPurchasesInvoicePageState();
 }
 
-class _DisplayPurchasesInvoicePageState
-    extends State<DisplayPurchasesInvoicePage> {
+class _DisplayPurchasesInvoicePageState extends State<DisplayPurchasesInvoicePage> {
   Widget bodyPage() {
     return const Text('Display Purchase Invoice');
   }
@@ -23,8 +20,7 @@ class _DisplayPurchasesInvoicePageState
     return widget.option != 0
         ? Background(widget: bodyPage()).build()
         : Scaffold(
-            appBar:
-                CustomizeAppBar().createCustomizeAppBar(widget.appBarTitle!),
+            appBar: CustomizeAppBar().createCustomizeAppBar(widget.appBarTitle!),
             body: Background(widget: bodyPage()).build(),
           );
   }

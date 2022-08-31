@@ -59,9 +59,7 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
         actions: <Widget>[
           ElevatedButton(
-            style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.all(MyColors.myColorContainer)),
+            style: ButtonStyle(backgroundColor: MaterialStateProperty.all(MyColors.myColorContainer)),
             onPressed: () {
               saveChange(op);
             },
@@ -80,10 +78,7 @@ class _SettingsPageState extends State<SettingsPage> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Text('Settings',
-            style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-                color: MyColors.myColorFont)),
+            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: MyColors.myColorFont)),
         const SizedBox(height: 30),
         butts('Change Containers Container', 0),
         butts('Change Icons Color', 1),
@@ -96,9 +91,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   ElevatedButton butts(String txt, int op) {
     return ElevatedButton(
-        style: ButtonStyle(
-            backgroundColor:
-                MaterialStateProperty.all(MyColors.myColorContainer)),
+        style: ButtonStyle(backgroundColor: MaterialStateProperty.all(MyColors.myColorContainer)),
         onPressed: () => {dialogChangeColor(context, pickerColor, op)},
         child: Text(txt, style: TextStyle(color: MyColors.myColorFont)));
   }

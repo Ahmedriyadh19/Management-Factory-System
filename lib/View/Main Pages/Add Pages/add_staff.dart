@@ -4,8 +4,7 @@ import 'package:management_factory_system/View/Containers/background.dart';
 import 'package:management_factory_system/Controller/colors.dart';
 
 class AddStaffPage extends StatefulWidget {
-  const AddStaffPage({Key? key, this.option, this.appBarTitle})
-      : super(key: key);
+  const AddStaffPage({Key? key, this.option, this.appBarTitle}) : super(key: key);
   final int? option;
   final String? appBarTitle;
   @override
@@ -31,25 +30,15 @@ class _AddStaffPageState extends State<AddStaffPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text('Add New Staff',
-              style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: MyColors.myColorFont)),
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: MyColors.myColorFont)),
           fieldInput('Staff name', 'Input Staff Name', Icons.person, 0, ctx),
-          fieldInput('Staff Phone', 'Input Staff Phone',
-              Icons.phone_android_rounded, 1, ctx),
-          hasError
-              ? Text(errorTextHint!, style: const TextStyle(color: Colors.red))
-              : Container(),
+          fieldInput('Staff Phone', 'Input Staff Phone', Icons.phone_android_rounded, 1, ctx),
+          hasError ? Text(errorTextHint!, style: const TextStyle(color: Colors.red)) : Container(),
           const SizedBox(height: 10),
           Center(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                buttonAction('Clear', 0),
-                const SizedBox(width: 20),
-                buttonAction('Save', 1)
-              ],
+              children: [buttonAction('Clear', 0), const SizedBox(width: 20), buttonAction('Save', 1)],
             ),
           )
         ],
@@ -59,9 +48,7 @@ class _AddStaffPageState extends State<AddStaffPage> {
 
   ElevatedButton buttonAction(String txt, int op) {
     return ElevatedButton(
-        style: ButtonStyle(
-            backgroundColor:
-                MaterialStateProperty.all(MyColors.myColorContainer)),
+        style: ButtonStyle(backgroundColor: MaterialStateProperty.all(MyColors.myColorContainer)),
         onPressed: () {
           setState(() {
             if (op == 0) {
@@ -84,8 +71,7 @@ class _AddStaffPageState extends State<AddStaffPage> {
   }
 
   void validity() {
-    if (myControllerNewCustomer[0].text.isEmpty ||
-        myControllerNewCustomer[0].text.trim().isEmpty) {
+    if (myControllerNewCustomer[0].text.isEmpty || myControllerNewCustomer[0].text.trim().isEmpty) {
       hasError = true;
       errorsTexts[0] = 'Please at least input Me !';
       errorTextHint = 'Check the input';
@@ -103,14 +89,12 @@ class _AddStaffPageState extends State<AddStaffPage> {
     hasError = false;
   }
 
-  Container fieldInput(String label, String hint, IconData icon, int index,
-      BuildContext context) {
+  Container fieldInput(String label, String hint, IconData icon, int index, BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width / 3,
       margin: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          color: MyColors.myColorContainer.withOpacity(0.4)),
+          borderRadius: BorderRadius.circular(15), color: MyColors.myColorContainer.withOpacity(0.4)),
       child: TextField(
         decoration: InputDecoration(
           border: InputBorder.none,
@@ -145,14 +129,12 @@ class _AddStaffPageState extends State<AddStaffPage> {
             actions: [
               ElevatedButton(
                 style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(
-                        MyColors.myColorContainer.withOpacity(1))),
+                    backgroundColor: MaterialStateProperty.all(MyColors.myColorContainer.withOpacity(1))),
                 onPressed: () {
                   Navigator.of(ctx).pop();
                   emptyAllData();
                 },
-                child:
-                    Text('Okay', style: TextStyle(color: MyColors.myColorFont)),
+                child: Text('Okay', style: TextStyle(color: MyColors.myColorFont)),
               )
             ],
           );
@@ -164,8 +146,7 @@ class _AddStaffPageState extends State<AddStaffPage> {
     return widget.option != 0
         ? Background(widget: bodyPage(context)).build()
         : Scaffold(
-            appBar:
-                CustomizeAppBar().createCustomizeAppBar(widget.appBarTitle!),
+            appBar: CustomizeAppBar().createCustomizeAppBar(widget.appBarTitle!),
             body: Background(widget: bodyPage(context)).build(),
           );
   }

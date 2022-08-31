@@ -1,22 +1,27 @@
 import 'dart:convert';
 
 class Admin {
-  String id;
+  int id;
+  String idSystem;
   String userName;
   String password;
+  
   Admin({
     required this.id,
+    required this.idSystem,
     required this.userName,
     required this.password,
   });
 
   Admin copyWith({
-    String? id,
+    int? id,
+    String? idSystem,
     String? userName,
     String? password,
   }) {
     return Admin(
       id: id ?? this.id,
+      idSystem: idSystem ?? this.idSystem,
       userName: userName ?? this.userName,
       password: password ?? this.password,
     );
@@ -26,6 +31,7 @@ class Admin {
     final result = <String, dynamic>{};
   
     result.addAll({'id': id});
+    result.addAll({'idSystem': idSystem});
     result.addAll({'userName': userName});
     result.addAll({'password': password});
   
@@ -34,7 +40,8 @@ class Admin {
 
   factory Admin.fromMap(Map<String, dynamic> map) {
     return Admin(
-      id: map['id'] ?? '',
+      id: map['id']?.toInt() ?? 0,
+      idSystem: map['idSystem'] ?? '',
       userName: map['userName'] ?? '',
       password: map['password'] ?? '',
     );
@@ -45,7 +52,9 @@ class Admin {
   factory Admin.fromJson(String source) => Admin.fromMap(json.decode(source));
 
   @override
-  String toString() => 'Admin(id: $id, userName: $userName, password: $password)';
+  String toString() {
+    return 'Admin(id: $id, idSystem: $idSystem, userName: $userName, password: $password)';
+  }
 
   @override
   bool operator ==(Object other) {
@@ -53,10 +62,16 @@ class Admin {
   
     return other is Admin &&
       other.id == id &&
+      other.idSystem == idSystem &&
       other.userName == userName &&
       other.password == password;
   }
 
   @override
-  int get hashCode => id.hashCode ^ userName.hashCode ^ password.hashCode;
+  int get hashCode {
+    return id.hashCode ^
+      idSystem.hashCode ^
+      userName.hashCode ^
+      password.hashCode;
+  }
 }

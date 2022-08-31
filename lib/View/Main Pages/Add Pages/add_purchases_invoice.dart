@@ -7,24 +7,25 @@ import 'package:management_factory_system/View/Containers/app_bar_customize.dart
 import 'package:management_factory_system/View/Containers/background.dart';
 
 class AddPurchasesInvoicePage extends StatefulWidget {
-  const AddPurchasesInvoicePage({Key? key, this.option, this.appBarTitle})
-      : super(key: key);
+  const AddPurchasesInvoicePage({Key? key, this.option, this.appBarTitle}) : super(key: key);
 
   final int? option;
   final String? appBarTitle;
 
   @override
-  State<AddPurchasesInvoicePage> createState() =>
-      _AddPurchasesInvoicePageState();
+  State<AddPurchasesInvoicePage> createState() => _AddPurchasesInvoicePageState();
 }
 
 class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
   static String? errorTextHint;
   static String? invoiceTotalError;
   static String? gstError;
+  static String? venderError;
   static bool hasError = false;
+  bool otherActive = false;
   TextEditingController gstController = TextEditingController();
   TextEditingController invoiceTotalController = TextEditingController();
+  TextEditingController venderController = TextEditingController();
   static List<List<TextEditingController>> controllerList = [];
   static List<List<String?>> errorList = [];
   static List<Align> rowHolder = [];
@@ -32,6 +33,38 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
   static int pointer = 0;
   final RegExp mySplit = RegExp(r'RM |,');
   final NumberFormat total = NumberFormat("#,##0.00");
+  String dropMenuValue = 'Plumbing';
+
+  List<String> items = [
+    'Improper Surface Grading/Drainage',
+    'Improper Electrical Wiring',
+    'Roof Damage',
+    'Heating or cooling system',
+    'Poor Overall Maintenance',
+    'Structurally Related Problems',
+    'Plumbing',
+    'Exteriors',
+    'Facilities',
+    'Improper Surface Grading/Drainage1',
+    'Improper Electrical Wiring1',
+    'Roof Damage1',
+    'Heating or cooling system1',
+    'Poor Overall Maintenance1',
+    'Structurally Related Problems1',
+    'Plumbing1',
+    'Exterior1',
+    'Facilities1',
+    'Improper Surface Grading/Drainage2',
+    'Improper Electrical Wiring2',
+    'Roof Damage2',
+    'Heating or cooling system2',
+    'Poor Overall Maintenance2',
+    'Structurally Related Problems2',
+    'Plumbing2',
+    'Exteriors2',
+    'Facilities2',
+    'Other'
+  ];
 
   @override
   void initState() {
@@ -47,12 +80,13 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text('Add New Purchases Invoice',
-                style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    color: MyColors.myColorFont)),
+            Text('New Purchases Invoice',
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: MyColors.myColorFont)),
             const SizedBox(height: 20),
+            listOFVender(),
+            const SizedBox(height: 20),
+            otherActive ? onActiveFunc() : const SizedBox(height: 20),
+            otherActive ? const SizedBox(height: 20) : Container(),
             Center(
                 child: Column(
               children: rowHolder,
@@ -63,10 +97,7 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 fieldInput(hint: 'Add GST', label: 'GST', isGst: true),
-                fieldInput(
-                    hint: 'Invoice Total',
-                    label: 'Invoice Total',
-                    isGst: false),
+                fieldInput(hint: 'Invoice Total', label: 'Invoice Total', isGst: false),
               ],
             ),
             const SizedBox(height: 10),
@@ -86,6 +117,64 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
       ),
     );
   }
+
+  onActiveFunc() {
+    return Container(
+      width: 450,
+      margin: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10), color: MyColors.myColorContainer.withOpacity(0.4)),
+      child: TextFormField(
+        autocorrect: true,
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          focusedBorder: InputBorder.none,
+          enabledBorder: InputBorder.none,
+          errorBorder: InputBorder.none,
+          disabledBorder: InputBorder.none,
+          errorText: venderError,
+          label: Text(
+            'Vender Name',
+            style: TextStyle(color: MyColors.myColorFont),
+          ),
+          hintText: 'Enter Vender Name',
+        ),
+        keyboardType: TextInputType.name,
+        controller: venderController,
+      ),
+    );
+  }
+
+  Theme listOFVender() {
+    return Theme(
+      data: Theme.of(context).copyWith(
+        canvasColor: MyColors.myColorContainer,
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton(
+          value: dropMenuValue,
+          items: items.map(buildMenuItem).toList(),
+          onChanged: selectedMenuValue,
+        ),
+      ),
+    );
+  }
+
+  selectedMenuValue(value) {
+    setState(() {
+      dropMenuValue = value;
+      if (value == 'Other') {
+        otherActive = true;
+      } else {
+        otherActive = false;
+      }
+    });
+  }
+
+  DropdownMenuItem buildMenuItem(String item) => DropdownMenuItem(
+        value: item,
+        child: Text(item),
+      );
 
   void setDefault() {
     setState(() {
@@ -113,14 +202,12 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
             actions: [
               ElevatedButton(
                 style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(
-                        MyColors.myColorContainer.withOpacity(1))),
+                    backgroundColor: MaterialStateProperty.all(MyColors.myColorContainer.withOpacity(1))),
                 onPressed: () {
                   Navigator.of(ctx).pop();
                   setDefault();
                 },
-                child:
-                    Text('Okay', style: TextStyle(color: MyColors.myColorFont)),
+                child: Text('Okay', style: TextStyle(color: MyColors.myColorFont)),
               )
             ],
           );
@@ -141,9 +228,8 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
 
   ElevatedButton buttons(String txt, int op) {
     return ElevatedButton(
-      style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(
-              MyColors.myColorContainer.withOpacity(1))),
+      style:
+          ButtonStyle(backgroundColor: MaterialStateProperty.all(MyColors.myColorContainer.withOpacity(1))),
       child: Text(txt, style: TextStyle(color: MyColors.myColorFont)),
       onPressed: () {
         setState(() {
@@ -166,24 +252,14 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
         scrollDirection: Axis.horizontal,
         child: Row(
           children: [
-            Text('${indexes + 1}',
-                style: TextStyle(color: MyColors.myColorFont)),
-            fieldInput(
-                hint: 'Name', index: 0, label: 'Item Name', option: indexes),
-            fieldInput(
-                hint: 'Quantity',
-                index: 1,
-                label: 'Item Quantity',
-                option: indexes),
-            fieldInput(
-                hint: 'Price', index: 2, label: 'Item Price', option: indexes),
-            fieldInput(
-                hint: 'Total', label: 'Item Total', index: 3, option: indexes),
+            Text('${indexes + 1}', style: TextStyle(color: MyColors.myColorFont)),
+            fieldInput(hint: 'Name', index: 0, label: 'Item Name', option: indexes),
+            fieldInput(hint: 'Quantity', index: 1, label: 'Item Quantity', option: indexes),
+            fieldInput(hint: 'Price', index: 2, label: 'Item Price', option: indexes),
+            fieldInput(hint: 'Total', label: 'Item Total', index: 3, option: indexes),
             const SizedBox(width: 20),
             ElevatedButton(
-              style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all(MyColors.myColorContainer)),
+              style: ButtonStyle(backgroundColor: MaterialStateProperty.all(MyColors.myColorContainer)),
               child: Icon(
                 Icons.delete_forever_rounded,
                 color: MyColors.myColorIcon,
@@ -263,8 +339,7 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
           }
         }
 
-        if (controllerList[where][1].text.isNotEmpty &&
-            controllerList[where][2].text.isNotEmpty) {
+        if (controllerList[where][1].text.isNotEmpty && controllerList[where][2].text.isNotEmpty) {
           q = double.parse(controllerList[where][1].text.split(',').join());
           p = double.parse(controllerList[where][2].text.split(mySplit).join());
 
@@ -288,8 +363,7 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
             }
 
             priceString = price.toStringAsFixed(3);
-            controllerList[where].last.text =
-                'RM ${total.format(double.parse(priceString))}';
+            controllerList[where].last.text = 'RM ${total.format(double.parse(priceString))}';
           }
         }
       });
@@ -312,20 +386,17 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
           totalAll += holdTotal[i];
         }
         totalAllString = totalAll.toStringAsFixed(2);
-        invoiceTotalController.text =
-            'RM ${total.format(double.parse(totalAllString))}';
+        invoiceTotalController.text = 'RM ${total.format(double.parse(totalAllString))}';
       }
     });
   }
 
-  Container fieldInput(
-      {String? label, String? hint, int? index, int? option, bool? isGst}) {
+  Container fieldInput({String? label, String? hint, int? index, int? option, bool? isGst}) {
     return Container(
       width: index == 0 ? 250 : 130,
       margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: MyColors.myColorContainer.withOpacity(0.4)),
+          borderRadius: BorderRadius.circular(10), color: MyColors.myColorContainer.withOpacity(0.4)),
       child: TextField(
         decoration: InputDecoration(
           border: InputBorder.none,
@@ -343,9 +414,7 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
           labelStyle: TextStyle(color: MyColors.myColorFont),
           iconColor: MyColors.myColorIcon,
         ),
-        readOnly: ((index != null && index == 3) || (isGst != null && !isGst))
-            ? true
-            : false,
+        readOnly: ((index != null && index == 3) || (isGst != null && !isGst)) ? true : false,
         inputFormatters: index == 0
             ? null
             : <TextInputFormatter>[
@@ -368,8 +437,7 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
     return widget.option != 0
         ? Background(widget: bodyPage()).build()
         : Scaffold(
-            appBar:
-                CustomizeAppBar().createCustomizeAppBar(widget.appBarTitle!),
+            appBar: CustomizeAppBar().createCustomizeAppBar(widget.appBarTitle!),
             body: Background(widget: bodyPage()).build(),
           );
   }

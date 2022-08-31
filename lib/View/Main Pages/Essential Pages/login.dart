@@ -24,15 +24,12 @@ class _LoginState extends State<Login> {
   static String? catchLoginError;
   static List<PopupMenuItem> optionDatabase = [];
   static List<String?> errorsTexts = List.generate(2, (i) => null);
-  static List<TextEditingController> myControllerLogin =
-      List.generate(2, (i) => TextEditingController());
+  static List<TextEditingController> myControllerLogin = List.generate(2, (i) => TextEditingController());
 
   initializeOptionsDatabaseMenuList() {
     optionDatabase.clear();
-    optionDatabase
-        .add(createOption(FontAwesomeIcons.folderPlus, 'New Database file', 0));
-    optionDatabase
-        .add(createOption(FontAwesomeIcons.link, 'Link your Database', 1));
+    optionDatabase.add(createOption(FontAwesomeIcons.folderPlus, 'New Database file', 0));
+    optionDatabase.add(createOption(FontAwesomeIcons.link, 'Link your Database', 1));
   }
 
   setVisibility() {
@@ -106,15 +103,11 @@ class _LoginState extends State<Login> {
                   ),
                   SizedBox(width: 135, child: btn()),
                   SizedBox(
-                      width: 135,
-                      child: option(FontAwesomeIcons.database, optionDatabase,
-                          'Select File'))
+                      width: 135, child: option(FontAwesomeIcons.database, optionDatabase, 'Select File'))
                 ]),
               ),
               hasTargetPath
-                  ? Container(
-                      margin: const EdgeInsets.all(15),
-                      child: Text(targetPath!))
+                  ? Container(margin: const EdgeInsets.all(15), child: Text(targetPath!))
                   : Container()
             ],
           ),
@@ -127,8 +120,7 @@ class _LoginState extends State<Login> {
     return Container(
       margin: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          color: MyColors.myColorContainer.withOpacity(0.4)),
+          borderRadius: BorderRadius.circular(15), color: MyColors.myColorContainer.withOpacity(0.4)),
       child: w,
     );
   }
@@ -157,9 +149,7 @@ class _LoginState extends State<Login> {
           labelStyle: TextStyle(color: MyColors.myColorFont),
           iconColor: MyColors.myColorIcon,
           suffixIcon: isPassword ? hidePassword() : null),
-      keyboardType: isPassword
-          ? TextInputType.visiblePassword
-          : TextInputType.emailAddress,
+      keyboardType: isPassword ? TextInputType.visiblePassword : TextInputType.emailAddress,
       obscureText: isPassword ? passwordVis : false,
       controller: editingController,
     );
@@ -199,9 +189,7 @@ class _LoginState extends State<Login> {
       elevation: 0,
       hoverColor: MyColors.myColorHover,
       onPressed: () {
-        if ((myControllerLogin[0].text == '' &&
-                myControllerLogin[1].text == '') ||
-            isDatabaseConnected) {
+        if ((myControllerLogin[0].text == '' && myControllerLogin[1].text == '') || isDatabaseConnected) {
           setState(() {
             hasTargetPath = false;
             targetPath = null;
@@ -225,8 +213,7 @@ class _LoginState extends State<Login> {
     );
   }
 
-  PopupMenuButton option(
-      IconData icon, List<PopupMenuEntry> optionsList, String tooltips) {
+  PopupMenuButton option(IconData icon, List<PopupMenuEntry> optionsList, String tooltips) {
     return PopupMenuButton(
       color: MyColors.myColorContainer.withOpacity(0.8),
       tooltip: tooltips,
@@ -251,16 +238,23 @@ class _LoginState extends State<Login> {
           heightCont = 370;
           targetPath = selectedDirectory;
           isDatabaseConnected = true;
+          DatabaseHelper.isDatabasePath = true;
+          DatabaseHelper.isDatabaseFile = false;
+          DatabaseHelper.myDBPath = targetPath;
         });
       }
     } else {
       FilePickerResult? result = await FilePicker.platform.pickFiles();
-      if (result != null) {
+      if (result != null && result.files.single.extension == 'db') {
         setState(() {
           hasTargetPath = true;
           heightCont = 370;
           targetPath = result.files.single.path;
+          result.files.single.extension;
           isDatabaseConnected = true;
+          DatabaseHelper.isDatabaseFile = true;
+          DatabaseHelper.isDatabasePath = false;
+          DatabaseHelper.myDBPath = targetPath;
         });
       }
     }

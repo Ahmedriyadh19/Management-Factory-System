@@ -14,8 +14,7 @@ import 'package:management_factory_system/View/Main%20Pages/Edit%20Pages/edit_st
 class ProductPage extends StatelessWidget {
   ProductPage({Key? key}) : super(key: key);
 
-  final bool isOkay =
-      Platform.isWindows || Platform.isLinux || Platform.isMacOS;
+  final bool isOkay = Platform.isWindows || Platform.isLinux || Platform.isMacOS;
   static const List<Widget> bodyPages = [
     AddStockPage(option: 0, appBarTitle: 'Add Stock'),
     EditStockPage(option: 0, appBarTitle: 'Edit Stock'),
@@ -43,10 +42,7 @@ class ProductPage extends StatelessWidget {
         const SizedBox(height: 30),
         Center(
           child: Text('STOCK',
-              style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: MyColors.myColorFont)),
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: MyColors.myColorFont)),
         ),
         buildFormatPage([
           createItem('add store', 'Add Stock', 0, ctx),
@@ -63,10 +59,7 @@ class ProductPage extends StatelessWidget {
         const SizedBox(height: 30),
         Center(
           child: Text('PRODUCT',
-              style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: MyColors.myColorFont)),
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: MyColors.myColorFont)),
         ),
         buildFormatPage([
           createItem('add product', 'Add Product', 4, ctx),
@@ -91,33 +84,25 @@ class ProductPage extends StatelessWidget {
         children: items);
   }
 
-  Tooltip createItem(
-      String pathImage, String nameMenu, int action, BuildContext ctx) {
+  Tooltip createItem(String pathImage, String nameMenu, int action, BuildContext ctx) {
     return Tooltip(
       message: descriptions[action],
       child: GestureDetector(
         child: Container(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(25),
-              color: MyColors.myColorContainer.withOpacity(0.8)),
+              borderRadius: BorderRadius.circular(25), color: MyColors.myColorContainer.withOpacity(0.8)),
           child: Center(
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  buildImage(pathImage),
-                  buildDiv(),
-                  const SizedBox(width: 5),
-                  buildText(nameMenu)
-                ],
+                children: [buildImage(pathImage), buildDiv(), const SizedBox(width: 5), buildText(nameMenu)],
               ),
             ),
           ),
         ),
         onTap: () {
-          Navigator.of(ctx)
-              .push(MaterialPageRoute(builder: (_) => bodyPages[action]));
+          Navigator.of(ctx).push(MaterialPageRoute(builder: (_) => bodyPages[action]));
         },
       ),
     );
@@ -143,10 +128,7 @@ class ProductPage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(nameMenu,
-            style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-                color: MyColors.myColorFont)),
+            style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: MyColors.myColorFont)),
       ],
     );
   }

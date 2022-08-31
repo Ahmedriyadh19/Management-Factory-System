@@ -8,8 +8,7 @@ import 'package:management_factory_system/View/Main%20Pages/Display%20Pages/disp
 import 'package:management_factory_system/View/Main%20Pages/Edit%20Pages/edit_payment.dart';
 
 class PaymentPage extends StatelessWidget {
-  final bool isOkay =
-      Platform.isWindows || Platform.isLinux || Platform.isMacOS;
+  final bool isOkay = Platform.isWindows || Platform.isLinux || Platform.isMacOS;
 
   static int lvl = 0;
 
@@ -34,10 +33,7 @@ class PaymentPage extends StatelessWidget {
         const SizedBox(height: 30),
         Center(
           child: Text('PAYMENT',
-              style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: MyColors.myColorFont)),
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: MyColors.myColorFont)),
         ),
         buildFormatPage([
           createItem('add payment', 'Add Payment', lvl++, ctx),
@@ -62,33 +58,25 @@ class PaymentPage extends StatelessWidget {
         children: items);
   }
 
-  Tooltip createItem(
-      String pathImage, String nameMenu, int action, BuildContext ctx) {
+  Tooltip createItem(String pathImage, String nameMenu, int action, BuildContext ctx) {
     return Tooltip(
       message: descriptions[action],
       child: GestureDetector(
         child: Container(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(25),
-              color: MyColors.myColorContainer.withOpacity(0.8)),
+              borderRadius: BorderRadius.circular(25), color: MyColors.myColorContainer.withOpacity(0.8)),
           child: Center(
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  buildImage(pathImage),
-                  buildDiv(),
-                  const SizedBox(width: 5),
-                  buildText(nameMenu)
-                ],
+                children: [buildImage(pathImage), buildDiv(), const SizedBox(width: 5), buildText(nameMenu)],
               ),
             ),
           ),
         ),
         onTap: () {
-          Navigator.of(ctx)
-              .push(MaterialPageRoute(builder: (_) => bodyPages[action]));
+          Navigator.of(ctx).push(MaterialPageRoute(builder: (_) => bodyPages[action]));
         },
       ),
     );
@@ -114,10 +102,7 @@ class PaymentPage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(nameMenu,
-            style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-                color: MyColors.myColorFont)),
+            style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: MyColors.myColorFont)),
       ],
     );
   }

@@ -18,10 +18,8 @@ class Background {
       height: double.maxFinite,
       width: double.maxFinite,
       decoration: BoxDecoration(
-          gradient: LinearGradient(
-              colors: _setNewColor(),
-              begin: Alignment.bottomLeft,
-              end: Alignment.topRight)),
+          gradient:
+              LinearGradient(colors: _setNewColor(), begin: Alignment.bottomLeft, end: Alignment.topRight)),
       child: Center(child: widget),
     );
   }

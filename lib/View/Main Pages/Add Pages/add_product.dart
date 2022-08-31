@@ -36,30 +36,17 @@ class _AddProductPageState extends State<AddProductPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text('Add New Product',
-              style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: MyColors.myColorFont)),
-          fieldInput('Product name', 'Input Product Name',
-              Icons.crop_square_rounded, 0, ctx),
-          fieldInput('Package Number', 'Input Package Pcs',
-              Icons.align_horizontal_left_rounded, 1, ctx),
-          fieldInput(
-              'Price', 'Input The Price', Icons.price_change_rounded, 2, ctx),
-          fieldInput('Expire Date', 'Input Expire Date',
-              Icons.date_range_rounded, 3, ctx),
-          hasError
-              ? Text(errorTextHint!, style: const TextStyle(color: Colors.red))
-              : Container(),
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: MyColors.myColorFont)),
+          fieldInput('Product name', 'Input Product Name', Icons.crop_square_rounded, 0, ctx),
+          fieldInput('Package Number', 'Input Package Pcs', Icons.align_horizontal_left_rounded, 1, ctx),
+          fieldInput('Price', 'Input The Price', Icons.price_change_rounded, 2, ctx),
+          fieldInput('Expire Date', 'Input Expire Date', Icons.date_range_rounded, 3, ctx),
+          hasError ? Text(errorTextHint!, style: const TextStyle(color: Colors.red)) : Container(),
           const SizedBox(height: 10),
           Center(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                buttonAction('Clear', 0),
-                const SizedBox(width: 20),
-                buttonAction('Save', 1)
-              ],
+              children: [buttonAction('Clear', 0), const SizedBox(width: 20), buttonAction('Save', 1)],
             ),
           )
         ],
@@ -69,9 +56,7 @@ class _AddProductPageState extends State<AddProductPage> {
 
   ElevatedButton buttonAction(String txt, int op) {
     return ElevatedButton(
-        style: ButtonStyle(
-            backgroundColor:
-                MaterialStateProperty.all(MyColors.myColorContainer)),
+        style: ButtonStyle(backgroundColor: MaterialStateProperty.all(MyColors.myColorContainer)),
         onPressed: () {
           setState(() {
             if (op == 0) {
@@ -94,8 +79,7 @@ class _AddProductPageState extends State<AddProductPage> {
   }
 
   void validity() {
-    if (myControllerNewProduct[0].text.isEmpty ||
-        myControllerNewProduct[0].text.trim().isEmpty) {
+    if (myControllerNewProduct[0].text.isEmpty || myControllerNewProduct[0].text.trim().isEmpty) {
       hasError = true;
       errorsTexts[0] = 'Please at least input Me !';
       errorTextHint = 'Check the input';
@@ -113,14 +97,12 @@ class _AddProductPageState extends State<AddProductPage> {
     hasError = false;
   }
 
-  Container fieldInput(String label, String hint, IconData icon, int index,
-      BuildContext context) {
+  Container fieldInput(String label, String hint, IconData icon, int index, BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width / 3,
       margin: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          color: MyColors.myColorContainer.withOpacity(0.4)),
+          borderRadius: BorderRadius.circular(15), color: MyColors.myColorContainer.withOpacity(0.4)),
       child: TextField(
         readOnly: index == 3 ? true : false,
         decoration: InputDecoration(
@@ -165,8 +147,7 @@ class _AddProductPageState extends State<AddProductPage> {
                   },
                 );
                 if (pickedDate != null) {
-                  String formattedDate =
-                      DateFormat('yyyy-MM-dd').format(pickedDate);
+                  String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
 
                   setState(() {
                     myControllerNewProduct[3].text = formattedDate;
@@ -193,14 +174,12 @@ class _AddProductPageState extends State<AddProductPage> {
             actions: [
               ElevatedButton(
                 style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(
-                        MyColors.myColorContainer.withOpacity(1))),
+                    backgroundColor: MaterialStateProperty.all(MyColors.myColorContainer.withOpacity(1))),
                 onPressed: () {
                   Navigator.of(ctx).pop();
                   emptyAllData();
                 },
-                child:
-                    Text('Okay', style: TextStyle(color: MyColors.myColorFont)),
+                child: Text('Okay', style: TextStyle(color: MyColors.myColorFont)),
               )
             ],
           );
@@ -212,8 +191,7 @@ class _AddProductPageState extends State<AddProductPage> {
     return widget.option != 0
         ? Background(widget: bodyPage(context)).build()
         : Scaffold(
-            appBar:
-                CustomizeAppBar().createCustomizeAppBar(widget.appBarTitle!),
+            appBar: CustomizeAppBar().createCustomizeAppBar(widget.appBarTitle!),
             body: Background(widget: bodyPage(context)).build(),
           );
   }

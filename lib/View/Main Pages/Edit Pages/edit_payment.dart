@@ -24,8 +24,7 @@ class _EditPaymentPageState extends State<EditPaymentPage> {
     return widget.option != 0
         ? Background(widget: bodyPage()).build()
         : Scaffold(
-            appBar:
-                CustomizeAppBar().createCustomizeAppBar(widget.appBarTitle!),
+            appBar: CustomizeAppBar().createCustomizeAppBar(widget.appBarTitle!),
             body: Background(widget: bodyPage()).build(),
           );
   }

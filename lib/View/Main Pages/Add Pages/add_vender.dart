@@ -3,15 +3,15 @@ import 'package:management_factory_system/View/Containers/app_bar_customize.dart
 import 'package:management_factory_system/View/Containers/background.dart';
 import 'package:management_factory_system/Controller/colors.dart';
 
-class AddCustomerPage extends StatefulWidget {
-  const AddCustomerPage({Key? key, this.option, this.appBarTitle}) : super(key: key);
+class AddVenderPage extends StatefulWidget {
+  const AddVenderPage({Key? key, this.option, this.appBarTitle}) : super(key: key);
   final int? option;
   final String? appBarTitle;
   @override
-  State<AddCustomerPage> createState() => _AddCustomerPageState();
+  State<AddVenderPage> createState() => _AddVenderPageState();
 }
 
-class _AddCustomerPageState extends State<AddCustomerPage> {
+class _AddVenderPageState extends State<AddVenderPage> {
   @override
   void initState() {
     super.initState();
@@ -21,19 +21,18 @@ class _AddCustomerPageState extends State<AddCustomerPage> {
   static String? errorTextHint;
   static bool hasError = false;
   static List<String?> errorsTexts = List.generate(4, (i) => null);
-  static List<TextEditingController> myControllerNewCustomer =
-      List.generate(4, (i) => TextEditingController());
+  static List<TextEditingController> myControllerNewVender = List.generate(4, (i) => TextEditingController());
   Widget bodyPage(BuildContext ctx) {
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Add New Customer',
+          Text('Add New Vender',
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: MyColors.myColorFont)),
-          fieldInput('Customer name', 'Input Customer Name', Icons.person, 0, ctx),
-          fieldInput('Customer Phone', 'Input Customer Phone', Icons.phone_android_rounded, 1, ctx),
-          fieldInput('Customer Address', 'Input Customer Address', Icons.location_on, 2, ctx),
-          fieldInput('Customer Email', 'Input Customer Email', Icons.email_rounded, 3, ctx),
+          fieldInput('Vender name', 'Input Vender Name', Icons.person, 0, ctx),
+          fieldInput('Vender Phone', 'Input Vender Phone', Icons.phone_android_rounded, 1, ctx),
+          fieldInput('Vender Address', 'Input Vender Address', Icons.location_on, 2, ctx),
+          fieldInput('Vender Email', 'Input Vender Email', Icons.email_rounded, 3, ctx),
           hasError ? Text(errorTextHint!, style: const TextStyle(color: Colors.red)) : Container(),
           const SizedBox(height: 10),
           Center(
@@ -72,7 +71,7 @@ class _AddCustomerPageState extends State<AddCustomerPage> {
   }
 
   void validity() {
-    if (myControllerNewCustomer[0].text.isEmpty || myControllerNewCustomer[0].text.trim().isEmpty) {
+    if (myControllerNewVender[0].text.isEmpty || myControllerNewVender[0].text.trim().isEmpty) {
       hasError = true;
       errorsTexts[0] = 'Please at least input Me !';
       errorTextHint = 'Check the input';
@@ -84,7 +83,7 @@ class _AddCustomerPageState extends State<AddCustomerPage> {
   void emptyAllData() {
     for (int i = 0; i < errorsTexts.length; i++) {
       errorsTexts[i] = null;
-      myControllerNewCustomer[i].clear();
+      myControllerNewVender[i].clear();
     }
     errorTextHint = null;
     hasError = false;
@@ -114,7 +113,7 @@ class _AddCustomerPageState extends State<AddCustomerPage> {
           iconColor: MyColors.myColorIcon,
         ),
         keyboardType: TextInputType.name,
-        controller: myControllerNewCustomer[index],
+        controller: myControllerNewVender[index],
       ),
     );
   }

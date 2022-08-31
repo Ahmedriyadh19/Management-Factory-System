@@ -12,6 +12,7 @@ import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_sale
 import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_product.dart';
 import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_staff.dart';
 import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_stock.dart';
+import 'package:management_factory_system/View/Main%20Pages/Add%20Pages/add_vender.dart';
 import 'package:management_factory_system/View/Main%20Pages/Categories%20Pages/categories_dashboard.dart';
 import 'package:management_factory_system/View/Main%20Pages/Categories%20Pages/categories_invoice.dart';
 import 'package:management_factory_system/View/Main%20Pages/Categories%20Pages/categories_payment.dart';
@@ -69,6 +70,7 @@ class _HomeState extends State<Home> {
     const AddStaffPage(),
     const AddPaymentPage(),
     const AddProductPage(),
+    const AddVenderPage(),
     const DisplayStockPage(),
     const DisplayCustomerPage(),
     const DisplaySalesInvoicePage(),
@@ -104,65 +106,38 @@ class _HomeState extends State<Home> {
     for (int i = 0; i < pages.length + 1; i++) {
       isSelectedBtnList.add(false);
     }
-    addListOption
-        .add(createOption(FontAwesomeIcons.layerGroup, 'Add Stock', lvl++));
-    addListOption
-        .add(createOption(FontAwesomeIcons.userPlus, 'Add Customer', lvl++));
-    addListOption.add(
-        createOption(FontAwesomeIcons.fileInvoice, 'Add Sales Invoice', lvl++));
-    addListOption.add(createOption(
-        FontAwesomeIcons.fileInvoice, 'Add Purchases Invoice', lvl++));
+    addListOption.add(createOption(FontAwesomeIcons.layerGroup, 'Add Stock', lvl++));
+    addListOption.add(createOption(FontAwesomeIcons.userPlus, 'Add Customer', lvl++));
+    addListOption.add(createOption(FontAwesomeIcons.fileInvoice, 'Add Sales Invoice', lvl++));
+    addListOption.add(createOption(FontAwesomeIcons.fileInvoice, 'Add Purchases Invoice', lvl++));
     addListOption.add(createOption(FontAwesomeIcons.user, 'Add Staff', lvl++));
-    addListOption
-        .add(createOption(Icons.payment_rounded, 'Add Payment', lvl++));
-    addListOption.add(
-        createOption(Icons.insert_drive_file_rounded, 'Add Product', lvl++));
+    addListOption.add(createOption(Icons.payment_rounded, 'Add Payment', lvl++));
+    addListOption.add(createOption(Icons.insert_drive_file_rounded, 'Add Product', lvl++));
+    addListOption.add(createOption(FontAwesomeIcons.shop, 'Add Vender', lvl++));
 
-    viewListOption
-        .add(createOption(FontAwesomeIcons.store, 'View Stock', lvl++));
-    viewListOption
-        .add(createOption(FontAwesomeIcons.peopleRoof, 'View Customer', lvl++));
-    viewListOption.add(
-        createOption(FontAwesomeIcons.receipt, 'View Sales Invoice', lvl++));
-    viewListOption.add(createOption(
-        FontAwesomeIcons.receipt, 'View Purchases Invoice', lvl++));
-    viewListOption
-        .add(createOption(FontAwesomeIcons.personCane, 'View Staff', lvl++));
-    viewListOption.add(
-        createOption(FontAwesomeIcons.moneyBillWave, 'View Payment', lvl++));
-    viewListOption.add(
-        createOption(FontAwesomeIcons.rectangleList, 'View Product', lvl++));
+    viewListOption.add(createOption(FontAwesomeIcons.store, 'View Stock', lvl++));
+    viewListOption.add(createOption(FontAwesomeIcons.peopleRoof, 'View Customer', lvl++));
+    viewListOption.add(createOption(FontAwesomeIcons.receipt, 'View Sales Invoice', lvl++));
+    viewListOption.add(createOption(FontAwesomeIcons.receipt, 'View Purchases Invoice', lvl++));
+    viewListOption.add(createOption(FontAwesomeIcons.personCane, 'View Staff', lvl++));
+    viewListOption.add(createOption(FontAwesomeIcons.moneyBillWave, 'View Payment', lvl++));
+    viewListOption.add(createOption(FontAwesomeIcons.rectangleList, 'View Product', lvl++));
 
     editListOption.add(createOption(FontAwesomeIcons.pen, 'Edit Stock', lvl++));
-    editListOption
-        .add(createOption(FontAwesomeIcons.userPen, 'Edit Customer', lvl++));
-    editListOption.add(
-        createOption(FontAwesomeIcons.filePen, 'Edit Sales Invoice', lvl++));
+    editListOption.add(createOption(FontAwesomeIcons.userPen, 'Edit Customer', lvl++));
+    editListOption.add(createOption(FontAwesomeIcons.filePen, 'Edit Sales Invoice', lvl++));
+    editListOption.add(createOption(FontAwesomeIcons.filePen, 'Edit Purchases Invoice', lvl++));
+    editListOption.add(createOption(FontAwesomeIcons.squarePen, 'Edit Staff', lvl++));
+    editListOption.add(createOption(Icons.payment_rounded, 'Edit Payment', lvl++));
+    editListOption.add(createOption(FontAwesomeIcons.penToSquare, 'Edit Product', lvl++));
 
-    editListOption.add(createOption(
-        FontAwesomeIcons.filePen, 'Edit Purchases Invoice', lvl++));
-    editListOption
-        .add(createOption(FontAwesomeIcons.squarePen, 'Edit Staff', lvl++));
-    editListOption
-        .add(createOption(Icons.payment_rounded, 'Edit Payment', lvl++));
-    editListOption
-        .add(createOption(FontAwesomeIcons.penToSquare, 'Edit Product', lvl++));
-
-    deleteListOption.add(
-        createOption(FontAwesomeIcons.solidTrashCan, 'Delete Stock', lvl++));
-    deleteListOption.add(
-        createOption(FontAwesomeIcons.userXmark, 'Delete Customer', lvl++));
-    deleteListOption.add(createOption(
-        FontAwesomeIcons.fileWaveform, 'Delete Sales Invoice', lvl++));
-
-    deleteListOption.add(createOption(
-        FontAwesomeIcons.fileWaveform, 'Delete Purchases Invoice', lvl++));
-    deleteListOption.add(
-        createOption(FontAwesomeIcons.userLargeSlash, 'Delete Staff', lvl++));
-    deleteListOption.add(
-        createOption(FontAwesomeIcons.circleMinus, 'Delete Payment', lvl++));
-    deleteListOption.add(createOption(
-        FontAwesomeIcons.fileCircleXmark, 'Delete Product', lvl++));
+    deleteListOption.add(createOption(FontAwesomeIcons.solidTrashCan, 'Delete Stock', lvl++));
+    deleteListOption.add(createOption(FontAwesomeIcons.userXmark, 'Delete Customer', lvl++));
+    deleteListOption.add(createOption(FontAwesomeIcons.fileWaveform, 'Delete Sales Invoice', lvl++));
+    deleteListOption.add(createOption(FontAwesomeIcons.fileWaveform, 'Delete Purchases Invoice', lvl++));
+    deleteListOption.add(createOption(FontAwesomeIcons.userLargeSlash, 'Delete Staff', lvl++));
+    deleteListOption.add(createOption(FontAwesomeIcons.circleMinus, 'Delete Payment', lvl++));
+    deleteListOption.add(createOption(FontAwesomeIcons.fileCircleXmark, 'Delete Product', lvl++));
   }
 
   Widget currentWidget = pages[0];
@@ -218,9 +193,7 @@ class _HomeState extends State<Home> {
         color: MyColors.myColorIcon,
       ),
       hoverColor: MyColors.myColorHover,
-      selectedColor: isSelectedBtnList[index]
-          ? MyColors.myColorSelected
-          : MyColors.myColorFont,
+      selectedColor: isSelectedBtnList[index] ? MyColors.myColorSelected : MyColors.myColorFont,
       iconColor: Colors.black,
       selected: isSelectedBtnList[index],
       onTap: () {
@@ -254,8 +227,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  PopupMenuButton option(BuildContext ctx, IconData icon,
-      List<PopupMenuEntry> optionsList, String tooltips) {
+  PopupMenuButton option(BuildContext ctx, IconData icon, List<PopupMenuEntry> optionsList, String tooltips) {
     return PopupMenuButton(
       color: MyColors.myColorContainer.withOpacity(0.8),
       tooltip: tooltips,
@@ -297,9 +269,7 @@ class _HomeState extends State<Home> {
   IconButton signOutBtn(int index) {
     return IconButton(
       tooltip: 'Exit',
-      hoverColor: isSelectedBtnList[index]
-          ? MyColors.myColorHover
-          : const Color.fromARGB(255, 255, 255, 255),
+      hoverColor: isSelectedBtnList[index] ? MyColors.myColorHover : const Color.fromARGB(255, 255, 255, 255),
       icon: const Icon(FontAwesomeIcons.personWalkingArrowLoopLeft),
       onPressed: () {
         Navigator.of(context).pushReplacement(

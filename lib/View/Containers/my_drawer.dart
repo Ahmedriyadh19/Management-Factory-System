@@ -15,18 +15,16 @@ class MyDrawer {
       elevation: 50,
       child: SizedBox(
         height: double.infinity,
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: up,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: down,
-              )
-            ]),
+        child: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: up,
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: down,
+          )
+        ]),
       ),
     );
   }

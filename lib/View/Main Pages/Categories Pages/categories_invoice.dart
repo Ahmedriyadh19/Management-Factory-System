@@ -16,8 +16,7 @@ class InvoicePage extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  final bool isOkay =
-      Platform.isWindows || Platform.isLinux || Platform.isMacOS;
+  final bool isOkay = Platform.isWindows || Platform.isLinux || Platform.isMacOS;
   static const List<Widget> bodyPages = [
     AddSalesInvoicePage(option: 0, appBarTitle: 'Add new Sales Invoice'),
     EditSalesInvoicePage(option: 0, appBarTitle: 'Edit Sales Invoice'),
@@ -45,10 +44,7 @@ class InvoicePage extends StatelessWidget {
         const SizedBox(height: 30),
         Center(
           child: Text('SALES INVOICE',
-              style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: MyColors.myColorFont)),
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: MyColors.myColorFont)),
         ),
         buildFormatPage([
           createItem('add sales invoice', 'Add Sales Invoice', 0, ctx),
@@ -65,19 +61,13 @@ class InvoicePage extends StatelessWidget {
         const SizedBox(height: 30),
         Center(
           child: Text('PURCHASES INVOICE',
-              style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: MyColors.myColorFont)),
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: MyColors.myColorFont)),
         ),
         buildFormatPage([
           createItem('add purchases invoice', 'Add Purchases Invoice', 4, ctx),
-          createItem(
-              'edit purchases invoice', 'Edit Purchases Invoice', 5, ctx),
-          createItem(
-              'display purchases invoice', 'View Purchases Invoice', 6, ctx),
-          createItem(
-              'delete purchases invoice', 'Delete Purchases Invoice', 7, ctx),
+          createItem('edit purchases invoice', 'Edit Purchases Invoice', 5, ctx),
+          createItem('display purchases invoice', 'View Purchases Invoice', 6, ctx),
+          createItem('delete purchases invoice', 'Delete Purchases Invoice', 7, ctx),
         ], 0)
       ],
     );
@@ -96,33 +86,25 @@ class InvoicePage extends StatelessWidget {
         children: items);
   }
 
-  Tooltip createItem(
-      String pathImage, String nameMenu, int action, BuildContext ctx) {
+  Tooltip createItem(String pathImage, String nameMenu, int action, BuildContext ctx) {
     return Tooltip(
       message: descriptions[action],
       child: GestureDetector(
         child: Container(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(25),
-              color: MyColors.myColorContainer.withOpacity(0.8)),
+              borderRadius: BorderRadius.circular(25), color: MyColors.myColorContainer.withOpacity(0.8)),
           child: Center(
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  buildImage(pathImage),
-                  buildDiv(),
-                  const SizedBox(width: 5),
-                  buildText(nameMenu)
-                ],
+                children: [buildImage(pathImage), buildDiv(), const SizedBox(width: 5), buildText(nameMenu)],
               ),
             ),
           ),
         ),
         onTap: () {
-          Navigator.of(ctx)
-              .push(MaterialPageRoute(builder: (_) => bodyPages[action]));
+          Navigator.of(ctx).push(MaterialPageRoute(builder: (_) => bodyPages[action]));
         },
       ),
     );
@@ -148,10 +130,7 @@ class InvoicePage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(nameMenu,
-            style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-                color: MyColors.myColorFont)),
+            style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: MyColors.myColorFont)),
       ],
     );
   }

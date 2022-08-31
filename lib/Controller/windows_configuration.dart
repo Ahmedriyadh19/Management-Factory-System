@@ -18,18 +18,17 @@ class WindowsConfiguration {
                     message: 'Yes',
                     child: ElevatedButton(
                         style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                                MyColors.myColorContainer.withOpacity(1))),
+                            backgroundColor:
+                                MaterialStateProperty.all(MyColors.myColorContainer.withOpacity(1))),
                         onPressed: () => Navigator.of(context).pop(true),
-                        child: const Text('Yes',
-                            style: TextStyle(color: Colors.black))),
+                        child: const Text('Yes', style: TextStyle(color: Colors.black))),
                   ),
                   Tooltip(
                     message: 'No',
                     child: ElevatedButton(
                         style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                                MyColors.myColorContainer.withOpacity(1))),
+                            backgroundColor:
+                                MaterialStateProperty.all(MyColors.myColorContainer.withOpacity(1))),
                         onPressed: () => Navigator.of(context).pop(false),
                         child: const Text(
                           'No',
