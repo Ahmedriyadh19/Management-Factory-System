@@ -104,11 +104,11 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                buttons('Clear All', 0),
+                buttons('Clear All', 0, Icons.delete_forever_rounded),
                 const SizedBox(width: 20),
-                buttons('Save', 1),
+                buttons('Save', 1, Icons.save),
                 const SizedBox(width: 20),
-                buttons('Add', 2),
+                buttons('Add', 2, Icons.add),
               ],
             ),
             const SizedBox(height: 50)
@@ -148,7 +148,7 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
   Theme listOFVender() {
     return Theme(
       data: Theme.of(context).copyWith(
-        canvasColor: MyColors.myColorContainer,
+        canvasColor: MyColors.myColorContainer.withOpacity(0.9),
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton(
@@ -226,11 +226,25 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
     }
   }
 
-  ElevatedButton buttons(String txt, int op) {
+  ElevatedButton buttons(String txt, int op, IconData? icon) {
     return ElevatedButton(
       style:
           ButtonStyle(backgroundColor: MaterialStateProperty.all(MyColors.myColorContainer.withOpacity(1))),
-      child: Text(txt, style: TextStyle(color: MyColors.myColorFont)),
+      child: SizedBox(
+        width: 100,
+        height: 35,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              color: MyColors.myColorIcon,
+            ),
+            const SizedBox(width: 10),
+            Text(txt, style: TextStyle(color: MyColors.myColorFont)),
+          ],
+        ),
+      ),
       onPressed: () {
         setState(() {
           if (op == 0) {
