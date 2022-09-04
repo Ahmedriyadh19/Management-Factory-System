@@ -194,7 +194,7 @@ class _HomeState extends State<Home> {
       ),
       hoverColor: MyColors.myColorHover,
       selectedColor: isSelectedBtnList[index] ? MyColors.myColorSelected : MyColors.myColorFont,
-      iconColor: Colors.black,
+      iconColor: MyColors.myColorIcon,
       selected: isSelectedBtnList[index],
       onTap: () {
         setState(() {

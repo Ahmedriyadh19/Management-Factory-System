@@ -96,8 +96,8 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                fieldInput(hint: 'Add GST', label: 'GST', isGst: true),
-                fieldInput(hint: 'Invoice Total', label: 'Invoice Total', isGst: false),
+                fieldInput(hint: 'Add GST', label: 'GST', hasGST: true),
+                fieldInput(hint: 'Invoice Total', label: 'Invoice Total', hasGST: false),
               ],
             ),
             const SizedBox(height: 10),
@@ -405,7 +405,7 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
     });
   }
 
-  Container fieldInput({String? label, String? hint, int? index, int? option, bool? isGst}) {
+  Container fieldInput({String? label, String? hint, int? index, int? option, bool? hasGST}) {
     return Container(
       width: index == 0 ? 250 : 130,
       margin: const EdgeInsets.all(10),
@@ -422,13 +422,13 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
           hintText: hint,
           errorText: option != null && index != null
               ? errorList[option][index]
-              : isGst != null && isGst
+              : hasGST != null && hasGST
                   ? gstError
                   : invoiceTotalError,
           labelStyle: TextStyle(color: MyColors.myColorFont),
           iconColor: MyColors.myColorIcon,
         ),
-        readOnly: ((index != null && index == 3) || (isGst != null && !isGst)) ? true : false,
+        readOnly: ((index != null && index == 3) || (hasGST != null && !hasGST)) ? true : false,
         inputFormatters: index == 0
             ? null
             : <TextInputFormatter>[
@@ -439,7 +439,7 @@ class _AddPurchasesInvoicePageState extends State<AddPurchasesInvoicePage> {
         keyboardType: index == 0 ? TextInputType.name : TextInputType.number,
         controller: (option != null && index != null)
             ? controllerList[option][index]
-            : (isGst != null && isGst)
+            : (hasGST != null && hasGST)
                 ? gstController
                 : invoiceTotalController,
       ),

@@ -80,7 +80,7 @@ class _SettingsPageState extends State<SettingsPage> {
         Text('Settings',
             style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: MyColors.myColorFont)),
         const SizedBox(height: 30),
-        butts('Change Containers Container', 0),
+        butts('Change Containers Color', 0),
         butts('Change Icons Color', 1),
         butts('Change Fonts Color', 2),
         butts('Change Hover Color', 3),
